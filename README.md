@@ -1,5 +1,5 @@
-Library
-=======
+Progetto 'library'
+==================
 
 Descrizione
 -----------
