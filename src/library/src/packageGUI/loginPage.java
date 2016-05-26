@@ -26,11 +26,19 @@ public class loginPage extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		/**
+		 * @author Valentino Di Giosaffatte 232411 
+		 * @author Riccardo Armando Di Prinzio 229032
+		 * @author Flavio Furia 229034
+		 */
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					loginPage frame = new loginPage();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,18 +62,32 @@ public class loginPage extends JFrame {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("E-mail");
+		JLabel lblNewLabel = new JLabel("E-MAIL");
 		
-		JLabel lblPassword = new JLabel("Password");
+		JLabel lblPassword = new JLabel("PASSWORD");
 		
 		JButton btnNewButton = new JButton("ACCEDI");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
 		
 		JButton btnAccediComeOspite = new JButton("ACCEDI COME OSPITE");
+		btnAccediComeOspite.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		
 		JButton btnRegistrati = new JButton("REGISTRATI");
+		
 		btnRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new registrazioneView().istanziaController();
+				dispose(); 
 			}
 		});
 		
@@ -81,20 +103,16 @@ public class loginPage extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(31)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnRegistrati, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnAccediComeOspite, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
 								.addComponent(lblNewLabel)
 								.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
 								.addComponent(passwordField)))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(99)
+							.addGap(98)
 							.addComponent(btnNewButton)))
 					.addContainerGap(33, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(53, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnRegistrati, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAccediComeOspite, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
-					.addGap(51))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -110,11 +128,11 @@ public class loginPage extends JFrame {
 					.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnNewButton)
-					.addGap(36)
+					.addGap(35)
 					.addComponent(btnAccediComeOspite)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnRegistrati)
-					.addContainerGap(25, Short.MAX_VALUE))
+					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
