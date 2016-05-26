@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import packageView.registrazioneView;
 public class loginPage extends JFrame {
 
 	private JPanel contentPane;
@@ -65,6 +65,7 @@ public class loginPage extends JFrame {
 		JButton btnRegistrati = new JButton("REGISTRATI");
 		btnRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				new registrazioneView().istanziaController();
 			}
 		});
 		
