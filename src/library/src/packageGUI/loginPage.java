@@ -1,6 +1,7 @@
 package packageGUI;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -50,7 +51,8 @@ public class loginPage extends JFrame {
 	 * Create the frame.
 	 */
 	public loginPage() {
-		super("Library"); 
+		super("Library");
+		loginPage finestra = this; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 295, 335);
 		contentPane = new JPanel();
@@ -68,6 +70,9 @@ public class loginPage extends JFrame {
 		
 		JButton btnNewButton = new JButton("ACCEDI");
 		btnNewButton.addActionListener(new ActionListener() {
+			/**
+			 * actionListener che istanzia 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
@@ -76,6 +81,9 @@ public class loginPage extends JFrame {
 		
 		JButton btnAccediComeOspite = new JButton("ACCEDI COME OSPITE");
 		btnAccediComeOspite.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				
 				
@@ -85,9 +93,13 @@ public class loginPage extends JFrame {
 		JButton btnRegistrati = new JButton("REGISTRATI");
 		
 		btnRegistrati.addActionListener(new ActionListener() {
+			/**
+			 * actionListener che istanzia la classe registrazioneView() 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
-				new registrazioneView().istanziaController();
-				dispose(); 
+				
+				new registrazioneView().istanziaController(finestra);
+				
 			}
 		});
 		

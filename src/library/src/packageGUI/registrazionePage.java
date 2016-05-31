@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import packageView.registrazioneView;
+import packageView.registrazione_confermaView;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -51,6 +53,7 @@ public class registrazionePage extends JFrame {
 	 */
 	public registrazionePage() {
 		super("Library"); 
+		registrazionePage finestra = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 288, 461);
 		contentPane = new JPanel();
@@ -78,25 +81,35 @@ public class registrazionePage extends JFrame {
 		
 		passwordField = new JPasswordField();
 		
+		passwordField_1 = new JPasswordField();
+		
 		JLabel lblRipetiPassword = new JLabel("RIPETI PASSWORD");
 		
 		JButton btnNewButton = new JButton("INDIETRO");
 		btnNewButton.addActionListener(new ActionListener() {
+			/**
+			 * actionListener che istanzia la classe registrazioneView() 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				
+				new registrazioneView().istanziaController(finestra);
 				
 			}
 		});
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
+			/**
+			 * actionListener che istanzia la classe registrazione_confermaView() 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				
+				new registrazione_confermaView(textField.getText(), textField_1.getText(), textField_2.getText(), passwordField.getText(), passwordField_1.getText()); 
 				
 			}
 		});
 		
-		passwordField_1 = new JPasswordField();
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
