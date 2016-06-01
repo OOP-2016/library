@@ -3,10 +3,10 @@ package packageGUI;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ * Classe alertDialog che permette di creare MessageDialog 
  */
 
-public class AlertDialog {
+public class alertDialog {
 	
 	/**
 	 * Il metodo crea un MessageDialog di informazione

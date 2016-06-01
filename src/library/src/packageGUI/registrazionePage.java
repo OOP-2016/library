@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import packageView.loginView;
 import packageView.registrazioneView;
-import packageView.registrazione_confermaView;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -19,6 +19,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+/**
+ * Classe JFrame registrazionePage
+ */
+
 public class registrazionePage extends JFrame {
 
 	private JPanel contentPane;
@@ -88,11 +93,11 @@ public class registrazionePage extends JFrame {
 		JButton btnNewButton = new JButton("INDIETRO");
 		btnNewButton.addActionListener(new ActionListener() {
 			/**
-			 * actionListener che istanzia la classe registrazioneView() 
+			 * actionListener che istanzia la classe registrazioneView al click del bottone "Indietro" 
 			 */
 			public void actionPerformed(ActionEvent e) {
 				
-				new registrazioneView().istanziaController(finestra);
+				new registrazioneView().istanziaControllerFinestra(finestra);
 				
 			}
 		});
@@ -100,11 +105,11 @@ public class registrazionePage extends JFrame {
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
 			/**
-			 * actionListener che istanzia la classe registrazione_confermaView() 
+			 * actionListener che istanzia la classe registrazioneView al click del bottone "Conferma" 
 			 */
 			public void actionPerformed(ActionEvent e) {
 				
-				new registrazione_confermaView(textField.getText(), textField_1.getText(), textField_2.getText(), passwordField.getText(), passwordField_1.getText()); 
+				new registrazioneView().confermaRegistrazione(textField.getText(), textField_1.getText(), textField_2.getText(), passwordField.getText(), passwordField_1.getText()); 
 				
 			}
 		});

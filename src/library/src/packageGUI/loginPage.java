@@ -1,6 +1,7 @@
 package packageGUI;
 
 import java.awt.BorderLayout;
+
 import java.awt.Component;
 import java.awt.EventQueue;
 
@@ -16,7 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import packageView.registrazioneView;
+import packageView.loginView;
+
+/**
+ * Classe JFrame loginPage
+ */
+
 public class loginPage extends JFrame {
 
 	private JPanel contentPane;
@@ -94,11 +100,11 @@ public class loginPage extends JFrame {
 		
 		btnRegistrati.addActionListener(new ActionListener() {
 			/**
-			 * actionListener che istanzia la classe registrazioneView() 
+			 * actionListener che istanzia la classe loginView al click del bottone "Registrati" 
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new registrazioneView().istanziaController(finestra);
+				new loginView().istanziaControllerFinestra(finestra);
 				
 			}
 		});

@@ -1,21 +1,51 @@
 package packageController;
+
+import packageView.loginView;
 import packageView.registrazioneView;
 
+/**
+ * Classe controller registrazioneController
+ */
+
 public class registrazioneController {
-	
-	/**
-	 * Il metodo istanzia la classe registrazioneView e chiama il metodo che permette di istanziare 
-	 * la finestra di registrazionePage
-	 */
-	public void instanziaRegistrazioneAction(){
+
+	private String nome;
+	private String cognome; 
+	private String email; 
+	private String password; 
 		
-		new registrazioneView().istanziaRegistrazionePage();
+	/**
+	 * Il metodo attua una serie di controlli sui dati immessi dall'utente e se vanno a buon fine 
+	 * aggiorna le sue variabili d'istanza, altrimenti un verrà creato un MessageDialog di errore
+	 * 
+	 * @param nome Stringa che rappresenta il nome dell'utente
+	 * @param cognome Stringa che rappresenta il cognome dell'utente
+	 * @param email Stringa che rappresenta l'email dell'utente
+	 * @param password Stringa che rappresenta la password dell'utente
+	 * @param ripetiPassword Stringa che rappresenta la conferma della password dell'utente
+	 */
+	public void confermaRegistrazioneAction(String nome, String cognome, String email, String password, String ripetiPassword){
+		
+		if(nome.length() == 0||cognome.length() == 0||email.length() == 0||password.length() == 0||ripetiPassword.length() == 0){
+			new registrazioneView().errorMessage("Campi vuoti"); 
+			return; 
+		}
+		
+		if(!(password.equals(ripetiPassword))){
+			new registrazioneView().errorMessage("I campi \"PASSWORD\" e \"RIPETI PASSWORD\" non coincidono"); 
+			return; 
+		}
+		
+		
+		this.nome = nome; 
+		this.cognome = cognome; 
+		this.email = email; 
+		this.password = password; 
 		
 	}
 	
 	/**
-	 * Il metodo istanzia la classe registrazioneView e chiama il metodo che permette di istanziare 
-	 * la finestra di loginPage 
+	 * Il metodo istanzia la classe registrazioneView 
 	 */
 	public void istanziaLoginAction() {
 		
@@ -23,4 +53,4 @@ public class registrazioneController {
 		
 	}
 	
-}	
+}
