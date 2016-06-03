@@ -16,4 +16,37 @@ public class loginController {
 		
 	}
 	
+	/**
+	 * Il metodo fa accedere l'utente al sistema, richiamando il database e facendo un confronto dei dati. 
+	 * Se il confronto va a buon fine, un infoDialog viene istanziato, altrimenti viene istanziato 
+	 * un ErrorDialog
+	 * 
+	 * @param email
+	 * @param password
+	 */
+	public void accediAction(String email, String password){
+		
+		if(email.length() == 0||password.length() == 0){
+			new loginView().errorMessage("Campi vuoti");
+			return; 
+		}
+		
+		
+		
+		
+		
+	}
+	
+	/**
+	 * Il metodo permette all'utente di accedere come utente base
+	 */
+	public void accediComeOspiteAction(){
+		
+		if(true /*Connessione a DB riuscita, con chiamata a DAO che restituisce true se tutto okay*/ )
+			new loginView().infoMessage("Accesso come \"Utente Base\" avvenuto");
+		else
+			new loginView().errorMessage("Errore in fase di accesso");
+		
+	}
+	
 }	

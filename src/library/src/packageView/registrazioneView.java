@@ -4,12 +4,12 @@ import javax.swing.JFrame;
 
 import packageController.loginController;
 import packageController.registrazioneController;
-import packageGUI.alertDialog;
+import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.registrazionePage;
 
 /**
- * Classe VIew registrazioneView
+ * Classe View registrazioneView
  */
 
 public class registrazioneView {
@@ -33,7 +33,7 @@ public class registrazioneView {
 	 * @param info Stringa informativa
 	 */
 	public void infoMessage(String info){
-		new alertDialog().infoDialog(info);
+		new dialog().infoDialog(info);
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class registrazioneView {
 	 * @param error Stringa di errore 
 	 */
 	public void errorMessage(String error){
-		new alertDialog().errorDialog(error);
+		new dialog().errorDialog(error);
 	}
 	
 	/**
@@ -52,8 +52,7 @@ public class registrazioneView {
 	 */
 	public void istanziaControllerFinestra(registrazionePage finestra){
 		
-		finestra.dispose(); 	//chiusura finestra
-		
+		new dialog().disposeDialog(finestra);//chiusura finestra
 		new registrazioneController().istanziaLoginAction(); //istanziazione controller
 		
 	}

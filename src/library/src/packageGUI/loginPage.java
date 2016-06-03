@@ -77,10 +77,11 @@ public class loginPage extends JFrame {
 		JButton btnNewButton = new JButton("ACCEDI");
 		btnNewButton.addActionListener(new ActionListener() {
 			/**
-			 * actionListener che istanzia 
+			 * actionListener che istanzia la classe loginView al click del bottone "Accedi" 
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				
+				new loginView().accedi(textField.getText(), passwordField.getText()); 
 				
 			}
 		});
@@ -88,10 +89,11 @@ public class loginPage extends JFrame {
 		JButton btnAccediComeOspite = new JButton("ACCEDI COME OSPITE");
 		btnAccediComeOspite.addActionListener(new ActionListener() {
 			/**
-			 * 
+			 * actionListener che istanzia la classe loginView al click del bottone "Accedi come ospite" 
 			 */
 			public void actionPerformed(ActionEvent e) {
 				
+				new loginView().accediComeOspite();
 				
 			}
 		});
