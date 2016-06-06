@@ -93,7 +93,7 @@ public class loginPage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent e) {
 				
-				new loginView().accediComeOspite();
+				new loginView().accediComeOspite(finestra);
 				
 			}
 		});

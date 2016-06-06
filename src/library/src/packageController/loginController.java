@@ -1,4 +1,6 @@
 package packageController;
+import packageBusiness.utente;
+import packageGUI.loginPage;
 import packageView.loginView;
 
 /**
@@ -40,10 +42,13 @@ public class loginController {
 	/**
 	 * Il metodo permette all'utente di accedere come utente base
 	 */
-	public void accediComeOspiteAction(){
+	public void accediComeOspiteAction(loginPage finestra){
 		
-		if(true /*Connessione a DB riuscita, con chiamata a DAO che restituisce true se tutto okay*/ )
+		if(true /*Connessione a DB riuscita, con chiamata a DAO che restituisce true se tutto okay*/ ){
 			new loginView().infoMessage("Accesso come \"Utente Base\" avvenuto");
+			new loginView().dispose(finestra);
+			new loginView().istanziaRicercaPage(new utente());
+		}
 		else
 			new loginView().errorMessage("Errore in fase di accesso");
 		

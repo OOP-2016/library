@@ -3,9 +3,11 @@ package packageView;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.registrazionePage;
+import packageGUI.ricercaPage;
 
 import javax.swing.JFrame;
 
+import packageBusiness.utente;
 import packageController.loginController;
 
 /**
@@ -52,8 +54,8 @@ public class loginView {
 	 * Il metodo permette di istanziare la classe loginController che farà l'azione di accesso come utente base
 	 */
 	
-	public void accediComeOspite(){
-		new loginController().accediComeOspiteAction();
+	public void accediComeOspite(loginPage finestra){
+		new loginController().accediComeOspiteAction(finestra);
 	}
 	
 	/**
@@ -72,6 +74,26 @@ public class loginView {
 	 */
 	public void errorMessage(String error){
 		new dialog().errorDialog(error);
+	}
+	
+	/**
+	 * Il metodo istanzia la classe ricercaPage 
+	 * 
+	 * @param user l'utente che esegue l'accesso, il parametro gestisce così le sessioni
+	 */
+	public void istanziaRicercaPage(utente user){
+		ricercaPage finestra = new ricercaPage(user);
+		finestra.setVisible(true);
+		finestra.setResizable(false);
+	}
+	
+	/**
+	 * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
+	 * 
+	 * @param finestra Finestra loginPage da chiudere 
+	 */
+	public void dispose(loginPage finestra){
+		new dialog().disposeDialog(finestra);
 	}
 	
 	
