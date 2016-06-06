@@ -1,5 +1,6 @@
 package packageController;
 
+import packageBusiness.utente;
 import packageGUI.ricercaPage;
 import packageView.ricercaView;
 
@@ -7,6 +8,11 @@ import packageView.ricercaView;
  * Classe Controller ricercaController 
  */
 public class ricercaController {
+	
+	public void apriOperaAction(ricercaPage finestra, utente user){
+		new ricercaView().dispose(finestra);
+		new ricercaView().istanziaOperaPage(user);
+	}
 
 	/**
 	 * Il metodo richiama la classe ricercaView con il compito di chiudere la finestra 

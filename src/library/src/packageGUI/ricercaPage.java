@@ -24,6 +24,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ricercaPage extends JFrame {
 
@@ -51,8 +54,7 @@ public class ricercaPage extends JFrame {
 	 * Create the frame.
 	 */
 	public ricercaPage(utente user) { 
-		super("Library"); 
-		
+		super("Library"); 			
 		
 		ricercaPage finestra = this; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,8 +93,6 @@ public class ricercaPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
 		
 		JButton btnCerca = new JButton("CERCA");
 		btnCerca.addActionListener(new ActionListener() {
@@ -112,13 +112,12 @@ public class ricercaPage extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		JButton btnApri = new JButton("APRI");
+		//controllo che disabilita il tasto APRI se l'utente è guest
+		/*if(user.getPermessi() == 0)
+			btnApri.setEnabled(false);*/
 		btnApri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
-				
+				new ricercaView().apriOpera(finestra, user);
 			}
 		});
 		
@@ -126,6 +125,47 @@ public class ricercaPage extends JFrame {
 		JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
 		
+		JComboBox comboBox = new JComboBox();
+			comboBox.addItem("-");
+			comboBox.addItem("ALL");
+			comboBox.addItem("A");
+			comboBox.addItem("B");
+			comboBox.addItem("C");
+			comboBox.addItem("D");
+			comboBox.addItem("E");
+			comboBox.addItem("F");
+			comboBox.addItem("G");
+			comboBox.addItem("H");
+			comboBox.addItem("I");
+			comboBox.addItem("J");
+			comboBox.addItem("K");
+			comboBox.addItem("L");
+			comboBox.addItem("M");
+			comboBox.addItem("N");
+			comboBox.addItem("O");
+			comboBox.addItem("P");
+			comboBox.addItem("Q");
+			comboBox.addItem("R");
+			comboBox.addItem("S");
+			comboBox.addItem("T");
+			comboBox.addItem("U");
+			comboBox.addItem("V");
+			comboBox.addItem("W");
+			comboBox.addItem("X");
+			comboBox.addItem("Y");
+			comboBox.addItem("Z");
+		
+			textField = new JTextField();
+			textField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					if(textField.getText().length() != 0)
+						comboBox.setEnabled(false);
+					if(textField.getText().length() == 0)
+						comboBox.setEnabled(true);
+				}
+			});
+			textField.setColumns(10);
 		//listModel.addElement("yo");
 		//listModel.clear();
 		//String s = (String) list.getSelectedValue();
@@ -136,15 +176,17 @@ public class ricercaPage extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
 						.addComponent(btnApri, Alignment.TRAILING)
 						.addComponent(lblUtente, Alignment.TRAILING)
-						.addComponent(lblManoscritti)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+							.addGap(18)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
 							.addComponent(btnCerca, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblRicercaOpere))
+						.addComponent(lblRicercaOpere)
+						.addComponent(lblManoscritti))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -157,8 +199,9 @@ public class ricercaPage extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCerca)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
 					.addComponent(lblManoscritti)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)

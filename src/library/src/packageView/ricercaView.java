@@ -1,8 +1,10 @@
 package packageView;
 
+import packageBusiness.utente;
 import packageController.ricercaController;
 import packageGUI.dialog;
 import packageGUI.loginPage;
+import packageGUI.operaPage;
 import packageGUI.ricercaPage;
 
 /**
@@ -46,6 +48,16 @@ public class ricercaView {
 		finestra.setVisible(true);
 		finestra.setResizable(false);
 		
+	}
+	
+	public void istanziaOperaPage(utente user){
+		operaPage finestra = new operaPage(user);
+		finestra.setVisible(true);
+		finestra.setResizable(false);
+	}
+
+	public void apriOpera(ricercaPage finestra, utente user){
+		new ricercaController().apriOperaAction(finestra, user);
 	}
 	
 	/**
