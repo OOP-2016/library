@@ -32,7 +32,7 @@ public class ricercaPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	int keyInTextField = 0; //indispansabile per la disattivazione della comboBox se la TextField è piena
+	private int keyInTextField = 0; //indispensabile per la disattivazione della comboBox se la TextField è piena
 	
 	/**
 	 * Launch the application.

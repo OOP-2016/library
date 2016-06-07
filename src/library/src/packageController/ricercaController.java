@@ -9,6 +9,14 @@ import packageView.ricercaView;
  */
 public class ricercaController {
 	
+	/**
+	 * Il metodo richiama la classe ricercaView con il compito di chiudere la finestra e di 
+	 * istanziare operaPage
+	 * 
+	 * @param finestra Finestra ricercaPage da chiudere 
+	 * @param user Utente che ha effettuato l'accesso al sistema 
+	 * @param title Stringa che rappresenta il titolo dell'opera scelta
+	 */
 	public void apriOperaAction(ricercaPage finestra, utente user, String title){
 		new ricercaView().dispose(finestra);
 		new ricercaView().istanziaOperaPage(user);

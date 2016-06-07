@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import packageBusiness.utente;
+import packageView.operaView;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -20,6 +21,8 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * Classe JFrame operaPage
@@ -50,8 +53,10 @@ public class operaPage extends JFrame {
 	 */
 	public operaPage(utente user) {
 		super("Library");
+		
+		operaPage finestra = this; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 749);
+		setBounds(100, 100, 800, 724);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -60,22 +65,31 @@ public class operaPage extends JFrame {
 		menuBar.add(mnComandi);
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
+		mntmLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new operaView().logOut(finestra);
+			}
+		});
 		mnComandi.add(mntmLogOut);
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new operaView().exit(finestra);
+			}
+		});
 		mnComandi.add(mntmExit);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblImg = new JLabel("img");
-		lblImg.setBackground(Color.WHITE);
+		JLabel lblImg = new JLabel("QUI ANDRA' L'IMMAGINE PRESA DAL DB");
 		
 		JButton btnNewButton = new JButton("\u25C4");
 		
 		JButton button = new JButton("\u25BA");
 		
-		JLabel lblUser = new JLabel(user.getEmail());
+		JLabel lblUser = new JLabel("/*utente:*/ " + user.getEmail());
 		
 		JScrollPane scrollPane = new JScrollPane();
 		

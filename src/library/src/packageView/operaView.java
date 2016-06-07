@@ -1,18 +1,50 @@
 package packageView;
 
-import packageBusiness.utente;
+import packageController.operaController;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.operaPage;
 
+/**
+ * Classe View operaView
+ */
 public class operaView {
 		
 	/**
+	 * Il metodo istanzia il controller operaController
+	 * 
+	 * @param finestra Finestra operaPage da chiudere 
+	 */
+	public void exit(operaPage finestra){
+		new operaController().exitAction(finestra); 
+	}
+	
+	/**
+	 * Il metodo istanzia il controller operaController
+	 * 
+	 * @param finestra Finestra operaPage da chiudere 
+	 */
+	public void logOut(operaPage finestra){
+		new operaController().logOutAction(finestra); 
+	}
+	
+	/**
+	 * Il metodo permette di invocare una nuova finestra di loginPage
+	 */
+	public void istanziaLoginPage(){
+
+		loginPage finestra = new loginPage();
+		finestra.setVisible(true);
+		finestra.setResizable(false);
+		
+	}
+	
+	/**
 	 * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
 	 * 
-	 * @param finestra Finestra operaView da chiudere 
+	 * @param finestra Finestra operaPage da chiudere 
 	 */
-	public void dispose(operaView finestra){
+	public void dispose(operaPage finestra){
 		new dialog().disposeDialog(finestra);
 	}
 	
