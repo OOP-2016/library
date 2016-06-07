@@ -6,24 +6,13 @@ import packageGUI.loginPage;
 import packageGUI.operaPage;
 
 public class operaView {
-	
-	
-	public void istanziaOperaPage(utente user){
-
-		operaPage finestra = new operaPage(user);
-		finestra.setVisible(true);
-		finestra.setResizable(false);
 		
-	}
-	
-	
-	
 	/**
 	 * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
 	 * 
-	 * @param finestra Finestra loginPage da chiudere 
+	 * @param finestra Finestra operaView da chiudere 
 	 */
-	public void dispose(loginPage finestra){
+	public void dispose(operaView finestra){
 		new dialog().disposeDialog(finestra);
 	}
 	

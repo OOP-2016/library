@@ -50,14 +50,26 @@ public class ricercaView {
 		
 	}
 	
+	/**
+	 * Il metodo permette di invocare una nuova finestra di operaPage
+	 * 
+	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 */
 	public void istanziaOperaPage(utente user){
 		operaPage finestra = new operaPage(user);
 		finestra.setVisible(true);
 		finestra.setResizable(false);
 	}
 
-	public void apriOpera(ricercaPage finestra, utente user){
-		new ricercaController().apriOperaAction(finestra, user);
+	/**
+	 * Il metodo permette di invocare il controller ricercaController
+	 * 
+	 * @param finestra Finestra ricercaPage chiamante
+	 * @param user Utente che ha effettuato l'accesso
+	 * @param title Stringa che rappresenta il titolo del manoscritto 
+	 */
+	public void apriOpera(ricercaPage finestra, utente user, String title){
+		new ricercaController().apriOperaAction(finestra, user, title);
 	}
 	
 	/**

@@ -32,7 +32,8 @@ public class ricercaPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-
+	int keyInTextField = 0; //indispansabile per la disattivazione della comboBox se la TextField è piena
+	
 	/**
 	 * Launch the application.
 	 */
@@ -115,9 +116,13 @@ public class ricercaPage extends JFrame {
 		//controllo che disabilita il tasto APRI se l'utente è guest
 		/*if(user.getPermessi() == 0)
 			btnApri.setEnabled(false);*/
+		String title = null; 
 		btnApri.addActionListener(new ActionListener() {
+			/**
+			 * ActionListener che istanzia ricercaView al click del bottone "Apri"
+			 */
 			public void actionPerformed(ActionEvent e) {
-				new ricercaView().apriOpera(finestra, user);
+				new ricercaView().apriOpera(finestra, user, title);
 			}
 		});
 		
@@ -125,6 +130,9 @@ public class ricercaPage extends JFrame {
 		JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
 		
+		/**
+		 * ComboBox riempita automaticamente con i simboli dell'alfabeto + ALL
+		 */
 		JComboBox comboBox = new JComboBox();
 			comboBox.addItem("-");
 			comboBox.addItem("ALL");
@@ -156,13 +164,31 @@ public class ricercaPage extends JFrame {
 			comboBox.addItem("Z");
 		
 			textField = new JTextField();
+			
+			/**
+			 * KeyListener che viene invocato ad ogni tasto premuto 
+			 */
 			textField.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent arg0) {
-					if(textField.getText().length() != 0)
+					
+					int strlen = textField.getText().length(); 
+					char keyPressed = arg0.getKeyChar(); 
+					
+					if(keyPressed == KeyEvent.VK_BACK_SPACE && strlen==0){
+						keyInTextField = 0; 
+					}
+					else if (keyPressed == KeyEvent.VK_BACK_SPACE)
+						keyInTextField--; 
+					else
+						keyInTextField++; 
+										
+					if(keyInTextField != 0)
 						comboBox.setEnabled(false);
-					if(textField.getText().length() == 0)
+					
+					if(keyInTextField == 0)
 						comboBox.setEnabled(true);
+				
 				}
 			});
 			textField.setColumns(10);

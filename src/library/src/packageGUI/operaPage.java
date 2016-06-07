@@ -21,6 +21,9 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Classe JFrame operaPage
+ */
 public class operaPage extends JFrame {
 
 	private JPanel contentPane;
@@ -34,6 +37,7 @@ public class operaPage extends JFrame {
 				try {
 					operaPage frame = new operaPage(new utente());
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

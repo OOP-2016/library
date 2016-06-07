@@ -9,7 +9,7 @@ import packageView.ricercaView;
  */
 public class ricercaController {
 	
-	public void apriOperaAction(ricercaPage finestra, utente user){
+	public void apriOperaAction(ricercaPage finestra, utente user, String title){
 		new ricercaView().dispose(finestra);
 		new ricercaView().istanziaOperaPage(user);
 	}
