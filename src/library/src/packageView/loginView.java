@@ -21,7 +21,7 @@ public class loginView {
 	 * 
 	 * @param finestra La finestra loginPage chiamante
 	 */
-	public void istanziaControllerFinestra(loginPage finestra){
+	public void registrati(loginPage finestra){
 		
 		new dialog().disposeDialog(finestra); 	//chiusura finestra
 		new loginController().instanziaRegistrazioneAction(); //istanziazione controller
@@ -52,6 +52,7 @@ public class loginView {
 	
 	/**
 	 * Il metodo permette di istanziare la classe loginController che farà l'azione di accesso come utente base
+	 * @param finestra Finestra loginPage da chiudere 
 	 */
 	
 	public void accediComeOspite(loginPage finestra){

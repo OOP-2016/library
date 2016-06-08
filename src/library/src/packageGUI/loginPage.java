@@ -106,7 +106,7 @@ public class loginPage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new loginView().istanziaControllerFinestra(finestra);
+				new loginView().registrati(finestra);
 				
 			}
 		});

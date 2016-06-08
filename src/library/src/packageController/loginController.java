@@ -26,8 +26,9 @@ public class loginController {
 	 * Se il confronto va a buon fine, un infoDialog viene istanziato, altrimenti viene istanziato 
 	 * un ErrorDialog
 	 * 
-	 * @param email
-	 * @param password
+	 * @param email Stringa che rappresenta l'email dell'utente 
+	 * @param password Stringa che rappresenta la password dell'utente
+	 * @param finestra finestra loginPage da chiudere 
 	 */
 	public void accediAction(String email, String password, loginPage finestra){
 		
@@ -35,29 +36,33 @@ public class loginController {
 			new loginView().errorMessage("Campi vuoti");
 			return;
 		}
+		
 		ArrayList<Object> datiUtente = new ArrayList<Object>();
+		
 		datiUtente.add(email);
 		datiUtente.add(password);
+		
 		utente utente = (utente)new utenteDAO().retrieve(datiUtente);
-			if(utente == null) new loginView().errorMessage("login fallito");
+		
+			if(utente == null) 
+				new loginView().errorMessage("login fallito");
 			else{
 			    new loginView().infoMessage("login riuscito");
 			    new loginView().dispose(finestra);
 			    new loginView().istanziaRicercaPage(utente);
 			    }
 		
-		
-		
-		
 	}
 	
 	/**
 	 * Il metodo permette all'utente di accedere come utente base
+	 * 
+	 * @param finestra Finestra loginPage da chiudere
 	 */
 	public void accediComeOspiteAction(loginPage finestra){
 		
 		if(true /*Connessione a DB riuscita, con chiamata a DAO che restituisce true se tutto okay*/ ){
-			new loginView().infoMessage("Accesso come \"Utente Base\" avvenuto");
+			new loginView().infoMessage("Accesso come ospite avvenuto");
 			new loginView().dispose(finestra);
 			new loginView().istanziaRicercaPage(new utente());
 		}

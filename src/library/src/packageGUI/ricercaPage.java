@@ -103,8 +103,8 @@ public class ricercaPage extends JFrame {
 				
 			}
 		});
-		
-		JLabel lblUtente = new JLabel( (user.getPermessi()==0)?"Utente Base":user.getEmail() );
+				
+		JLabel lblUtente = new JLabel( (user.getPermessi()==0)?"Ospite":user.getEmail() );
 		
 		JLabel lblManoscritti = new JLabel("MANOSCRITTI");
 		

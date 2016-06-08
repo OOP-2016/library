@@ -22,6 +22,7 @@ public class registrazioneView {
 	 * @param email Stringa che rappresenta l' email dell'utente
 	 * @param password Stringa che rappresenta la password dell'utente
 	 * @param ripetiPassword Stringa che rappresenta la conferma della password dell'utente
+	 * @param finestra Finestra registrazionePage da chiudere
 	 */
 	public void confermaRegistrazione(String nome, String cognome, String email, String password, String ripetiPassword, registrazionePage finestra){
 		new registrazioneController().confermaRegistrazioneAction(nome, cognome, email, password, ripetiPassword, finestra); 
@@ -50,7 +51,7 @@ public class registrazioneView {
 	 * 
 	 * @param finestra La finestra registrazionePage chiamante
 	 */
-	public void istanziaControllerFinestra(registrazionePage finestra){
+	public void indietro(registrazionePage finestra){
 		
 		new dialog().disposeDialog(finestra);//chiusura finestra
 		new registrazioneController().istanziaLoginAction(); //istanziazione controller
@@ -71,7 +72,7 @@ public class registrazioneView {
 	/**
 	 * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
 	 * 
-	 * @param finestra Finestra loginPage da chiudere 
+	 * @param finestra Finestra registrazionePage da chiudere 
 	 */
 	public void dispose(registrazionePage finestra){
 		new dialog().disposeDialog(finestra);

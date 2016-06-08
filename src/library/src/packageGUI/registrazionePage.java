@@ -97,7 +97,7 @@ public class registrazionePage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent e) {
 				
-				new registrazioneView().istanziaControllerFinestra(finestra);
+				new registrazioneView().indietro(finestra);
 				
 			}
 		});
