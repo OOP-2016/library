@@ -23,8 +23,8 @@ public class registrazioneView {
 	 * @param password Stringa che rappresenta la password dell'utente
 	 * @param ripetiPassword Stringa che rappresenta la conferma della password dell'utente
 	 */
-	public void confermaRegistrazione(String nome, String cognome, String email, String password, String ripetiPassword){
-		new registrazioneController().confermaRegistrazioneAction(nome, cognome, email, password, ripetiPassword); 
+	public void confermaRegistrazione(String nome, String cognome, String email, String password, String ripetiPassword, registrazionePage finestra){
+		new registrazioneController().confermaRegistrazioneAction(nome, cognome, email, password, ripetiPassword, finestra); 
 	}
 	
 	/**
@@ -67,5 +67,15 @@ public class registrazioneView {
 		finestra.setResizable(false);
 		
 	}
+	
+	/**
+	 * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
+	 * 
+	 * @param finestra Finestra loginPage da chiudere 
+	 */
+	public void dispose(registrazionePage finestra){
+		new dialog().disposeDialog(finestra);
+	}
+	
 	
 }

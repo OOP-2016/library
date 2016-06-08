@@ -1,5 +1,8 @@
 package packageController;
+import java.util.ArrayList;
+
 import packageBusiness.utente;
+import packageDAO.utenteDAO;
 import packageGUI.loginPage;
 import packageView.loginView;
 
@@ -26,13 +29,22 @@ public class loginController {
 	 * @param email
 	 * @param password
 	 */
-	public void accediAction(String email, String password){
+	public void accediAction(String email, String password, loginPage finestra){
 		
 		if(email.length() == 0||password.length() == 0){
 			new loginView().errorMessage("Campi vuoti");
-			return; 
+			return;
 		}
-		
+		ArrayList<Object> datiUtente = new ArrayList<Object>();
+		datiUtente.add(email);
+		datiUtente.add(password);
+		utente utente = (utente)new utenteDAO().retrieve(datiUtente);
+			if(utente == null) new loginView().errorMessage("login fallito");
+			else{
+			    new loginView().infoMessage("login riuscito");
+			    new loginView().dispose(finestra);
+			    new loginView().istanziaRicercaPage(utente);
+			    }
 		
 		
 		

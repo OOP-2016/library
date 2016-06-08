@@ -46,8 +46,8 @@ public class loginView {
 	 * @param password Stringa che rappresenta la password dell'utente
 	 */
 	
-	public void accedi(String email, String password){
-		new loginController().accediAction(email, password); 
+	public void accedi(String email, String password, loginPage finestra){
+		new loginController().accediAction(email, password, finestra); 
 	}
 	
 	/**

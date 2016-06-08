@@ -114,8 +114,8 @@ public class ricercaPage extends JFrame {
 		
 		JButton btnApri = new JButton("APRI");
 		//controllo che disabilita il tasto APRI se l'utente è guest
-		/*if(user.getPermessi() == 0)
-			btnApri.setEnabled(false);*/
+		if(user.getPermessi() == 0)
+			btnApri.setEnabled(false);
 		String title = null; 
 		btnApri.addActionListener(new ActionListener() {
 			/**

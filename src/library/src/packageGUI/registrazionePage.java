@@ -109,7 +109,7 @@ public class registrazionePage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent e) {
 				
-				new registrazioneView().confermaRegistrazione(textField.getText(), textField_1.getText(), textField_2.getText(), passwordField.getText(), passwordField_1.getText()); 
+				new registrazioneView().confermaRegistrazione(textField.getText(), textField_1.getText(), textField_2.getText(), passwordField.getText(), passwordField_1.getText(), finestra); 
 				
 			}
 		});

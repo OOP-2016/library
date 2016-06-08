@@ -89,7 +89,7 @@ public class operaPage extends JFrame {
 		
 		JButton button = new JButton("\u25BA");
 		
-		JLabel lblUser = new JLabel("/*utente:*/ " + user.getEmail());
+		JLabel lblUser = new JLabel(user.getEmail());
 		
 		JScrollPane scrollPane = new JScrollPane();
 		

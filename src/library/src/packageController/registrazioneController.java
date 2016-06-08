@@ -1,7 +1,10 @@
 package packageController;
 
+import packageGUI.registrazionePage;
 import packageView.loginView;
 import packageView.registrazioneView;
+import java.util.ArrayList;
+import packageDAO.utenteDAO;
 
 /**
  * Classe controller registrazioneController
@@ -24,8 +27,7 @@ public class registrazioneController {
 	 * @param password Stringa che rappresenta la password dell'utente
 	 * @param ripetiPassword Stringa che rappresenta la conferma della password dell'utente
 	 */
-	public void confermaRegistrazioneAction(String nome, String cognome, String email, String password, String ripetiPassword){
-		
+		public void confermaRegistrazioneAction(String nome, String cognome, String email, String password, String ripetiPassword, registrazionePage finestra){
 		if(nome.length() == 0||cognome.length() == 0||email.length() == 0||password.length() == 0||ripetiPassword.length() == 0){
 			new registrazioneView().errorMessage("Campi vuoti"); 
 			return; 
@@ -40,8 +42,21 @@ public class registrazioneController {
 		this.nome = nome; 
 		this.cognome = cognome; 
 		this.email = email; 
-		this.password = password; 
-		
+		this.password = password;
+		ArrayList<Object> dati = new ArrayList<Object>();
+		dati.add(this.nome);
+		dati.add(this.cognome);
+		dati.add(this.email);
+		dati.add(this.password);
+		/* passo i dati al DAO */
+		boolean success = new utenteDAO().insert(dati);
+		/* dialog di successo o errore */ 
+		if(success) new registrazioneView().infoMessage("registrazione avvenuta");
+		else
+			new registrazioneView().errorMessage("registrazione fallita");
+			new registrazioneView().dispose(finestra);
+		/* riapro la login page */
+		new registrazioneView().istanziaLoginPage();
 	}
 	
 	/**

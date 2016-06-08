@@ -81,7 +81,7 @@ public class loginPage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new loginView().accedi(textField.getText(), passwordField.getText()); 
+				new loginView().accedi(textField.getText(), passwordField.getText(), finestra); 
 				
 			}
 		});
