@@ -4,6 +4,9 @@ import packageGUI.registrazionePage;
 import packageView.loginView;
 import packageView.registrazioneView;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import packageDAO.utenteDAO;
 
 /**
@@ -16,7 +19,12 @@ public class registrazioneController {
 	private String cognome; 
 	private String email; 
 	private String password; 
-		
+	
+	private Pattern pattern;
+	private Matcher matcher;
+	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + 
+												"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	
 	/**
 	 * Il metodo attua una serie di controlli sui dati immessi dall'utente e se vanno a buon fine 
 	 * aggiorna le sue variabili d'istanza, altrimenti un verrà creato un MessageDialog di errore
@@ -29,17 +37,37 @@ public class registrazioneController {
 	 * @param finestra Finestra registrazionePage da chiudere
 	 */
 		public void confermaRegistrazioneAction(String nome, String cognome, String email, String password, String ripetiPassword, registrazionePage finestra){
-		if(nome.length() == 0||cognome.length() == 0||email.length() == 0||password.length() == 0||ripetiPassword.length() == 0){
+		
+			/**
+			 * Controllo campi vuoti 
+			 */
+			if(nome.length() == 0||cognome.length() == 0||email.length() == 0||password.length() == 0||ripetiPassword.length() == 0){
 			new registrazioneView().errorMessage("Campi vuoti"); 
 			return; 
 		}
 		
+		/**
+		 * Controllo pattern email
+		 */
+		pattern = Pattern.compile(EMAIL_PATTERN);
+		matcher = pattern.matcher(email); 
+		
+		if(!(matcher.matches())){
+			new registrazioneView().errorMessage("email non valida");
+			return; 
+		}
+		
+		/**
+		 * Controllo match password/ripetiPassword
+		 */
 		if(!(password.equals(ripetiPassword))){
 			new registrazioneView().errorMessage("I campi \"PASSWORD\" e \"RIPETI PASSWORD\" non coincidono"); 
 			return; 
 		}
 		
-		
+		/**
+		 * Controlli superati 
+		 */
 		this.nome = nome; 
 		this.cognome = cognome; 
 		this.email = email; 

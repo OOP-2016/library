@@ -5,12 +5,18 @@ import packageBusiness.utente;
 import packageDAO.utenteDAO;
 import packageGUI.loginPage;
 import packageView.loginView;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  * Classe controller loginController
  */
 
 public class loginController {
+	
+	private Pattern pattern;
+	private Matcher matcher;
+	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + 
+												"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	/**
 	 * Il metodo istanzia la classe loginView 
@@ -37,6 +43,21 @@ public class loginController {
 			return;
 		}
 		
+		/**
+		 * Controllo pattern email
+		 */
+		pattern = Pattern.compile(EMAIL_PATTERN);
+		matcher = pattern.matcher(email); 
+		
+		if(!(matcher.matches())){
+			new loginView().errorMessage("email non valida");
+			return; 
+		}
+		
+		
+		/**
+		 * Controlli superati
+		 */
 		ArrayList<Object> datiUtente = new ArrayList<Object>();
 		
 		datiUtente.add(email);
@@ -61,13 +82,9 @@ public class loginController {
 	 */
 	public void accediComeOspiteAction(loginPage finestra){
 		
-		if(true /*Connessione a DB riuscita, con chiamata a DAO che restituisce true se tutto okay*/ ){
 			new loginView().infoMessage("Accesso come ospite avvenuto");
 			new loginView().dispose(finestra);
 			new loginView().istanziaRicercaPage(new utente());
-		}
-		else
-			new loginView().errorMessage("Errore in fase di accesso");
 		
 	}
 	
