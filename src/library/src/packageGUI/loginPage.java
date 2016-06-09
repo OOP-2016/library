@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
@@ -43,9 +44,11 @@ public class loginPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 					loginPage frame = new loginPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,7 +63,7 @@ public class loginPage extends JFrame {
 		super("Library");
 		loginPage finestra = this; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 295, 335);
+		setBounds(100, 100, 295, 316);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -124,11 +127,11 @@ public class loginPage extends JFrame {
 							.addGap(31)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(btnRegistrati, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnAccediComeOspite, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
 								.addComponent(lblNewLabel)
 								.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-								.addComponent(passwordField)))
+								.addComponent(passwordField)
+								.addComponent(btnAccediComeOspite, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(98)
 							.addComponent(btnNewButton)))
