@@ -19,9 +19,13 @@ public class ricercaController {
 	 * @param user Utente che ha effettuato l'accesso al sistema 
 	 * @param title Stringa che rappresenta il titolo dell'opera scelta
 	 */
-	public void apriOperaAction(ricercaPage finestra, utente user, String title){
+	public void apriOperaAction(ricercaPage finestra, utente utente, String titolo){
+		if(titolo == null){
+			new ricercaView().errorMessage("Selezionare un opera");
+			return; 
+		}
 		new ricercaView().dispose(finestra);
-		new ricercaView().istanziaOperaPage(user);
+		new ricercaView().istanziaOperaPage(utente, titolo);
 	}
 
 	/**

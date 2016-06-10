@@ -44,7 +44,14 @@ public class loginPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					/**
+					 * Se il Look di Windows non è installato allora viene applicato il Look di default
+					 */
+					UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels(); 
+					for(int i = 0; i < looks.length ; i++ )
+						if(looks[i].getName().equals("Windows"))
+							UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+					
 					loginPage frame = new loginPage();
 					frame.setVisible(true);
 					frame.setResizable(false);

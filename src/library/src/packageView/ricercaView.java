@@ -58,8 +58,8 @@ public class ricercaView {
 	 * 
 	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
 	 */
-	public void istanziaOperaPage(utente user){
-		operaPage finestra = new operaPage(user);
+	public void istanziaOperaPage(utente utente, String titolo){
+		operaPage finestra = new operaPage(utente, titolo);
 		finestra.setVisible(true);
 		finestra.setResizable(false);
 	}
@@ -71,8 +71,8 @@ public class ricercaView {
 	 * @param user Utente che ha effettuato l'accesso
 	 * @param title Stringa che rappresenta il titolo del manoscritto 
 	 */
-	public void apriOpera(ricercaPage finestra, utente user, String title){
-		new ricercaController().apriOperaAction(finestra, user, title);
+	public void apriOpera(ricercaPage finestra, utente utente, String titolo){
+		new ricercaController().apriOperaAction(finestra, utente, titolo);
 	}
 	
 	/**

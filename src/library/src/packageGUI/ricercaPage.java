@@ -54,7 +54,7 @@ public class ricercaPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ricercaPage(utente user) { 
+	public ricercaPage(utente utente) { 
 		super("Library"); 			
 		
 		ricercaPage finestra = this; 
@@ -94,7 +94,7 @@ public class ricercaPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);		
 				
-		JLabel lblUtente = new JLabel( (user.getPermessi()==0)?"Ospite":user.getEmail() );
+		JLabel lblUtente = new JLabel( (utente.getPermessi()==0)?"Ospite":utente.getEmail() );
 		
 		JLabel lblManoscritti = new JLabel("MANOSCRITTI");
 		
@@ -108,12 +108,12 @@ public class ricercaPage extends JFrame {
 		
 		JButton btnApri = new JButton("APRI");
 		//controllo che disabilita il tasto APRI se l'utente è guest
-		if(user.getPermessi() == 0)
-			btnApri.setEnabled(false);
+		if(utente.getPermessi() == 0)
+			btnApri.setEnabled(false); 
 		btnApri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String titolo = (String)list.getSelectedValue();
-				new ricercaView().apriOpera(finestra, user, titolo);
+				new ricercaView().apriOpera(finestra, utente, titolo);
 			}
 		});
 		

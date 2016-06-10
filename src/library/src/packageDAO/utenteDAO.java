@@ -32,11 +32,12 @@ public class utenteDAO implements DAO {
 			
 		Class.forName("com.mysql.jdbc.Driver");
 		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
-		preparedStatement = connect.prepareStatement("INSERT INTO library.utenti(nome,cognome,email,password) VALUES (?,?,?,?)");
+		preparedStatement = connect.prepareStatement("INSERT INTO library.utenti(nome,cognome,email,password,permessi) VALUES (?,?,?,?,?)");
 		preparedStatement.setString(1,(String)args.get(0));
 		preparedStatement.setString(2,(String)args.get(1));
 		preparedStatement.setString(3,(String)args.get(2));
 		preparedStatement.setString(4,(String)args.get(3));
+		preparedStatement.setInt(5, 1);
 		preparedStatement.executeUpdate();
 		}
 			catch(SQLException e){

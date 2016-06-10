@@ -72,22 +72,30 @@ public class operaDAO implements DAO {
 		Statement Statement = null;
 		ResultSet resultSet = null;
 		opera opera = null;
+		String titolo = (String)args.get(0); 
+		String autore = null; 
+		int anno_pubblicazione = 0; 
+		int numero_pagine = 0; 
+		boolean pubblicata = false; 
 		
 	try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
-			resultSet = Statement.executeQuery("SELECT * FROM library.opera");
+			String query = String.format("SELECT * FROM library.opera WHERE titolo='%s'", titolo); 
+			resultSet = Statement.executeQuery(query);
 			
 			while(resultSet.next()){
 				
-			String titolo = resultSet.getString("email");
-			String autore = resultSet.getString("password");
-			int anno_pubblicazione = resultSet.getInt("anno_pubblicazione");
-			int numero_pagine = resultSet.getInt("numero_pagine");
-			boolean pubblicata = resultSet.getBoolean("pubblicata");
+			autore = resultSet.getString("autore");
+			anno_pubblicazione = resultSet.getInt("anno_pubblicazione");
+			numero_pagine = resultSet.getInt("numero_pagine");
+			pubblicata = resultSet.getBoolean("pubblicata");
 			}
+			
+			opera = new opera(titolo, autore, anno_pubblicazione, numero_pagine, pubblicata); 
+			
 		}
 				catch(SQLException e){
 				new dialog().errorDialog("Errore Database: " + e.getMessage());
