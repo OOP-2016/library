@@ -1,6 +1,8 @@
 package packageController;
 
+import java.util.ArrayList;
 import packageBusiness.utente;
+import packageDAO.operaDAO;
 import packageGUI.ricercaPage;
 import packageView.ricercaView;
 
@@ -42,4 +44,10 @@ public class ricercaController {
 		new ricercaView().istanziaLoginPage();
 	}
 	
+	public ArrayList<String> cercaOperaAction(String filtro) {
+		
+		ArrayList<String> titoli = new operaDAO().retrieveTitoli(filtro);
+		return titoli;
+		
+	}
 }

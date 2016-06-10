@@ -1,0 +1,184 @@
+package packageDAO;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import packageBusiness.opera;
+import packageGUI.dialog;
+
+public class operaDAO implements DAO {
+	
+	/**
+	 * Metodo che inserisce parametri nel database 
+	 * 
+	 * @param args ArrayList contententi i parametri da inserire nel database 
+	 * @return true se insert termina senza errori, false altrimenti 
+	 */
+	@SuppressWarnings("finally")
+	public boolean insert(ArrayList<Object> args) {
+		
+		Connection connect = null;
+		PreparedStatement preparedStatement = null;
+		boolean success=true;
+		
+		try{
+			
+		Class.forName("com.mysql.jdbc.Driver");
+		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+		preparedStatement = connect.prepareStatement("INSERT INTO library.opera(titolo,autore,anno_pubblicazione,numero_pagine) VALUES (?,?,?,?)");
+		preparedStatement.setString(1,(String)args.get(0));
+		preparedStatement.setString(2,(String)args.get(1));
+		preparedStatement.setInt(3,(int)args.get(2));
+		preparedStatement.setInt(4,(int)args.get(3));
+		preparedStatement.executeUpdate();
+		}
+			catch(SQLException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(ClassNotFoundException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(Exception e){
+			success=false;
+			new dialog().errorDialog("Errore generico:" + e.getMessage());
+			}
+				finally{
+					try{
+						if(connect!=null) connect.close();
+						if(preparedStatement!=null) preparedStatement.close();
+						return success;
+						}
+					catch(SQLException e){
+						new dialog().errorDialog("Errore Database: "+ e.getMessage());
+						return false;
+						}
+					    }
+	}
+	
+	/**
+	 * Metodo che prende dati dal database
+	 * @param args ArrayList contententi i parametri da inserire nel database 
+	 * @return oggetto preso dal database 
+	 */
+	@SuppressWarnings("finally")
+	public Object retrieve(ArrayList<Object> args) {
+		Connection connect = null;
+		Statement Statement = null;
+		ResultSet resultSet = null;
+		opera opera = null;
+		
+	try{
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+			Statement = connect.createStatement();
+			resultSet = Statement.executeQuery("SELECT * FROM library.opera");
+			
+			while(resultSet.next()){
+				
+			String titolo = resultSet.getString("email");
+			String autore = resultSet.getString("password");
+			int anno_pubblicazione = resultSet.getInt("anno_pubblicazione");
+			int numero_pagine = resultSet.getInt("numero_pagine");
+			boolean pubblicata = resultSet.getBoolean("pubblicata");
+			}
+		}
+				catch(SQLException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(ClassNotFoundException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(Exception e){
+				new dialog().errorDialog("Errore generico:" + e.getMessage());
+				}
+					finally{
+						
+						try{
+							
+							if(connect!=null) connect.close();
+							if(Statement!=null) Statement.close();
+							if(resultSet!=null) resultSet.close();
+							return opera;
+							
+							}
+						
+						catch(SQLException e){
+							
+							new dialog().errorDialog("Errore Database: "+e.getMessage());
+							return null;
+							}
+						
+				      }
+	}
+	
+	@SuppressWarnings("finally")
+	public ArrayList<String> retrieveTitoli(String filtro) {
+		Connection connect = null;
+		Statement Statement = null;
+		ResultSet resultSet = null;
+		ArrayList<String> titoli = new ArrayList<String>();
+		String query;
+		
+	try{
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+			if(filtro.length()==1) {
+				if(filtro.equals("-")){
+					query = "SELECT titolo FROM library.opera";
+				}
+				else {
+				query = "SELECT titolo FROM library.opera WHERE titolo LIKE '";
+				query += String.format("%s", filtro);
+				query += "%'";
+				}
+			}
+			else {
+			query = "SELECT titolo FROM library.opera WHERE titolo LIKE '%";
+			query += String.format("%s", filtro);
+			query += "%'"; 
+			}
+			Statement = connect.createStatement();
+			resultSet = Statement.executeQuery(query);
+			
+			while(resultSet.next()){
+				
+			titoli.add(resultSet.getString("titolo"));
+			}
+		}
+				catch(SQLException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(ClassNotFoundException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(Exception e){
+				new dialog().errorDialog("Errore generico:" + e.getMessage());
+				}
+					finally{
+						
+						try{
+							
+							if(connect!=null) connect.close();
+							if(Statement!=null) Statement.close();
+							if(resultSet!=null) resultSet.close();
+							return titoli;
+							
+							}
+						
+						catch(SQLException e){
+							
+							new dialog().errorDialog("Errore Database: "+e.getMessage());
+							return null;
+							}
+		
+	}
+}
+}

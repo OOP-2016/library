@@ -1,5 +1,8 @@
 package packageView;
 
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 import packageBusiness.utente;
 import packageController.ricercaController;
 import packageGUI.dialog;
@@ -90,4 +93,8 @@ public class ricercaView {
 		new dialog().errorDialog(error);
 	}
 	
-}
+	public void cercaOpera(String filtro, DefaultListModel listModel ) {
+		ArrayList<String> titoli=new ricercaController().cercaOperaAction(filtro);
+		for(int i=0;i<titoli.size();i++) listModel.addElement(titoli.get(i));
+		}
+	}

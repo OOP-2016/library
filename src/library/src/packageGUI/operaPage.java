@@ -133,6 +133,9 @@ public class operaPage extends JFrame {
 						.addComponent(btnIndietro))
 					.addContainerGap())
 		);
+		
+		JTextPane textPane = new JTextPane();
+		scrollPane.setViewportView(textPane);
 		contentPane.setLayout(gl_contentPane);
 	}
 }

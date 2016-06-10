@@ -92,17 +92,7 @@ public class ricercaPage extends JFrame {
 		mnNewMenu.add(mntmExit);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
-		
-		JButton btnCerca = new JButton("CERCA");
-		btnCerca.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				
-				
-			}
-		});
+		setContentPane(contentPane);		
 				
 		JLabel lblUtente = new JLabel( (user.getPermessi()==0)?"Ospite":user.getEmail() );
 		
@@ -112,30 +102,28 @@ public class ricercaPage extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
+		DefaultListModel listModel = new DefaultListModel();
+		JList list = new JList(listModel);
+		scrollPane.setViewportView(list);
+		
 		JButton btnApri = new JButton("APRI");
 		//controllo che disabilita il tasto APRI se l'utente è guest
 		if(user.getPermessi() == 0)
 			btnApri.setEnabled(false);
-		String title = null; 
 		btnApri.addActionListener(new ActionListener() {
-			/**
-			 * ActionListener che istanzia ricercaView al click del bottone "Apri"
-			 */
 			public void actionPerformed(ActionEvent e) {
-				new ricercaView().apriOpera(finestra, user, title);
+				String titolo = (String)list.getSelectedValue();
+				new ricercaView().apriOpera(finestra, user, titolo);
 			}
 		});
 		
-		DefaultListModel listModel = new DefaultListModel();
-		JList list = new JList(listModel);
-		scrollPane.setViewportView(list);
+		
 		
 		/**
 		 * ComboBox riempita automaticamente con i simboli dell'alfabeto + ALL
 		 */
 		JComboBox comboBox = new JComboBox();
 			comboBox.addItem("-");
-			comboBox.addItem("ALL");
 			comboBox.addItem("A");
 			comboBox.addItem("B");
 			comboBox.addItem("C");
@@ -162,6 +150,24 @@ public class ricercaPage extends JFrame {
 			comboBox.addItem("X");
 			comboBox.addItem("Y");
 			comboBox.addItem("Z");
+			
+			new ricercaView().cercaOpera((String)comboBox.getSelectedItem(), listModel);
+			
+			JButton btnCerca = new JButton("CERCA");
+			btnCerca.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					listModel.clear();
+					String filtro;			
+					if(comboBox.isEnabled()){ 
+						filtro = (String)comboBox.getSelectedItem();
+						new ricercaView().cercaOpera(filtro, listModel);
+					}
+					else {
+						filtro= (String)textField.getText();
+						new ricercaView().cercaOpera(filtro, listModel);
+					}
+				}
+			});
 		
 			textField = new JTextField();
 			
@@ -192,9 +198,6 @@ public class ricercaPage extends JFrame {
 				}
 			});
 			textField.setColumns(10);
-		//listModel.addElement("yo");
-		//listModel.clear();
-		//String s = (String) list.getSelectedValue();
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
