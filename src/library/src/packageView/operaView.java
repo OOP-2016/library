@@ -2,11 +2,11 @@ package packageView;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
-
+import packageBusiness.opera;
 import packageBusiness.pagina;
 import packageBusiness.utente;
 import packageController.operaController;
@@ -87,17 +87,32 @@ public class operaView {
 		new dialog().errorDialog(error);
 	}
 	
+	/**
+	 * Il metodo istanzia il controller operaController
+	 * 
+	 * @param finestra Finestra operaPage da chiudere 
+	 * @param user Utente che ha effettuato l'accesso nel sistema 
+	 */
 	public void indietro(operaPage finestra, utente user){
 		new operaController().indietroAction(finestra, user);
 	}
 	
+	/**
+	 * Il metodo istanzia operaController e setta operaPage in modo
+	 * da accogliere l'immagine e la trascrizione da visualizzare all'utente
+	 * 
+	 * @param immagine Riquadro dove verrà visualizzata l'immagine
+	 * @param trascrizione Riquadro dove verrà visualizzata la trascrizione 
+	 * @param titolo Stringa che rappresenta il titolo dell'opera 
+	 * @param npagina intero che rappresenta il corrente numero di pagina
+	 */
 	public void vista(JLabel immagine, JTextPane trascrizione, String titolo, int npagina){
 		pagina pagina = new operaController().vistaAction(titolo, npagina); 
 		BufferedImage img = pagina.getImmagine().getImmagine(); 
 		Image im = null; 
-		im = img.getScaledInstance(405, 439,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		im = img.getScaledInstance(395, 569,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		
-		//JOptionPane.showMessageDialog(null, lblNewLabel.getWidth() + "x" + lblNewLabel.getHeight());
+		//new dialog().infoDialog(immagine.getWidth() + "x" + immagine.getHeight());
 		
 		immagine.setIcon(new ImageIcon(im));
 
@@ -107,6 +122,49 @@ public class operaView {
 		trascrizione.setContentType("text/html");
 		trascrizione.setText(stringa.toString());
 		
+		
+	}
+	
+	public int firstPage(String titolo, JLabel page, int npagina){
+		opera opera = new operaController().getPageMax(titolo); 
+		int pageMax = opera.getNumero_pagine();  
+		page.setText(npagina + " / " + pageMax); 
+		
+		return npagina; 
+	}
+	
+	public int clickAvanti(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro){
+		opera opera = new operaController().getPageMax(titolo); 
+		int pageMax = opera.getNumero_pagine();  
+		
+		indietro.setEnabled(true); //abilito bottone indietro
+		
+		npagina+=1; 
+		if(pageMax == npagina) avanti.setEnabled(false);
+		
+		page.setText(npagina + " / " + pageMax); 
+		
+		return npagina; 
+	}
+	
+	public int clickIndietro(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro){
+
+		avanti.setEnabled(true); //abilita bottone avanti
+		
+		npagina-=1; 
+		
+		opera opera = new operaController().getPageMax(titolo); 
+		int pageMax = opera.getNumero_pagine();  
+		
+		
+		page.setText(npagina + " / " + pageMax); 
+		
+		if(npagina == 1){
+			indietro.setEnabled(false); //disabilito bottone indietro 
+			return npagina; 
+		}
+		
+		return npagina; 
 		
 	}
 

@@ -2,19 +2,12 @@ package packageGUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Image;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import packageBusiness.opera;
 import packageBusiness.utente;
-import packageDAO.operaDAO;
 import packageView.operaView;
-
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -22,12 +15,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
-import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 /**
@@ -36,9 +26,9 @@ import java.awt.event.ActionEvent;
 public class operaPage extends JFrame {
 
 	private JPanel contentPane;
-	private static int npagina = 1; 
-	private int pageMax = 0; 
-	private JLabel lblNewLabel; 
+	private static int npagina = 1; /* Current page */ 
+	private JLabel lblNewLabel; /* Page label */
+	
 	/**
 	 * Launch the application.
 	 */
@@ -100,76 +90,47 @@ public class operaPage extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblImg = new JLabel();
-		
 		JTextPane textPane = new JTextPane();
 		
 		
-		
-		ArrayList<Object> args = new ArrayList<Object>(); 
-		args.add(titolo); 
-		
-		opera opera = (opera)new operaDAO().retrieve(args); 
-		pageMax = opera.getNumero_pagine(); 
-		lblNewLabel = new JLabel(npagina + " / " + pageMax);
-		
-		//Indietro 
-				JButton btnNewButton = new JButton("\u25C4");
+		//Indietro button
+		JButton btnNewButton = new JButton("\u25C4");
 				
-		//Avanti
-				JButton button = new JButton("\u25BA");
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						ArrayList<Object> args = new ArrayList<Object>(); 
-						args.add(titolo); 
-						
-						opera opera = (opera)new operaDAO().retrieve(args); 
-						pageMax = opera.getNumero_pagine(); 
-						
-						if(pageMax < 0) return; 
-						
-						btnNewButton.setEnabled(true); //abilito bottone indietro
-						
-						npagina+=1; 
-						if(pageMax == npagina) button.setEnabled(false);
-						
-						
-						new operaView().vista(lblImg, textPane, titolo, npagina);
-						lblNewLabel.setText(npagina + " / " + pageMax); 
-						
-					}
-				});
-		
-		
-		btnNewButton.addActionListener(new ActionListener() {
+		//Avanti button
+		JButton button = new JButton("\u25BA");
+		button.addActionListener(new ActionListener() {
+			/**
+			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
+			 */
 			public void actionPerformed(ActionEvent arg0) {
-				
-
-				button.setEnabled(true); //abilita bottone avanti
-				
-				npagina-=1; 
-				
-				new operaView().vista(lblImg, textPane, titolo, npagina);
-				
-				lblNewLabel.setText(npagina + " / " + pageMax); 
-				
-				if(npagina == 1){
-					btnNewButton.setEnabled(false); //disabilito bottone indietro 
-					return; 
-				}
-				
-				
+				npagina = new operaView().clickAvanti(titolo, lblNewLabel, npagina, button, btnNewButton);
+				new operaView().vista(lblImg, textPane, titolo, npagina);		
 			}
 		});
 		
 		
+		btnNewButton.addActionListener(new ActionListener() {
+			/**
+			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
+			 */
+			public void actionPerformed(ActionEvent arg0) {
+				npagina = new operaView().clickIndietro(titolo, lblNewLabel, npagina, button, btnNewButton);
+				new operaView().vista(lblImg, textPane, titolo, npagina);
+			}
+		});
 		
 		JLabel lblUser = new JLabel(user.getEmail());
-		
 		JLabel lblTooo = new JLabel(titolo);
 		
-		new operaView().vista(lblImg, textPane, titolo, 1);
+		
+		/**
+		 * Caricamento prima pagina 
+		 */
+		lblNewLabel = new JLabel();
+		npagina = new operaView().firstPage(titolo, lblNewLabel , npagina);
+		new operaView().vista(lblImg, textPane, titolo, npagina);
 		btnNewButton.setEnabled(false);
+		
 		
 		
 		JScrollPane scrollPane = new JScrollPane();

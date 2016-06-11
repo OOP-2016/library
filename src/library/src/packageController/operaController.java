@@ -1,9 +1,10 @@
 package packageController;
 
 import java.util.ArrayList;
-
+import packageBusiness.opera;
 import packageBusiness.pagina;
 import packageBusiness.utente;
+import packageDAO.operaDAO;
 import packageDAO.paginaDAO;
 import packageGUI.operaPage;
 import packageView.operaView;
@@ -46,4 +47,14 @@ public class operaController {
 		pagina pagina = (pagina)new paginaDAO().retrieve(args); 
 		return pagina; 
 	}
+	
+	public opera getPageMax(String titolo){
+		ArrayList<Object> args = new ArrayList<Object>(); 
+		args.add(titolo); 
+		
+		opera opera = (opera)new operaDAO().retrieve(args); 
+ 		
+		return opera; 
+	}
+	
 }
