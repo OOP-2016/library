@@ -29,11 +29,12 @@ public class operaDAO implements DAO {
 			
 		Class.forName("com.mysql.jdbc.Driver");
 		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
-		preparedStatement = connect.prepareStatement("INSERT INTO library.opera(titolo,autore,anno_pubblicazione,numero_pagine) VALUES (?,?,?,?)");
+		preparedStatement = connect.prepareStatement("INSERT INTO library.opera(titolo,autore,anno_pubblicazione,numero_pagine,pubblicata) VALUES (?,?,?,?,?)");
 		preparedStatement.setString(1,(String)args.get(0));
 		preparedStatement.setString(2,(String)args.get(1));
 		preparedStatement.setInt(3,(int)args.get(2));
 		preparedStatement.setInt(4,(int)args.get(3));
+		preparedStatement.setBoolean(5, false);
 		preparedStatement.executeUpdate();
 		}
 			catch(SQLException e){

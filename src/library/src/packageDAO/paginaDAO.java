@@ -43,13 +43,13 @@ public class paginaDAO implements DAO {
 		int numero = arg.getNumero(); 
 		String opera = arg.getOpera(); 
 		String trascrizione = arg.getTrascrizione(); 
+		boolean trascrizione_validata = arg.gettrascrizione_validata(); 
+		boolean immagine_validata = arg.getimmagine_validata(); 
 		
 		immagine immagine = arg.getImmagine(); 
 		BufferedImage img = immagine.getImmagine(); 
 		Date dataScatto = immagine.getDataScatto(); 
-		int altezza = immagine.getAltezza(); 
-		int larghezza = immagine.getLarghezza(); 
-		String risoluzione = String.format("%d" + "x" + "%d", altezza, larghezza); 
+		String risoluzione = immagine.getRisoluzione(); 
 		
 		try{
 		
@@ -61,13 +61,16 @@ public class paginaDAO implements DAO {
 	    ImageIO.write(img, "jpg", baos);
 	    ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 		
-		preparedStatement = connect.prepareStatement("INSERT INTO library.utenti(numero,opera,immagine,trascrizione,datascatto,risoluzione) VALUES (?,?,?,?,?,?)");
+		preparedStatement = connect.prepareStatement("INSERT INTO library.utenti(numero,opera,immagine,immagine_validata,trascrizione,trascrizione_validata,datascatto,risoluzione) VALUES (?,?,?,?,?,?,?,?)");
 		preparedStatement.setInt(1, numero);
 		preparedStatement.setString(2,opera);
 		preparedStatement.setBlob(3, bais);
-		preparedStatement.setString(4,trascrizione);
-		preparedStatement.setDate(5, dataScatto);
-		preparedStatement.setString(6,risoluzione);
+		preparedStatement.setBoolean(4,immagine_validata);
+		preparedStatement.setString(5,trascrizione);
+		preparedStatement.setBoolean(6,trascrizione_validata);
+		preparedStatement.setDate(7, dataScatto);
+		preparedStatement.setString(8,risoluzione);
+		
 		preparedStatement.executeUpdate();
 		}
 			catch(SQLException e){
@@ -140,8 +143,8 @@ public class paginaDAO implements DAO {
 				
 			}
 			
-			immagine = new immagine(img, null, 0, 0); 
-			pagina = new pagina(Npagina, titolo, immagine, trascrizione); 
+			immagine = new immagine(img, null, null); 
+			pagina = new pagina(Npagina, titolo, immagine, false, trascrizione, false); 
 			
 		}
 				catch(SQLException e){

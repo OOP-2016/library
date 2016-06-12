@@ -7,15 +7,13 @@ public class immagine {
 	
 	private BufferedImage immagine; 
 	private Date dataScatto; 
-	private int altezza; 
-	private int larghezza;
+	private String risoluzione; 
 
-	public immagine(BufferedImage immagine, Date dataScatto, int altezza, int larghezza) {
+	public immagine(BufferedImage immagine, Date dataScatto, String risoluzione) {
 		
 		this.immagine = immagine;
 		this.dataScatto = dataScatto;
-		this.altezza = altezza;
-		this.larghezza = larghezza;
+		this.risoluzione = risoluzione;
 	}
 	
 
@@ -35,20 +33,12 @@ public class immagine {
 		this.dataScatto = dataScatto;
 	}
 	
-	public int getAltezza() {
-		return this.altezza;
+	public String getRisoluzione() {
+		return this.risoluzione;
 	}
 	
-	public void setAltezza(int altezza) {
-		this.altezza = altezza;
+	public void setRisoluzione(String risoluzione) {
+		this.risoluzione = risoluzione;
 	}
-	
-	public int getLarghezza() {
-		return this.larghezza;
-	}
-	
-	public void setLarghezza(int larghezza) {
-		this.larghezza = larghezza;
-	} 
 	
 }

@@ -85,18 +85,21 @@ public class utenteDAO implements DAO {
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
 			resultSet = Statement.executeQuery("SELECT * FROM library.utenti");
-			
-			while(resultSet.next()){
 				
+			while(resultSet.next()){
+			
 			String email = resultSet.getString("email");
 			String password = resultSet.getString("password");
 			int permessi = resultSet.getInt("permessi");
 			
-			if(email.equals(args.get(0)) && password.equals(args.get(1))){
+			if(email.equals((String)args.get(0)) && password.equals((String)args.get(1))){
 				utente = new utente(email,permessi);
+				return utente; 
 			}
-			else
-				utente = null;	
+			else{
+				utente = null;
+			}
+					
 			}
 			
 			}
