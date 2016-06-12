@@ -48,7 +48,7 @@ public class paginaDAO implements DAO {
 		
 		immagine immagine = arg.getImmagine(); 
 		BufferedImage img = immagine.getImmagine(); 
-		Date dataScatto = immagine.getDataScatto(); 
+		String dataScatto = immagine.getDataScatto(); 
 		String risoluzione = immagine.getRisoluzione(); 
 		
 		try{
@@ -61,14 +61,14 @@ public class paginaDAO implements DAO {
 	    ImageIO.write(img, "jpg", baos);
 	    ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 		
-		preparedStatement = connect.prepareStatement("INSERT INTO library.utenti(numero,opera,immagine,immagine_validata,trascrizione,trascrizione_validata,datascatto,risoluzione) VALUES (?,?,?,?,?,?,?,?)");
+		preparedStatement = connect.prepareStatement("INSERT INTO library.pagina(numero,opera,immagine,immagine_validata,trascrizione,trascrizione_validata,data_scatto,risoluzione) VALUES (?,?,?,?,?,?,?,?)");
 		preparedStatement.setInt(1, numero);
 		preparedStatement.setString(2,opera);
 		preparedStatement.setBlob(3, bais);
 		preparedStatement.setBoolean(4,immagine_validata);
 		preparedStatement.setString(5,trascrizione);
 		preparedStatement.setBoolean(6,trascrizione_validata);
-		preparedStatement.setDate(7, dataScatto);
+		preparedStatement.setString(7, dataScatto);
 		preparedStatement.setString(8,risoluzione);
 		
 		preparedStatement.executeUpdate();

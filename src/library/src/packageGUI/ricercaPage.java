@@ -7,7 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import packageBusiness.opera;
 import packageBusiness.utente;
+import packageController.operaController;
+import packageView.operaView;
 import packageView.ricercaView;
 
 import javax.swing.JMenuBar;
@@ -114,6 +117,11 @@ public class ricercaPage extends JFrame {
 		btnApri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String titolo = (String)list.getSelectedValue();
+				opera opera =  new operaController().getPageMax(titolo);  
+				if(utente.getPermessi() == 2){
+					new ricercaView().istanziaAcquisizionePage(finestra,utente,opera);
+					return;
+				}
 				new ricercaView().apriOpera(finestra, utente, titolo);
 			}
 		});

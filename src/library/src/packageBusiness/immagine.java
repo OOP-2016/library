@@ -6,10 +6,10 @@ import java.sql.Date;
 public class immagine {
 	
 	private BufferedImage immagine; 
-	private Date dataScatto; 
+	private String dataScatto; 
 	private String risoluzione; 
 
-	public immagine(BufferedImage immagine, Date dataScatto, String risoluzione) {
+	public immagine(BufferedImage immagine, String dataScatto, String risoluzione) {
 		
 		this.immagine = immagine;
 		this.dataScatto = dataScatto;
@@ -25,11 +25,11 @@ public class immagine {
 		this.immagine = immagine;
 	}
 	
-	public Date getDataScatto() {
+	public String getDataScatto() {
 		return this.dataScatto;
 	}
 	
-	public void setDataScatto(Date dataScatto) {
+	public void setDataScatto(String dataScatto) {
 		this.dataScatto = dataScatto;
 	}
 	

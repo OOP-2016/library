@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.WindowConstants;
 
+import packageBusiness.opera;
 import packageBusiness.utente;
 import packageController.operaController;
 import packageController.ricercaController;
+import packageGUI.acquisizionePage;
 import packageGUI.aggiungiOperaForm;
 import packageGUI.dialog;
 import packageGUI.loginPage;
@@ -124,5 +126,10 @@ public class ricercaView {
 		});
 		
 	}
-	
+	public void istanziaAcquisizionePage(ricercaPage finestra, utente utente, opera opera){
+		new dialog().disposeDialog(finestra);
+		acquisizionePage frame = new acquisizionePage(utente,opera);
+		frame.setVisible(true);
+		frame.setResizable(false);
+	}
 	}
