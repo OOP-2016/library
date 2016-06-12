@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import packageBusiness.utente;
 import packageDAO.operaDAO;
 import packageGUI.ricercaPage;
+import packageView.operaView;
 import packageView.ricercaView;
 
 /**
@@ -52,6 +53,44 @@ public class ricercaController {
 		
 		ArrayList<String> titoli = new operaDAO().retrieveTitoli(filtro);
 		return titoli;
+		
+	}
+	
+	public void aggiungiOperaAction(String titolo, String autore, String annoPubblicazione, String numeroPagine){
+		
+		if(titolo.length() == 0||autore.length() == 0||annoPubblicazione.length() == 0||numeroPagine.length() == 0){
+			new ricercaView().errorMessage("Campi mancanti");
+			return; 
+		}
+		
+		int anno_pubblicazione; 
+		int numero_pagine; 
+		
+		try {
+		
+		anno_pubblicazione = Integer.parseInt(annoPubblicazione); 
+		numero_pagine = Integer.parseInt(numeroPagine); 
+		
+		} catch(Exception e){
+			new ricercaView().errorMessage("Errore scrittura nei campi");
+			return; 
+		}
+		
+		ArrayList<Object> args = new ArrayList<Object>(); 
+		args.add(titolo); 
+		args.add(autore); 
+		args.add(anno_pubblicazione); 
+		args.add(numero_pagine); 
+		
+		boolean success = new operaDAO().insert(args); 
+		
+		if(success){
+			new ricercaView().infoMessage("Opera caricata");
+			return; 
+		} else {
+			new ricercaView().errorMessage("Opera non caricata");
+			return; 
+		}
 		
 	}
 }

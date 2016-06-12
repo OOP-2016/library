@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import packageBusiness.utente;
 import packageDAO.utenteDAO;
+import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageView.loginView;
 import java.util.regex.Matcher;
@@ -69,6 +70,24 @@ public class loginController {
 				new loginView().errorMessage("login fallito");
 			else{
 			    new loginView().infoMessage("login riuscito");
+			    
+			    /**
+			     * Scelta
+			     */
+			    if(utente.getPermessi() > 1){
+			    	
+			    	int choice = new loginView().modalit‡Accesso(utente);
+			    	
+			    		if(choice == -1){
+			    			new loginView().errorMessage("Non essere indifferente! SCEGLI");
+			    			return; 
+			    		} else {
+			    			utente.setPermessi(choice);
+			    		}
+			    	
+			    } //fine Scelta
+			    
+			    
 			    new loginView().dispose(finestra);
 			    new loginView().istanziaRicercaPage(utente);
 			    }

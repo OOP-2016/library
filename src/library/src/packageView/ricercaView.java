@@ -1,10 +1,15 @@
 package packageView;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.WindowConstants;
+
 import packageBusiness.utente;
+import packageController.operaController;
 import packageController.ricercaController;
+import packageGUI.aggiungiOperaForm;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.operaPage;
@@ -97,4 +102,27 @@ public class ricercaView {
 		ArrayList<String> titoli=new ricercaController().cercaOperaAction(filtro);
 		for(int i=0;i<titoli.size();i++) listModel.addElement(titoli.get(i));
 		}
+	
+	public void aggiungiOpera(String titolo, String autore, String anno_pubblicazione, String numero_pagine, aggiungiOperaForm finestra){
+		new ricercaController().aggiungiOperaAction(titolo, autore, anno_pubblicazione, numero_pagine);
+		new dialog().disposeDialog(finestra);
+	}
+	
+	public void apriAggiungiOperaForm(){
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					aggiungiOperaForm frame = new aggiungiOperaForm();
+					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+	}
+	
 	}

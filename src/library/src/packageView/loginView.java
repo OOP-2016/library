@@ -97,5 +97,10 @@ public class loginView {
 		new dialog().disposeDialog(finestra);
 	}
 	
+	public int modalit‡Accesso(utente utente){
+		int choice = new dialog().modalit‡AccessoForm(utente);
+		return choice; 
+	}
+	
 	
 }

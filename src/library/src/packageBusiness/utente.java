@@ -46,4 +46,8 @@ public class utente {
 		return permessi;
 	}
 	
+	public void setPermessi(int permessi) {
+		this.permessi = permessi;
+	}
+	
 }

@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JTextPane;
 
 public class ricercaPage extends JFrame {
 
@@ -96,15 +97,15 @@ public class ricercaPage extends JFrame {
 				
 		JLabel lblUtente = new JLabel( (utente.getPermessi()==0)?"Ospite":utente.getEmail() );
 		
-		JLabel lblManoscritti = new JLabel("MANOSCRITTI");
+		JLabel lblManoscritti = new JLabel("LISTA OPERE");
 		
 		JLabel lblRicercaOpere = new JLabel("RICERCA OPERE");
 		
-		JScrollPane scrollPane = new JScrollPane();
-		
 		DefaultListModel listModel = new DefaultListModel();
+		
+		textField = new JTextField();
+		
 		JList list = new JList(listModel);
-		scrollPane.setViewportView(list);
 		
 		JButton btnApri = new JButton("APRI");
 		//controllo che disabilita il tasto APRI se l'utente è guest
@@ -169,7 +170,7 @@ public class ricercaPage extends JFrame {
 				}
 			});
 		
-			textField = new JTextField();
+			
 			
 			/**
 			 * KeyListener che viene invocato ad ogni tasto premuto 
@@ -199,45 +200,68 @@ public class ricercaPage extends JFrame {
 			});
 			textField.setColumns(10);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		JButton btnAggiungiOpera = new JButton("AGGIUNGI OPERA");
+		if(utente.getPermessi() != 2){
+			btnAggiungiOpera.hide();
+		}
+		btnAggiungiOpera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ricercaView().apriAggiungiOperaForm(); 
+			}
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
-						.addComponent(btnApri, Alignment.TRAILING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnAggiungiOpera)
+							.addPreferredGap(ComponentPlacement.RELATED, 385, Short.MAX_VALUE)
+							.addComponent(btnApri))
 						.addComponent(lblUtente, Alignment.TRAILING)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
 							.addComponent(btnCerca, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblRicercaOpere)
-						.addComponent(lblManoscritti))
+						.addComponent(lblManoscritti)
+						.addComponent(lblRicercaOpere))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblUtente)
-					.addGap(18)
-					.addComponent(lblRicercaOpere)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblUtente)
+							.addGap(26))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblRicercaOpere)
+							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCerca)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-					.addComponent(lblManoscritti)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnApri)
+					.addComponent(lblManoscritti)
+					.addGap(13)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnApri)
+						.addComponent(btnAggiungiOpera))
 					.addContainerGap())
 		);
+		
+		
+		scrollPane.setViewportView(list);
 		
 		contentPane.setLayout(gl_contentPane);
 	}
