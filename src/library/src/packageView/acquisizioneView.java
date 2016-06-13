@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 
 import packageBusiness.immagine;
 import packageBusiness.opera;
-import packageBusiness.pagina;
 import packageBusiness.utente;
 import packageController.acquisizioneController;
 import packageController.operaController;
@@ -21,18 +20,15 @@ import packageGUI.ricercaPage;
 
 public class acquisizioneView {
 	
-public boolean esistePagina(int numeroPagina, String titolo){
-	boolean p = new acquisizioneController().esistePaginaAction(numeroPagina, titolo);
+public boolean esistePagina(int numero_pagina, String titolo_opera){
+	boolean p = new acquisizioneController().esistePaginaAction(numero_pagina, titolo_opera);
 	return p;
 }
 
-public void conferma(String risoluzione, String datascatto, String npagina, opera opera, BufferedImage immagine){
-
-	immagine campoImmagine = new immagine(immagine,datascatto,risoluzione);	
-	pagina pagina = new pagina(); 
-	pagina.setImmagine(campoImmagine);
-	
-	new acquisizioneController().confermaAction(risoluzione,datascatto, npagina, opera, pagina);
+public void conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
+    int num_pagina = Integer.parseInt(numero_pagina);
+	immagine campo_immagine = new immagine(immagine, num_pagina, opera.getTitolo(), data_scatto, risoluzione, false, acquisitore);	
+	new acquisizioneController().confermaAction(risoluzione,data_scatto, numero_pagina, opera, campo_immagine);
 		
 }
 

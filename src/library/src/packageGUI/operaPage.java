@@ -28,7 +28,7 @@ public class operaPage extends JFrame {
 	private JPanel contentPane;
 	private static int npagina = 1; /* Current page */ 
 	private JLabel lblNewLabel; /* Page label */
-	
+	private static JLabel lblImg; 
 	/**
 	 * Launch the application.
 	 */
@@ -89,7 +89,7 @@ public class operaPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblImg = new JLabel();
+		lblImg = new JLabel("");
 		JTextPane textPane = new JTextPane();
 		
 		
@@ -103,7 +103,7 @@ public class operaPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new operaView().clickAvanti(titolo, lblNewLabel, npagina, button, btnNewButton);
+				npagina = new operaView().clickAvanti(titolo, lblNewLabel, npagina, button, btnNewButton, user);
 				new operaView().vista(lblImg, textPane, titolo, npagina);		
 			}
 		});
@@ -114,7 +114,7 @@ public class operaPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new operaView().clickIndietro(titolo, lblNewLabel, npagina, button, btnNewButton);
+				npagina = new operaView().clickIndietro(titolo, lblNewLabel, npagina, button, btnNewButton, user);
 				new operaView().vista(lblImg, textPane, titolo, npagina);
 			}
 		});
@@ -127,7 +127,7 @@ public class operaPage extends JFrame {
 		 * Caricamento prima pagina 
 		 */
 		lblNewLabel = new JLabel();
-		npagina = new operaView().firstPage(titolo, lblNewLabel , npagina);
+		npagina = new operaView().firstPage(titolo, lblNewLabel , npagina, user);
 		new operaView().vista(lblImg, textPane, titolo, npagina);
 		btnNewButton.setEnabled(false);
 		

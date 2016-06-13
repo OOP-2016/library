@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import packageBusiness.immagine;
 import packageBusiness.opera;
-import packageBusiness.pagina;
 import packageBusiness.utente;
+import packageDAO.immagineDAO;
 import packageDAO.operaDAO;
-import packageDAO.paginaDAO;
 import packageDAO.utenteDAO;
 import packageGUI.acquisizionePage;
 import packageGUI.dialog;
@@ -18,13 +18,13 @@ import packageView.operaView;
 
 public class acquisizioneController {
 	
-public boolean esistePaginaAction(int numeroPagina, String titolo){
-	ArrayList<Object> pagina = new ArrayList<Object>();
-	pagina oggettoPagina;
-	pagina.add(numeroPagina);
-	pagina.add(titolo);
-	oggettoPagina = (pagina)new paginaDAO().retrieve(pagina);
-	if(oggettoPagina.getImmagine().getImmagine() != null) return true;
+public boolean esistePaginaAction(int numero_pagina, String titolo_opera){
+	ArrayList<Object> immagine = new ArrayList<Object>();
+	immagine immagine_obj;
+	immagine.add(numero_pagina);
+	immagine.add(titolo_opera);
+	immagine_obj = (immagine)new immagineDAO().retrieve(immagine);
+	if(immagine_obj.getImmagine()!= null) return true;
 	return false;
 }
 
@@ -48,9 +48,9 @@ public void logOutAction(acquisizionePage finestra){
 	new acquisizioneView().istanziaLoginPage();
 }
 
-public opera getOpera(String titolo){
+public opera getOpera(String titolo_opera){
 	ArrayList<Object> args = new ArrayList<Object>(); 
-	args.add(titolo); 
+	args.add(titolo_opera); 
 	
 	opera opera = (opera)new operaDAO().retrieve(args); 
 		
@@ -62,30 +62,30 @@ public void indietroAction(acquisizionePage finestra, utente user){
 	new acquisizioneView().istanziaRicercaPage(user);
 }
 
-public void confermaAction(String risoluzione, String datascatto, String npagina, opera opera, pagina pagina){
+public void confermaAction(String risoluzione, String data_scatto, String numero_pagina, opera opera, immagine immagine){
 	
 	try {
-		int numero_pagina = Integer.parseInt(npagina); 
+		int num_pagina = Integer.parseInt(numero_pagina); 
 		
-		if(numero_pagina > opera.getNumero_pagine() || numero_pagina < 1){
+		if(num_pagina > opera.getNumero_pagine() || num_pagina < 1){
 			new acquisizioneView().errorMessage("pagina non valida");
 			return;
 		}
 		
-		boolean exist = new acquisizioneView().esistePagina(numero_pagina, opera.getTitolo()); 
+		boolean exist = new acquisizioneView().esistePagina(num_pagina, opera.getTitolo()); 
 		
 		if(exist){
 			new acquisizioneView().errorMessage("acquisizione già effettuata per questa pagina");
 			return;
 		}	
 				
-		pagina.setNumero(numero_pagina);
-		pagina.setimmagine_validata(false);
-		pagina.setOpera(opera.getTitolo());
+		immagine.setNumero_pagina(num_pagina);
+		immagine.setValidata(false);
+		immagine.setTitolo_opera(opera.getTitolo());
 		
-		ArrayList<Object> paginaArgs = new ArrayList<Object>();
-		paginaArgs.add(pagina);
-		boolean success = new paginaDAO().insert(paginaArgs); 
+		ArrayList<Object> immagineArgs = new ArrayList<Object>();
+		immagineArgs.add(immagine);
+		boolean success = new immagineDAO().insert(immagineArgs); 
 		
 		if(success){
 			new acquisizioneView().infoMessage("acquisizione effettuata con successo\nOra è possibile caricare un'altra immagine");

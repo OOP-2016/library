@@ -7,14 +7,10 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import packageBusiness.immagine;
 import packageBusiness.opera;
-import packageBusiness.pagina;
 import packageBusiness.utente;
-import packageDAO.paginaDAO;
 import packageView.acquisizioneView;
-
 import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -112,7 +108,7 @@ public class acquisizionePage extends JFrame {
 		JButton btnNewButton = new JButton("CONFERMA");
 		btnNewButton.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent arg0){
-				new acquisizioneView().conferma(textField.getText(), textField_1.getText(), textField_2.getText(), opera, immagine);
+				new acquisizioneView().conferma(textField.getText(), textField_1.getText(), textField_2.getText(), opera, immagine, utente.getEmail());
 			}
 		});
 		

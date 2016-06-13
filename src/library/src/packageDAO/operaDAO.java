@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import packageBusiness.opera;
+import packageBusiness.utente;
 import packageGUI.dialog;
 
 public class operaDAO implements DAO {
@@ -74,17 +75,22 @@ public class operaDAO implements DAO {
 		ResultSet resultSet = null;
 		opera opera = null;
 		String titolo = (String)args.get(0); 
+		utente utente = (utente)args.get(1); 
 		String autore = null; 
 		int anno_pubblicazione = 0; 
 		int numero_pagine = 0; 
 		boolean pubblicata = false; 
 		
 	try{
-			
+			String query; 
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
-			String query = String.format("SELECT * FROM library.opera WHERE titolo='%s'", titolo); 
+			if(utente.getPermessi() == 1)
+				query = String.format("SELECT * FROM library.opera WHERE titolo='%s' AND pubblicata=1", titolo); 
+			else 
+				query = String.format("SELECT * FROM library.opera WHERE titolo='%s' AND pubblicata=0", titolo); 
+			
 			resultSet = Statement.executeQuery(query);
 			
 			while(resultSet.next()){

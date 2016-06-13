@@ -1,11 +1,14 @@
 package packageController;
 
 import java.util.ArrayList;
+
+import packageBusiness.immagine;
 import packageBusiness.opera;
-import packageBusiness.pagina;
+import packageBusiness.trascrizione;
 import packageBusiness.utente;
+import packageDAO.immagineDAO;
 import packageDAO.operaDAO;
-import packageDAO.paginaDAO;
+import packageDAO.trascrizioneDAO;
 import packageGUI.operaPage;
 import packageView.operaView;
 
@@ -40,17 +43,22 @@ public class operaController {
 		new operaView().istanziaRicercaPage(user);
 	}
 	
-	public pagina vistaAction(String titolo, int npagina){
+	public Object[] vistaAction(String titolo_opera, int numero_pagina){
 		ArrayList<Object> args = new ArrayList<Object>(); 
-		args.add(npagina); 
-		args.add(titolo); 
-		pagina pagina = (pagina)new paginaDAO().retrieve(args); 
-		return pagina; 
+		args.add(numero_pagina); 
+		args.add(titolo_opera); 
+		immagine immagine = (immagine)new immagineDAO().retrieve(args);
+	    trascrizione trascrizione = (trascrizione)new trascrizioneDAO().retrieve(args);
+		Object[] pagina = new Object[2];
+		pagina[0] = immagine;
+		pagina[1] = trascrizione;
+		return pagina;
 	}
 	
-	public opera getOpera(String titolo){
+	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(titolo); 
+		args.add(utente); 
 		
 		opera opera = (opera)new operaDAO().retrieve(args); 
  		
