@@ -1,6 +1,15 @@
 package packageGUI;
 
+import java.awt.Component;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import packageBusiness.utente;
@@ -82,6 +91,35 @@ public class dialog {
 		} else 
 			return -1; 
 		
+	}
+	
+	public BufferedImage fileChooser(JLabel labelImmagine, Component acquisizionePage){
+		Image img = null;
+		BufferedImage immagine = null;
+		
+		JFileChooser fileChooser = new JFileChooser();
+		
+		int returnVal = fileChooser.showOpenDialog(acquisizionePage);
+		
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			File imported = fileChooser.getSelectedFile();
+			try{
+				
+			immagine = ImageIO.read(imported);
+			img = immagine.getScaledInstance(labelImmagine.getWidth(),labelImmagine.getHeight(),java.awt.Image.SCALE_SMOOTH);
+			labelImmagine.setIcon(new ImageIcon(img));
+			
+			return immagine; 
+			
+			}
+			catch(Exception e){
+				this.errorDialog("Il file non è un immagine");
+				return null; 
+			}
+		
+		} else {
+			return null; 
+		}
 	}
 	
 }

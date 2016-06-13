@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class acquisizionePage extends JFrame {
 
@@ -38,7 +41,8 @@ public class acquisizionePage extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-
+	private BufferedImage immagine;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -46,7 +50,7 @@ public class acquisizionePage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					acquisizionePage frame = new acquisizionePage(null,null);
+					acquisizionePage frame = new acquisizionePage(new utente(),null);
 					frame.setVisible(true);
 					frame.setResizable(false);
 				} catch (Exception e) {
@@ -62,8 +66,39 @@ public class acquisizionePage extends JFrame {
 	public acquisizionePage(utente utente, opera opera) {
 		super("Library");
 		Component acquisizionePage = this;
+		acquisizionePage window = this; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 536, 430);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Comandi");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
+		mntmLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new acquisizioneView().logOut(window);
+			}
+		});
+		
+		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
+		mntmIndietro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new acquisizioneView().indietro(window, utente);
+			}
+		});
+		mnNewMenu.add(mntmIndietro);
+		mnNewMenu.add(mntmLogOut);
+		
+		JMenuItem mntmExit = new JMenuItem("EXIT");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new acquisizioneView().exit(window);
+			}
+		});
+		mnNewMenu.add(mntmExit);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,46 +112,14 @@ public class acquisizionePage extends JFrame {
 		JButton btnNewButton = new JButton("CONFERMA");
 		btnNewButton.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent arg0){
-				if(Integer.parseInt(textField_2.getText())>opera.getNumero_pagine()||Integer.parseInt(textField_2.getText())<1){
-					new dialog().errorDialog("pagina non valida");
-					return;
-				}
-				if(new acquisizioneView().esistePagina(Integer.parseInt(textField_2.getText()),opera.getTitolo())){
-					new dialog().errorDialog("acquisizione già effettuata per questa pagina");
-					return;
-				}			
-			boolean p;
-			ImageIcon icon = (ImageIcon)lblNewLabel.getIcon();
-			Image immagine3 = icon.getImage();
-			BufferedImage immagine = (BufferedImage)immagine3; 
-			immagine immagine2 = new immagine(immagine,textField_1.getText(),textField.getText());	
-			pagina pagina = new pagina(Integer.parseInt(textField_2.getText()), opera.getTitolo(),immagine2,false,null,false);
-			ArrayList<Object> paginaDef = new ArrayList<Object>();
-			paginaDef.add(pagina);
-			p = new paginaDAO().insert(paginaDef); 
-			if(p) new dialog().infoDialog("acquisizione effettuata con successo");
-			else new dialog().errorDialog("acquisizione fallita");
+				new acquisizioneView().conferma(textField.getText(), textField_1.getText(), textField_2.getText(), opera, immagine);
 			}
 		});
 		
 		JButton btnNewButton_1 = new JButton("CARICA");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			Image img = null;
-			BufferedImage immagine = null;
-			JFileChooser fileChooser = new JFileChooser();
-			int returnVal = fileChooser.showOpenDialog(acquisizionePage);
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				File imported = fileChooser.getSelectedFile();
-				try{
-				immagine = ImageIO.read(imported);
-				img = immagine.getScaledInstance(lblNewLabel.getWidth(),lblNewLabel.getHeight(),java.awt.Image.SCALE_SMOOTH);
-				lblNewLabel.setIcon(new ImageIcon(img));
-				//new dialog().infoDialog(lblNewLabel.getWidth()+"x"+lblNewLabel.getHeight());
-				}
-				catch(Exception e){
-				}
-			}
+				immagine = new acquisizioneView().carica(lblNewLabel, acquisizionePage); 
 			}
 		});
 		

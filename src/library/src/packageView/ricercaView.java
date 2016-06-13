@@ -106,8 +106,12 @@ public class ricercaView {
 		}
 	
 	public void aggiungiOpera(String titolo, String autore, String anno_pubblicazione, String numero_pagine, aggiungiOperaForm finestra){
-		new ricercaController().aggiungiOperaAction(titolo, autore, anno_pubblicazione, numero_pagine);
-		new dialog().disposeDialog(finestra);
+		boolean success = new ricercaController().aggiungiOperaAction(titolo, autore, anno_pubblicazione, numero_pagine);
+		
+		if(success){
+			new dialog().disposeDialog(finestra);
+		}
+		
 	}
 	
 	public void apriAggiungiOperaForm(){
@@ -132,4 +136,9 @@ public class ricercaView {
 		frame.setVisible(true);
 		frame.setResizable(false);
 	}
+	
+	public opera getOpera(String titolo){
+		return new ricercaController().getOpera(titolo); 
 	}
+	
+}

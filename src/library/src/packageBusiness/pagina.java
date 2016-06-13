@@ -9,6 +9,10 @@ public class pagina {
 	private String trascrizione;
 	private boolean trascrizione_validata; 
 	
+	public pagina(){
+		
+	}
+	
 	public pagina(int numero, String opera, immagine immagine, boolean immagine_validata, String trascrizione, boolean trascrizione_validata) {
 		
 		this.numero = numero;

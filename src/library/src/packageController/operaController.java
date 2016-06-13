@@ -48,7 +48,7 @@ public class operaController {
 		return pagina; 
 	}
 	
-	public opera getPageMax(String titolo){
+	public opera getOpera(String titolo){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(titolo); 
 		

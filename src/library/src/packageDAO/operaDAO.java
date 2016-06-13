@@ -141,16 +141,16 @@ public class operaDAO implements DAO {
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			if(filtro.length()==1) {
 				if(filtro.equals("-")){
-					query = "SELECT titolo FROM library.opera";
+					query = "SELECT titolo, autore FROM library.opera";
 				}
 				else {
-				query = "SELECT titolo FROM library.opera WHERE titolo LIKE '";
+				query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '";
 				query += String.format("%s", filtro);
 				query += "%'";
 				}
 			}
 			else {
-			query = "SELECT titolo FROM library.opera WHERE titolo LIKE '%";
+			query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '%";
 			query += String.format("%s", filtro);
 			query += "%'"; 
 			}
@@ -159,7 +159,10 @@ public class operaDAO implements DAO {
 			
 			while(resultSet.next()){
 				
-			titoli.add(resultSet.getString("titolo"));
+				String title = resultSet.getString("titolo"); 
+				String autore = resultSet.getString("autore");
+				
+				titoli.add(title + " - " + autore);
 			}
 		}
 				catch(SQLException e){

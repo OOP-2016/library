@@ -116,8 +116,20 @@ public class ricercaPage extends JFrame {
 			btnApri.setEnabled(false); 
 		btnApri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String titolo = (String)list.getSelectedValue();
-				opera opera =  new operaController().getPageMax(titolo);  
+			
+				String titoloEautore = (String)list.getSelectedValue();
+				String titolo = ""; 
+				
+				for(int i = 0; i < titoloEautore.length(); i++){
+					if(titoloEautore.charAt(i+1) == '-') 
+						break; 
+					
+					titolo+=Character.toString(titoloEautore.charAt(i)); 
+				}
+				
+				opera opera =  new ricercaView().getOpera(titolo); 
+				opera.setTitolo(titolo);
+				
 				if(utente.getPermessi() == 2){
 					new ricercaView().istanziaAcquisizionePage(finestra,utente,opera);
 					return;

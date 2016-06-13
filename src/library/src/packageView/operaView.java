@@ -126,7 +126,7 @@ public class operaView {
 	}
 	
 	public int firstPage(String titolo, JLabel page, int npagina){
-		opera opera = new operaController().getPageMax(titolo); 
+		opera opera = new operaController().getOpera(titolo); 
 		int pageMax = opera.getNumero_pagine();  
 		page.setText(npagina + " / " + pageMax); 
 		
@@ -134,7 +134,7 @@ public class operaView {
 	}
 	
 	public int clickAvanti(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro){
-		opera opera = new operaController().getPageMax(titolo); 
+		opera opera = new operaController().getOpera(titolo); 
 		int pageMax = opera.getNumero_pagine();  
 		
 		indietro.setEnabled(true); //abilito bottone indietro
@@ -153,7 +153,7 @@ public class operaView {
 		
 		npagina-=1; 
 		
-		opera opera = new operaController().getPageMax(titolo); 
+		opera opera = new operaController().getOpera(titolo); 
 		int pageMax = opera.getNumero_pagine();  
 		
 		
@@ -167,5 +167,5 @@ public class operaView {
 		return npagina; 
 		
 	}
-
+	
 }
