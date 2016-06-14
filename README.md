@@ -26,5 +26,5 @@ Biblioteca digitale di testi e studi che contribuiscono alla formazione della cu
 
 ### Deliverables 
 
-* **Deliverable 1:** [link](https://github.com/OOP-2016/library/tree/master/doc) a cartella 'doc' richiesta. 
-
+* **Deliverable 1:** Link a cartella [doc](https://github.com/OOP-2016/library/tree/master/doc) richiesta. 
+* **Deliverable 2:** Link a cartelle [src](https://github.com/OOP-2016/library/tree/master/src), [doc](https://github.com/OOP-2016/library/tree/master/doc) e [javadoc](https://github.com/OOP-2016/library/tree/master/javadoc) richieste. 
