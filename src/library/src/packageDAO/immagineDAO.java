@@ -160,5 +160,179 @@ public boolean insert(ArrayList<Object> args){
 						
 				      }
 	}
+	
+	@SuppressWarnings("finally")
+	public boolean update(ArrayList<Object> args){
+		Connection connect = null;
+		Statement Statement = null;
+		boolean success=true;
+		
+		int numero_pagina = (int)args.get(0); 
+		String titolo_opera = (String)args.get(1);
+		String email_utente = (String)args.get(2); 
+		String query; 
+		String sanitizedQuery; 
+		
+		try{
+		Class.forName("com.mysql.jdbc.Driver");
+		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+		
+		Statement = connect.createStatement(); 
+		query = "UPDATE library.acquisizione SET validata=1, revisore='";  
+		query+= String.format("%s' WHERE titolo_opera='", email_utente); 
+		sanitizedQuery = String.format("%s", titolo_opera); 
+		sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+		query+=sanitizedQuery; 
+		query+= String.format("' AND numero_pagina=%d", numero_pagina); 
+		
+		Statement.executeUpdate(query);
+		
+		}
+			catch(SQLException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(ClassNotFoundException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(Exception e){
+			success=false;
+			new dialog().errorDialog("Errore generico:" + e.getMessage());
+			}
+				finally{
+					try{
+						if(connect!=null) connect.close();
+						if(Statement!=null) Statement.close();
+						return success;
+						}
+					catch(SQLException e){
+						new dialog().errorDialog("Errore Database: "+ e.getMessage());
+						return false;
+						}
+					    }
+	}
+
+	@SuppressWarnings("finally")
+	public boolean delete(ArrayList<Object> args){
+		Connection connect = null;
+		Statement Statement = null;
+		boolean success=true;
+		
+		int numero_pagina = (int)args.get(0); 
+		String titolo_opera = (String)args.get(1);
+		String query; 
+		String sanitizedQuery; 
+		
+		try{
+		Class.forName("com.mysql.jdbc.Driver");
+		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+		
+		Statement = connect.createStatement(); 
+		query = "DELETE FROM library.acquisizione WHERE titolo_opera='";  
+		sanitizedQuery = String.format("%s", titolo_opera); 
+		sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+		query+=sanitizedQuery; 
+		query+= String.format("' AND numero_pagina=%d", numero_pagina); 
+		
+		Statement.executeUpdate(query);
+		
+		}
+			catch(SQLException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(ClassNotFoundException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(Exception e){
+			success=false;
+			new dialog().errorDialog("Errore generico:" + e.getMessage());
+			}
+				finally{
+					try{
+						if(connect!=null) connect.close();
+						if(Statement!=null) Statement.close();
+						return success;
+						}
+					catch(SQLException e){
+						new dialog().errorDialog("Errore Database: "+ e.getMessage());
+						return false;
+						}
+					    }
+	}
+
+	@SuppressWarnings("finally")
+	public boolean controllaValidate(ArrayList<Object> args){
+		Connection connect = null;
+		Statement Statement = null;
+		ResultSet resultSet = null;
+		boolean pubblica = false; 
+		
+		String titolo_opera = (String)args.get(0); 
+		int numero_pagine = (int)args.get(1); 
+		
+		boolean validata = false;
+		int paginePresenti = 0; 
+		
+		String query; 
+		String sanitizedQuery; 
+		
+	try{
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+			Statement = connect.createStatement();
+			query = "SELECT * FROM library.acquisizione WHERE titolo_opera='"; 
+			sanitizedQuery = String.format("%s", titolo_opera); 
+			sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+			query+= sanitizedQuery; 
+			query+= "'"; 
+			resultSet = Statement.executeQuery(query);
+			
+			while(resultSet.next()){
+				paginePresenti++; 
+				validata = resultSet.getBoolean("validata"); 
+				
+				if(!validata){
+					pubblica = false; 
+					break; 
+				}
+				
+				if(paginePresenti == numero_pagine)
+					pubblica = true; 
+			}
+					
+		}
+				catch(SQLException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(ClassNotFoundException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(Exception e){
+				new dialog().errorDialog("Errore generico:" + e.getMessage());
+				}
+					finally{
+						
+						try{
+							
+							if(connect!=null) connect.close();
+							if(Statement!=null) Statement.close();
+							if(resultSet!=null) resultSet.close();
+							return pubblica;
+							
+							}
+						
+						catch(SQLException e){
+							
+							new dialog().errorDialog("Errore Database: "+e.getMessage());
+							return false;
+							}
+						
+				      }
+	}
+
 
 }

@@ -130,11 +130,26 @@ public class ricercaPage extends JFrame {
 				opera opera =  new ricercaView().getOpera(titolo, utente); 
 				opera.setTitolo(titolo);
 				
-				if(utente.getPermessi() == 2){
+				if(utente.getPermessi() == 1){
+					new ricercaView().apriOpera(finestra, utente, titolo);
+					return; 
+				} else if(utente.getPermessi() == 2){
 					new ricercaView().istanziaAcquisizionePage(finestra,utente,opera);
 					return;
+				} else if(utente.getPermessi() == 3){
+					new ricercaView().istanziaRevisione_aPage(finestra,utente, titolo);
+					return; 
+				} else if(utente.getPermessi() == 4){
+					//new ricercaView().istanziaTrascrizionePage(finestra,utente, titolo);
+					return; 
+				} else if(utente.getPermessi() == 5){
+					//new ricercaView().istanziaRevisione_tPage(finestra,utente, titolo);
+					return; 					
+				} else {
+					new ricercaView().errorMessage("Errore utente");
+					return; 
 				}
-				new ricercaView().apriOpera(finestra, utente, titolo);
+				
 			}
 		});
 		

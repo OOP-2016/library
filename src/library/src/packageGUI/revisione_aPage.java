@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import packageBusiness.utente;
+import packageView.loginView;
 import packageView.operaView;
 import packageView.revisione_aView;
 
@@ -33,13 +34,16 @@ import javax.swing.JRadioButton;
 public class revisione_aPage extends JFrame {
 
 	private JPanel contentPane;
-	private static int npagina = 1; /* Current page */ 
+	private int npagina = 1; /* Current page */ 
 	private JLabel lblNewLabel; /* Page label */
 	private static JLabel lblImg; 
 	private JTextField txtAcquisitore;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JLabel lblNewLabel_3;
+	private JRadioButton rdbtnValidaAcquisizione; 
+	private JRadioButton rdbtnRifiutaAcquisizione;
+	private JButton btnConferma; 
 	/**
 	 * Launch the application.
 	 */
@@ -102,6 +106,7 @@ public class revisione_aPage extends JFrame {
 		
 		lblImg = new JLabel("");
 		
+		lblNewLabel_3 = new JLabel();
 		
 		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
@@ -117,6 +122,21 @@ public class revisione_aPage extends JFrame {
 				new revisione_aView().vista(lblImg,titolo, npagina);
 				new revisione_aView().metadati(txtAcquisitore, textField, textField_1, titolo, npagina);
 				lblNewLabel_3.setText(new revisione_aView().getValidazione(titolo, npagina));
+				
+				if(!lblNewLabel_3.getText().equals("ACQUISIZIONE DISPONIBILE PER LA VALIDAZIONE")){
+					rdbtnValidaAcquisizione.setSelected(false); 
+					rdbtnRifiutaAcquisizione.setSelected(false); 
+					rdbtnValidaAcquisizione.setEnabled(false);
+					rdbtnRifiutaAcquisizione.setEnabled(false);
+					btnConferma.setEnabled(false);
+				} else {
+					rdbtnValidaAcquisizione.setSelected(false); 
+					rdbtnRifiutaAcquisizione.setSelected(false); 
+					rdbtnValidaAcquisizione.setEnabled(true);
+					rdbtnRifiutaAcquisizione.setEnabled(true);
+					btnConferma.setEnabled(true);
+				}
+				
 			}
 		});
 		
@@ -130,6 +150,20 @@ public class revisione_aPage extends JFrame {
 				new revisione_aView().vista(lblImg, titolo, npagina);
 				new revisione_aView().metadati(txtAcquisitore, textField, textField_1, titolo, npagina);
 				lblNewLabel_3.setText(new revisione_aView().getValidazione(titolo, npagina));
+				
+				if(!lblNewLabel_3.getText().equals("ACQUISIZIONE DISPONIBILE PER LA VALIDAZIONE")){
+					rdbtnValidaAcquisizione.setSelected(false); 
+					rdbtnRifiutaAcquisizione.setSelected(false); 
+					rdbtnValidaAcquisizione.setEnabled(false);
+					rdbtnRifiutaAcquisizione.setEnabled(false);
+					btnConferma.setEnabled(false);
+				} else {
+					rdbtnValidaAcquisizione.setSelected(false); 
+					rdbtnRifiutaAcquisizione.setSelected(false);
+					rdbtnValidaAcquisizione.setEnabled(true);
+					rdbtnRifiutaAcquisizione.setEnabled(true); 
+					btnConferma.setEnabled(true);
+				}
 			}
 		});
 		
@@ -154,14 +188,42 @@ public class revisione_aPage extends JFrame {
 		textField_1.setEditable(false);
 		textField_1.setColumns(10);
 		
-		JRadioButton rdbtnValidaAcquisizione = new JRadioButton("  VALIDA ACQUISIZIONE");		
-		JRadioButton rdbtnRifiutaAcquisizione = new JRadioButton("  RIFIUTA  ACQUISIZIONE");
+		rdbtnValidaAcquisizione = new JRadioButton("  VALIDA ACQUISIZIONE");		
+		rdbtnRifiutaAcquisizione = new JRadioButton("  RIFIUTA  ACQUISIZIONE");
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnValidaAcquisizione);
 		group.add(rdbtnRifiutaAcquisizione);
 		
 		
-		JButton btnConferma = new JButton("CONFERMA");
+		btnConferma = new JButton("CONFERMA");
+		btnConferma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean validate; 
+				
+				if(rdbtnValidaAcquisizione.isSelected()){
+					validate = true; 
+				}
+				else if (rdbtnRifiutaAcquisizione.isSelected()){
+					validate = false; 
+				}
+				else{
+					new revisione_aView().errorMessage("Scegliere se validare o rifiutare l'acquisizione");
+					return; 
+				}
+				
+				boolean success = new revisione_aView().conferma(titolo, npagina, validate, user); 
+				
+				if(success){
+					boolean pubblicata = new revisione_aView().validaOpera(titolo, user); 
+					if(pubblicata){
+						new revisione_aView().infoMessage("Tutte le acquisizioni sono state validate\nL'opera è appena stata pubblicata");
+						new revisione_aView().istanziaRicercaPage(user);
+						new revisione_aView().dispose(finestra);
+					}
+				} else
+					new revisione_aView().errorMessage("Errore");
+			}
+		});
 		/**
 		 * Caricamento prima pagina 
 		 */
@@ -171,9 +233,21 @@ public class revisione_aPage extends JFrame {
 		btnNewButton.setEnabled(false);
 		new revisione_aView().metadati(txtAcquisitore, textField, textField_1, titolo, npagina);
 		
-		
-		lblNewLabel_3 = new JLabel();
 		lblNewLabel_3.setText(new revisione_aView().getValidazione(titolo, npagina));
+		
+		if(!lblNewLabel_3.getText().equals("ACQUISIZIONE DISPONIBILE PER LA VALIDAZIONE")){
+			rdbtnValidaAcquisizione.setSelected(false); 
+			rdbtnRifiutaAcquisizione.setSelected(false); 
+			rdbtnValidaAcquisizione.setEnabled(false);
+			rdbtnRifiutaAcquisizione.setEnabled(false);
+			btnConferma.setEnabled(false);
+		} else {
+			rdbtnValidaAcquisizione.setSelected(false); 
+			rdbtnRifiutaAcquisizione.setSelected(false); 
+			rdbtnValidaAcquisizione.setEnabled(true);
+			rdbtnRifiutaAcquisizione.setEnabled(true);
+			btnConferma.setEnabled(true);
+		}
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

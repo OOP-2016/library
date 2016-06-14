@@ -88,21 +88,28 @@ public class operaDAO implements DAO {
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
 			
-			if(utente.getPermessi() == 1){
+			if(utente.getPermessi() == 1||utente.getPermessi()==0){
 				query = "SELECT * FROM library.opera WHERE titolo='"; 
 				sanitizedQuery = String.format("%s", titolo); 
 				sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
 				query+= sanitizedQuery; 
 				query+= "' AND pubblicata=1"; 
 			}
+			else if(utente.getPermessi() == 2||utente.getPermessi()==3) {
+				query = "SELECT * FROM library.opera WHERE titolo='"; 
+				sanitizedQuery = String.format("%s", titolo); 
+				sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+				query+= sanitizedQuery; 
+				query+= "' AND pubblicata=0"; 			
+			}
 			else {
 				query = "SELECT * FROM library.opera WHERE titolo='"; 
 				sanitizedQuery = String.format("%s", titolo); 
 				sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
 				query+= sanitizedQuery; 
-				query+= "' AND pubblicata=0"; 			}
+				query+= "'"; 	
+			}
 			
-			//query.replaceAll("'", "/'"); 
 			resultSet = Statement.executeQuery(query);
 			
 			while(resultSet.next()){
@@ -181,7 +188,7 @@ public class operaDAO implements DAO {
 				query += "%' AND pubblicata=1"; 
 				}
 				
-			} else {
+			} else if(utente.getPermessi() == 2||utente.getPermessi()==3){
 			
 			if(filtro.length()==1) {
 				if(filtro.equals("-")){
@@ -202,9 +209,29 @@ public class operaDAO implements DAO {
 			query+=sanitizeQuery;
 			query += "%' AND pubblicata=0"; 
 			}
+			} else {
+				if(filtro.length()==1) {
+					if(filtro.equals("-")){
+						query = "SELECT titolo, autore FROM library.opera";
+					}
+					else {
+					query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '";
+					sanitizeQuery = String.format("%s", filtro);
+					sanitizeQuery = sanitizeQuery.replace("'", "''"); 
+					query+=sanitizeQuery;
+					query += "%'";
+					}
+				}
+				else {
+				query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '%";
+				sanitizeQuery = String.format("%s", filtro);
+				sanitizeQuery = sanitizeQuery.replace("'", "''"); 
+				query+=sanitizeQuery;
+				query += "%'"; 
+				}
 			}
 			
-			new dialog().infoDialog(query);
+			//new dialog().infoDialog(query);
 			Statement = connect.createStatement();
 			resultSet = Statement.executeQuery(query);
 			
@@ -244,4 +271,55 @@ public class operaDAO implements DAO {
 		
 	}
 }
+	
+	@SuppressWarnings("finally")
+	public boolean pubblica(ArrayList<Object> args){
+		Connection connect = null;
+		Statement Statement = null;
+		boolean success=true;
+		
+		String titolo_opera = (String)args.get(0); 
+		String query; 
+		String sanitizedQuery; 
+		
+		try{
+		Class.forName("com.mysql.jdbc.Driver");
+		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+		
+		Statement = connect.createStatement(); 
+		query = "UPDATE library.opera SET pubblicata=1 WHERE titolo='";   
+		sanitizedQuery = String.format("%s", titolo_opera); 
+		sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+		query+=sanitizedQuery; 
+		query+= "'" ; 
+		
+		Statement.executeUpdate(query);
+		
+		}
+			catch(SQLException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(ClassNotFoundException e){
+			success=false;
+			new dialog().errorDialog("Errore Database: " + e.getMessage());
+			}
+			catch(Exception e){
+			success=false;
+			new dialog().errorDialog("Errore generico:" + e.getMessage());
+			}
+				finally{
+					try{
+						if(connect!=null) connect.close();
+						if(Statement!=null) Statement.close();
+						return success;
+						}
+					catch(SQLException e){
+						new dialog().errorDialog("Errore Database: "+ e.getMessage());
+						return false;
+						}
+					    }
+	}
+	
+	
 }

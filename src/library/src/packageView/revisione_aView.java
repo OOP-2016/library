@@ -57,7 +57,7 @@ public class revisione_aView {
 	 * Il metodo permette di invocare una nuova finestra di loginPage
 	 */
 	public void istanziaRicercaPage(utente user){
-
+	
 		ricercaPage finestra = new ricercaPage(user);
 		finestra.setVisible(true);
 		finestra.setResizable(false);
@@ -188,8 +188,16 @@ public class revisione_aView {
 			risposta = "ACQUISIZIONE VALIDATA IN PRECEDENZA";
 			return risposta;
 		}
-		return "";
+		return "ACQUISIZIONE DISPONIBILE PER LA VALIDAZIONE";
 		
+	}
+	
+	public boolean conferma(String titolo_opera, int numero_pagina, boolean validation, utente utente){
+		return new revisione_aController().confermaAction(titolo_opera, numero_pagina, validation, utente); 
+	}
+	
+	public boolean validaOpera(String titolo_opera, utente utente){
+		return new revisione_aController().validaOperaAction(titolo_opera, utente); 
 	}
 	
 }

@@ -80,4 +80,49 @@ public class revisione_aController {
 		return opera; 
 	}
 	
+	public boolean confermaAction(String titolo_opera, int numero_pagina, boolean validation, utente utente){
+		
+		boolean success; 
+		ArrayList<Object> args = new ArrayList<Object>(); 
+		args.add(numero_pagina); 
+		args.add(titolo_opera); 
+		args.add(utente.getEmail()); 
+		
+		if(validation){
+			success = new immagineDAO().update(args); 
+		} else {
+			success = new immagineDAO().delete(args); 
+		}
+		
+		if(success) 
+			new revisione_aView().infoMessage("Conferma avvenuta");
+		else 
+			new revisione_aView().errorMessage("Conferma non avvenuta");; 
+		
+		return success; 
+	}
+	
+	public boolean validaOperaAction(String titolo_opera, utente utente){
+		
+		boolean success = false; 
+		
+		ArrayList<Object> args = new ArrayList<Object>();  
+		args.add(titolo_opera); 
+		args.add(utente); 
+		
+		opera opera = (opera)new operaDAO().retrieve(args); 
+		int numero_pagine = opera.getNumero_pagine(); 
+		
+		args.clear();
+		args.add(titolo_opera); 
+		args.add(numero_pagine); 
+		
+		boolean pubblicazione = new immagineDAO().controllaValidate(args); 
+		
+		if(pubblicazione)
+			success = new operaDAO().pubblica(args); 
+		
+		return success; 
+	}
+	
 }

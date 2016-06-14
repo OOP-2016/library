@@ -68,7 +68,7 @@ public class dialog {
 			break;
 			
 		case 4: 
-			choices[1] = "Trascrizione"; 
+			choices[1] = "Trascrittore"; 
 			break;
 			
 		case 5: 
@@ -87,8 +87,22 @@ public class dialog {
 			return 1; //utente avanzato
 		}
 		else if(choice == 1){
-			return 2; //acquisitore
-		} else 
+			
+			if(choices[1].equals("Acquisitore")){
+				return 2; 
+			} else if(choices[1].equals("Revisore Acquisizioni")){
+				return 3; 
+			} else if(choices[1].equals("Trascrittore")){
+				return 4; 
+			} else if(choices[1].equals("Revisore Trascrizioni")){
+				return 5; 
+			} else if(choices[1].equals("Amministratore")){
+				return 6; 
+			} else {
+				return -1;
+			} 
+			
+		} else
 			return -1; 
 		
 	}

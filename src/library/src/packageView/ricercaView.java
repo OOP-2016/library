@@ -67,9 +67,21 @@ public class ricercaView {
 	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
 	 */
 	public void istanziaOperaPage(utente utente, String titolo){
-		revisione_aPage finestra = new revisione_aPage(utente, titolo);
+		operaPage finestra = new operaPage(utente, titolo);
 		finestra.setVisible(true);
 		finestra.setResizable(false);
+	}
+	
+	/**
+	 * Il metodo permette di invocare una nuova finestra di operaPage
+	 * 
+	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 */
+	public void istanziaRevisione_aPage(ricercaPage finestra, utente utente, String titolo){
+		new dialog().disposeDialog(finestra);
+		revisione_aPage revisione_aPage = new revisione_aPage(utente, titolo);
+		revisione_aPage.setVisible(true);
+		revisione_aPage.setResizable(false);
 	}
 
 	/**

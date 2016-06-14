@@ -26,7 +26,13 @@ public boolean esistePagina(int numero_pagina, String titolo_opera){
 }
 
 public void conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
-    try {
+   
+	if(risoluzione==null||data_scatto==null||numero_pagina==null||immagine==null){
+		new dialog().errorDialog("Campi o immagine mancanti");
+		return; 
+	}
+	
+	try {
     	
 		int num_pagina = Integer.parseInt(numero_pagina);
 		immagine campo_immagine = new immagine(immagine, num_pagina, opera.getTitolo(), data_scatto, risoluzione, false, acquisitore);	
