@@ -32,7 +32,7 @@ public class utenteDAO implements DAO {
 			
 		Class.forName("com.mysql.jdbc.Driver");
 		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
-		preparedStatement = connect.prepareStatement("INSERT INTO library.utenti(nome,cognome,email,password,permessi) VALUES (?,?,?,?,?)");
+		preparedStatement = connect.prepareStatement("INSERT INTO library.utente(nome,cognome,email,password,permessi) VALUES (?,?,?,?,?)");
 		preparedStatement.setString(1,(String)args.get(0));
 		preparedStatement.setString(2,(String)args.get(1));
 		preparedStatement.setString(3,(String)args.get(2));
@@ -84,7 +84,7 @@ public class utenteDAO implements DAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
-			resultSet = Statement.executeQuery("SELECT * FROM library.utenti");
+			resultSet = Statement.executeQuery("SELECT * FROM library.utente");
 				
 			while(resultSet.next()){
 			

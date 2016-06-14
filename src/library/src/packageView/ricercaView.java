@@ -15,6 +15,7 @@ import packageGUI.aggiungiOperaForm;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.operaPage;
+import packageGUI.revisione_aPage;
 import packageGUI.ricercaPage;
 
 /**
@@ -66,7 +67,7 @@ public class ricercaView {
 	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
 	 */
 	public void istanziaOperaPage(utente utente, String titolo){
-		operaPage finestra = new operaPage(utente, titolo);
+		revisione_aPage finestra = new revisione_aPage(utente, titolo);
 		finestra.setVisible(true);
 		finestra.setResizable(false);
 	}
