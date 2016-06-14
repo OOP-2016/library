@@ -51,9 +51,9 @@ public class ricercaController {
 		new ricercaView().istanziaLoginPage();
 	}
 	
-	public ArrayList<String> cercaOperaAction(String filtro) {
+	public ArrayList<String> cercaOperaAction(String filtro, utente utente) {
 		
-		ArrayList<String> titoli = new operaDAO().retrieveTitoli(filtro);
+		ArrayList<String> titoli = new operaDAO().retrieveTitoli(filtro, utente);
 		return titoli;
 		
 	}
@@ -96,9 +96,10 @@ public class ricercaController {
 		
 	}
 	
-	public opera getOpera(String titolo){
+	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(titolo); 
+		args.add(utente); 
 		
 		opera opera = (opera)new operaDAO().retrieve(args); 
  		

@@ -18,6 +18,7 @@ import packageBusiness.immagine;
 import packageGUI.dialog;
 
 public class immagineDAO {
+@SuppressWarnings("finally")
 public boolean insert(ArrayList<Object> args){
 		
 		Connection connect = null;

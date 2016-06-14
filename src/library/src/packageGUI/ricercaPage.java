@@ -127,7 +127,7 @@ public class ricercaPage extends JFrame {
 					titolo+=Character.toString(titoloEautore.charAt(i)); 
 				}
 				
-				opera opera =  new ricercaView().getOpera(titolo); 
+				opera opera =  new ricercaView().getOpera(titolo, utente); 
 				opera.setTitolo(titolo);
 				
 				if(utente.getPermessi() == 2){
@@ -172,7 +172,7 @@ public class ricercaPage extends JFrame {
 			comboBox.addItem("Y");
 			comboBox.addItem("Z");
 			
-			new ricercaView().cercaOpera((String)comboBox.getSelectedItem(), listModel);
+			new ricercaView().cercaOpera((String)comboBox.getSelectedItem(), listModel, utente);
 			
 			JButton btnCerca = new JButton("CERCA");
 			btnCerca.addActionListener(new ActionListener() {
@@ -181,11 +181,11 @@ public class ricercaPage extends JFrame {
 					String filtro;			
 					if(comboBox.isEnabled()){ 
 						filtro = (String)comboBox.getSelectedItem();
-						new ricercaView().cercaOpera(filtro, listModel);
+						new ricercaView().cercaOpera(filtro, listModel, utente);
 					}
 					else {
 						filtro= (String)textField.getText();
-						new ricercaView().cercaOpera(filtro, listModel);
+						new ricercaView().cercaOpera(filtro, listModel, utente);
 					}
 				}
 			});

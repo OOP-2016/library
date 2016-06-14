@@ -100,8 +100,8 @@ public class ricercaView {
 		new dialog().errorDialog(error);
 	}
 	
-	public void cercaOpera(String filtro, DefaultListModel listModel ) {
-		ArrayList<String> titoli=new ricercaController().cercaOperaAction(filtro);
+	public void cercaOpera(String filtro, DefaultListModel listModel, utente utente) {
+		ArrayList<String> titoli=new ricercaController().cercaOperaAction(filtro, utente);
 		for(int i=0;i<titoli.size();i++) listModel.addElement(titoli.get(i));
 		}
 	
@@ -137,8 +137,8 @@ public class ricercaView {
 		frame.setResizable(false);
 	}
 	
-	public opera getOpera(String titolo){
-		return new ricercaController().getOpera(titolo); 
+	public opera getOpera(String titolo, utente utente){
+		return new ricercaController().getOpera(titolo, utente); 
 	}
 	
 }

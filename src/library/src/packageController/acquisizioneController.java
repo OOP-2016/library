@@ -48,9 +48,10 @@ public void logOutAction(acquisizionePage finestra){
 	new acquisizioneView().istanziaLoginPage();
 }
 
-public opera getOpera(String titolo_opera){
+public opera getOpera(String titolo_opera, utente utente){
 	ArrayList<Object> args = new ArrayList<Object>(); 
 	args.add(titolo_opera); 
+	args.add(utente); 
 	
 	opera opera = (opera)new operaDAO().retrieve(args); 
 		

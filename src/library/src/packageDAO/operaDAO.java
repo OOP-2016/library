@@ -83,14 +83,26 @@ public class operaDAO implements DAO {
 		
 	try{
 			String query; 
+			String sanitizedQuery; 
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
-			if(utente.getPermessi() == 1)
-				query = String.format("SELECT * FROM library.opera WHERE titolo='%s' AND pubblicata=1", titolo); 
-			else 
-				query = String.format("SELECT * FROM library.opera WHERE titolo='%s' AND pubblicata=0", titolo); 
 			
+			if(utente.getPermessi() == 1){
+				query = "SELECT * FROM library.opera WHERE titolo='"; 
+				sanitizedQuery = String.format("%s", titolo); 
+				sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+				query+= sanitizedQuery; 
+				query+= "' AND pubblicata=1"; 
+			}
+			else {
+				query = "SELECT * FROM library.opera WHERE titolo='"; 
+				sanitizedQuery = String.format("%s", titolo); 
+				sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+				query+= sanitizedQuery; 
+				query+= "' AND pubblicata=0"; 			}
+			
+			//query.replaceAll("'", "/'"); 
 			resultSet = Statement.executeQuery(query);
 			
 			while(resultSet.next()){
@@ -134,32 +146,65 @@ public class operaDAO implements DAO {
 	}
 	
 	@SuppressWarnings("finally")
-	public ArrayList<String> retrieveTitoli(String filtro) {
+	public ArrayList<String> retrieveTitoli(String filtro, utente utente) {
 		Connection connect = null;
 		Statement Statement = null;
 		ResultSet resultSet = null;
 		ArrayList<String> titoli = new ArrayList<String>();
 		String query;
+		String sanitizeQuery; 
 		
 	try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+			
+			if(utente.getPermessi() == 1||utente.getPermessi() == 0){
+				
+				if(filtro.length()==1) {
+					if(filtro.equals("-")){
+						query = "SELECT titolo, autore FROM library.opera WHERE pubblicata=1";
+					}
+					else {
+					query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '";
+					sanitizeQuery = String.format("%s", filtro);
+					sanitizeQuery = sanitizeQuery.replace("'", "''"); 
+					query+=sanitizeQuery; 
+					query += "%' AND pubblicata=1";
+					}
+				}
+				else {
+				query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '%";
+				sanitizeQuery = String.format("%s", filtro);
+				sanitizeQuery = sanitizeQuery.replace("'", "''"); 
+				query+=sanitizeQuery;
+				query += "%' AND pubblicata=1"; 
+				}
+				
+			} else {
+			
 			if(filtro.length()==1) {
 				if(filtro.equals("-")){
-					query = "SELECT titolo, autore FROM library.opera";
+					query = "SELECT titolo, autore FROM library.opera WHERE pubblicata=0";
 				}
 				else {
 				query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '";
-				query += String.format("%s", filtro);
-				query += "%'";
+				sanitizeQuery = String.format("%s", filtro);
+				sanitizeQuery = sanitizeQuery.replace("'", "''"); 
+				query+=sanitizeQuery;
+				query += "%' AND pubblicata=0";
 				}
 			}
 			else {
 			query = "SELECT titolo, autore FROM library.opera WHERE titolo LIKE '%";
-			query += String.format("%s", filtro);
-			query += "%'"; 
+			sanitizeQuery = String.format("%s", filtro);
+			sanitizeQuery = sanitizeQuery.replace("'", "''"); 
+			query+=sanitizeQuery;
+			query += "%' AND pubblicata=0"; 
 			}
+			}
+			
+			new dialog().infoDialog(query);
 			Statement = connect.createStatement();
 			resultSet = Statement.executeQuery(query);
 			
