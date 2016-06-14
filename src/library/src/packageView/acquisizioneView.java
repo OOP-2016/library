@@ -26,10 +26,16 @@ public boolean esistePagina(int numero_pagina, String titolo_opera){
 }
 
 public void conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
-    int num_pagina = Integer.parseInt(numero_pagina);
-	immagine campo_immagine = new immagine(immagine, num_pagina, opera.getTitolo(), data_scatto, risoluzione, false, acquisitore);	
-	new acquisizioneController().confermaAction(risoluzione,data_scatto, numero_pagina, opera, campo_immagine);
-		
+    try {
+    	
+		int num_pagina = Integer.parseInt(numero_pagina);
+		immagine campo_immagine = new immagine(immagine, num_pagina, opera.getTitolo(), data_scatto, risoluzione, false, acquisitore);	
+		new acquisizioneController().confermaAction(risoluzione,data_scatto, numero_pagina, opera, campo_immagine);
+    
+    } catch(Exception e){
+			new dialog().errorDialog("Errori nei campi");
+			return; 
+	}
 }
 
 public BufferedImage carica(JLabel labelImmagine, Component finestra){

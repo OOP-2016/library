@@ -18,6 +18,7 @@ import packageBusiness.trascrizione;
 import packageGUI.dialog;
 
 public class trascrizioneDAO {
+@SuppressWarnings("finally")
 public boolean insert(ArrayList<Object> args){
 		
 		Connection connect = null;
@@ -91,13 +92,20 @@ public boolean insert(ArrayList<Object> args){
         String data_scrittura = null;
         String trascrittore = null;
         boolean validata = false;
-		
+        String query; 
+        String sanitizedQuery; 
+        
 	try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
-			String query = String.format("SELECT * FROM library.trascrizione WHERE titolo_opera='%s' AND numero_pagina=%d", titolo_opera, numero_pagina); 
+			query = "SELECT * FROM library.trascrizione WHERE titolo_opera='" ; 
+			sanitizedQuery = String.format("%s", titolo_opera);  
+			sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+			query+=sanitizedQuery; 
+			query+= String.format("' AND numero_pagina=%d", numero_pagina);
+					
 			resultSet = Statement.executeQuery(query);
 			
 			while(resultSet.next()){

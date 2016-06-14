@@ -100,13 +100,19 @@ public boolean insert(ArrayList<Object> args){
 		Blob binary; 
 		InputStream in; 
 		BufferedImage img = null; 
+		String query; 
+		String sanitizedQuery; 
 		
 	try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
 			Statement = connect.createStatement();
-			String query = String.format("SELECT * FROM library.acquisizione WHERE titolo_opera='%s' AND numero_pagina=%d", titolo_opera, numero_pagina); 
+			query = "SELECT * FROM library.acquisizione WHERE titolo_opera='"; 
+			sanitizedQuery = String.format("%s", titolo_opera); 
+			sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+			query+= sanitizedQuery; 
+			query+= String.format("' AND numero_pagina=%d", numero_pagina) ; 
 			resultSet = Statement.executeQuery(query);
 			
 			while(resultSet.next()){
