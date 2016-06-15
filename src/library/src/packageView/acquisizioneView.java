@@ -29,7 +29,7 @@ public boolean esistePagina(int numero_pagina, String titolo_opera){
 
 public boolean conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
     boolean success;
-	if(risoluzione==null||data_scatto==null||numero_pagina==null||immagine==null){
+	if(risoluzione.length()==0||data_scatto.length()==0||numero_pagina.length()==0||immagine==null){
 		new dialog().errorDialog("Campi o immagine mancanti");
 		return false; 
 	}

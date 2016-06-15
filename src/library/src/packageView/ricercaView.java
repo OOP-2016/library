@@ -16,6 +16,7 @@ import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.operaPage;
 import packageGUI.revisione_aPage;
+import packageGUI.revisione_tPage;
 import packageGUI.ricercaPage;
 
 /**
@@ -82,6 +83,18 @@ public class ricercaView {
 		revisione_aPage revisione_aPage = new revisione_aPage(utente, titolo);
 		revisione_aPage.setVisible(true);
 		revisione_aPage.setResizable(false);
+	}
+	
+	/**
+	 * Il metodo permette di invocare una nuova finestra di operaPage
+	 * 
+	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 */
+	public void istanziaRevisione_tPage(ricercaPage finestra, utente utente, String titolo){
+		new dialog().disposeDialog(finestra);
+		revisione_tPage revisione_tPage = new revisione_tPage(utente, titolo);
+		revisione_tPage.setVisible(true);
+		revisione_tPage.setResizable(false);
 	}
 
 	/**
