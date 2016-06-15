@@ -6,8 +6,9 @@ import packageView.registrazioneView;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import packageDAO.utenteDAO;
+
+import mailer.mailer;
 
 /**
  * Classe controller registrazioneController
@@ -84,8 +85,10 @@ public class registrazioneController {
 		/* passo i dati al DAO */
 		boolean success = new utenteDAO().insert(datiRegistrazione);
 		/* dialog di successo o errore */ 
-		if(success) 
+		if(success){
 			new registrazioneView().infoMessage("registrazione avvenuta");
+			//new mailer().sendMail(email, nome);
+		}
 		else
 			new registrazioneView().errorMessage("registrazione fallita");
 		
