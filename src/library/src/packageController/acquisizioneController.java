@@ -63,21 +63,21 @@ public void indietroAction(acquisizionePage finestra, utente user){
 	new acquisizioneView().istanziaRicercaPage(user);
 }
 
-public void confermaAction(String risoluzione, String data_scatto, String numero_pagina, opera opera, immagine immagine){
+public boolean confermaAction(String risoluzione, String data_scatto, String numero_pagina, opera opera, immagine immagine){
 	
 	try {
 		int num_pagina = Integer.parseInt(numero_pagina); 
 		
 		if(num_pagina > opera.getNumero_pagine() || num_pagina < 1){
 			new acquisizioneView().errorMessage("pagina non valida");
-			return;
+			return false;
 		}
 		
 		boolean exist = new acquisizioneView().esistePagina(num_pagina, opera.getTitolo()); 
 		
 		if(exist){
 			new acquisizioneView().errorMessage("acquisizione già effettuata per questa pagina");
-			return;
+			return false;
 		}	
 				
 		immagine.setNumero_pagina(num_pagina);
@@ -90,19 +90,46 @@ public void confermaAction(String risoluzione, String data_scatto, String numero
 		
 		if(success){
 			new acquisizioneView().infoMessage("acquisizione effettuata con successo\nOra è possibile caricare un'altra immagine");
-			return; 
+			return true; 
 		}
 		else {
 			new acquisizioneView().infoMessage("acquisizione fallita");
-			return; 
+			return false; 
 		}
 		
 	} 
 	catch(Exception e){
 		new acquisizioneView().errorMessage("Errori nei campi"); 
-		return; 
+		return false; 
 	}
 
+}
+public boolean tutteAcquisiteAction(String titolo_opera, utente utente){
+	
+	ArrayList<Object> args = new ArrayList<Object>();  
+	args.add(titolo_opera); 
+	args.add(utente); 
+	
+	opera opera = (opera)new operaDAO().retrieve(args); 
+	int numero_pagine = opera.getNumero_pagine(); 
+	
+	args.clear();
+	args.add(titolo_opera); 
+	args.add(numero_pagine); 
+	args.add(utente); 
+	
+	boolean pubblicazione = new immagineDAO().controllaValidate(args); 
+		
+	return pubblicazione; 
+}
+
+public int paginaDaAcquisireAction(String titolo_opera){
+	
+	ArrayList<Object> args = new ArrayList<Object>();  
+	args.add(titolo_opera); 
+	int paginaDaAcquisire = new immagineDAO().paginaDaAcquisire(args); 
+	
+	return paginaDaAcquisire; 
 }
 
 }

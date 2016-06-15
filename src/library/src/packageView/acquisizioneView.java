@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import packageBusiness.immagine;
@@ -12,6 +13,7 @@ import packageBusiness.opera;
 import packageBusiness.utente;
 import packageController.acquisizioneController;
 import packageController.operaController;
+import packageController.revisione_aController;
 import packageGUI.acquisizionePage;
 import packageGUI.dialog;
 import packageGUI.loginPage;
@@ -25,23 +27,24 @@ public boolean esistePagina(int numero_pagina, String titolo_opera){
 	return p;
 }
 
-public void conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
-   
+public boolean conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
+    boolean success;
 	if(risoluzione==null||data_scatto==null||numero_pagina==null||immagine==null){
 		new dialog().errorDialog("Campi o immagine mancanti");
-		return; 
+		return false; 
 	}
 	
 	try {
     	
 		int num_pagina = Integer.parseInt(numero_pagina);
 		immagine campo_immagine = new immagine(immagine, num_pagina, opera.getTitolo(), data_scatto, risoluzione, false, acquisitore);	
-		new acquisizioneController().confermaAction(risoluzione,data_scatto, numero_pagina, opera, campo_immagine);
+		success = new acquisizioneController().confermaAction(risoluzione,data_scatto, numero_pagina, opera, campo_immagine);
     
     } catch(Exception e){
 			new dialog().errorDialog("Errori nei campi");
-			return; 
+			return false; 
 	}
+	return success;
 }
 
 public BufferedImage carica(JLabel labelImmagine, Component finestra){
@@ -125,6 +128,24 @@ public void istanziaRicercaPage(utente user){
 	finestra.setVisible(true);
 	finestra.setResizable(false);
 	
+}
+
+public boolean tutteAcquisite(String titolo_opera, utente utente, JFrame finestra){
+	boolean tutteAcquisite = new acquisizioneController().tutteAcquisiteAction(titolo_opera, utente); 
+	
+	if(tutteAcquisite){
+		new dialog().infoDialog("Tutte le immagini di quest'opera sono state acquisite");
+		if(finestra instanceof acquisizionePage){
+			new dialog().disposeDialog(finestra);
+			new acquisizioneView().istanziaRicercaPage(utente);
+		}
+	}
+	
+	return tutteAcquisite; 
+}
+
+public int paginaDaAcquisire(String titolo_opera){
+	return new acquisizioneController().paginaDaAcquisireAction(titolo_opera); 
 }
 
 }

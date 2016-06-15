@@ -11,13 +11,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 import com.mysql.jdbc.Blob;
-import packageBusiness.immagine;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
+import packageBusiness.immagine;
+import packageBusiness.utente;
 import packageGUI.dialog;
 
 public class immagineDAO {
+	
+	 public void bubbleSort(int [] array) {
+
+	        for(int i = 0; i < array.length; i++) {
+	            boolean flag = false;
+	            for(int j = 0; j < array.length-1; j++) {
+
+	                //Se l' elemento j e maggiore del successivo allora
+	                //scambiamo i valori
+	                if(array[j]>array[j+1]) {
+	                    int k = array[j];
+	                    array[j] = array[j+1];
+	                    array[j+1] = k;
+	                    flag=true; //Lo setto a true per indicare che é avvenuto uno scambio
+	                }
+	                
+
+	            }
+
+	            if(!flag) break; //Se flag=false allora vuol dire che nell' ultima iterazione
+	                             //non ci sono stati scambi, quindi il metodo può terminare
+	                             //poiché l' array risulta ordinato
+	        }
+	    }
+	 
 @SuppressWarnings("finally")
 public boolean insert(ArrayList<Object> args){
 		
@@ -264,6 +294,81 @@ public boolean insert(ArrayList<Object> args){
 	}
 
 	@SuppressWarnings("finally")
+	public int paginaDaAcquisire(ArrayList<Object> args){
+		Connection connect = null;
+		Statement Statement = null;
+		ResultSet resultSet = null;
+		
+		String titolo_opera = (String)args.get(0); 
+		
+		int numero_pagina = 0; 
+		ArrayList<Integer> pagine = new ArrayList<Integer>();  
+		int expectedNum = 1; 
+		
+		String query; 
+		String sanitizedQuery; 
+		
+	try{
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+			Statement = connect.createStatement();
+			query = "SELECT * FROM library.acquisizione WHERE titolo_opera='"; 
+			sanitizedQuery = String.format("%s", titolo_opera); 
+			sanitizedQuery = sanitizedQuery.replaceAll("'", "''"); 
+			query+= sanitizedQuery; 
+			query+= "'"; 
+			resultSet = Statement.executeQuery(query);
+			
+			while(resultSet.next()){
+				
+					numero_pagina = resultSet.getInt("numero_pagina"); 
+					pagine.add(numero_pagina); 			
+			}
+			//for(int i=0; i<pagine.size();i++) new dialog().infoDialog(String.format("pagine: %d",pagine.get(i)));
+			int[] pagineArray = new int[pagine.size()];
+			for(int i=0; i<pagine.size(); i++) pagineArray[i] = pagine.get(i);
+			bubbleSort(pagineArray);
+			//for(int i=0; i<pagineArray.length;i++) new dialog().infoDialog(String.format("paginedopo: %d",pagineArray[i]));
+			for(int i = 0; i < pagineArray.length; i++){
+				if(pagineArray[i] != expectedNum){ 
+					break; 
+				 }
+				expectedNum++; 
+			}
+			
+			
+		}
+				catch(SQLException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(ClassNotFoundException e){
+				new dialog().errorDialog("Errore Database: " + e.getMessage());
+				}
+				catch(Exception e){
+				new dialog().errorDialog("Errore generico:" + e.getMessage());
+				}
+					finally{
+						
+						try{
+							
+							if(connect!=null) connect.close();
+							if(Statement!=null) Statement.close();
+							if(resultSet!=null) resultSet.close();
+							return expectedNum;
+							
+							}
+						
+						catch(SQLException e){
+							
+							new dialog().errorDialog("Errore Database: "+e.getMessage());
+							return expectedNum;
+							}
+						
+				      }
+	}
+	
+	@SuppressWarnings("finally")
 	public boolean controllaValidate(ArrayList<Object> args){
 		Connection connect = null;
 		Statement Statement = null;
@@ -272,6 +377,7 @@ public boolean insert(ArrayList<Object> args){
 		
 		String titolo_opera = (String)args.get(0); 
 		int numero_pagine = (int)args.get(1); 
+		utente utente = (utente)args.get(2); 
 		
 		boolean validata = false;
 		int paginePresenti = 0; 
@@ -292,17 +398,28 @@ public boolean insert(ArrayList<Object> args){
 			resultSet = Statement.executeQuery(query);
 			
 			while(resultSet.next()){
-				paginePresenti++; 
-				validata = resultSet.getBoolean("validata"); 
 				
-				if(!validata){
-					pubblica = false; 
-					break; 
-				}
+				if(utente.getPermessi()!=2){
+				
+					paginePresenti++; 
+					validata = resultSet.getBoolean("validata"); 
+					
+					if(!validata){
+						pubblica = false; 
+						break; 
+					}
+					
+					if(paginePresenti == numero_pagine)
+						pubblica = true; 
+					
+			} else if(utente.getPermessi() == 2){
+				paginePresenti++; 
 				
 				if(paginePresenti == numero_pagine)
 					pubblica = true; 
 			}
+				
+		}
 					
 		}
 				catch(SQLException e){
@@ -333,6 +450,6 @@ public boolean insert(ArrayList<Object> args){
 						
 				      }
 	}
-
+	 
 
 }

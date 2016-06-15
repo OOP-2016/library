@@ -212,6 +212,11 @@ public class revisione_aPage extends JFrame {
 				}
 				
 				boolean success = new revisione_aView().conferma(titolo, npagina, validate, user); 
+				rdbtnValidaAcquisizione.setSelected(false); 
+				rdbtnRifiutaAcquisizione.setSelected(false); 
+				rdbtnValidaAcquisizione.setEnabled(false);
+				rdbtnRifiutaAcquisizione.setEnabled(false);
+				btnConferma.setEnabled(false);
 				
 				if(success){
 					boolean pubblicata = new revisione_aView().validaOpera(titolo, user); 
@@ -228,7 +233,7 @@ public class revisione_aPage extends JFrame {
 		 * Caricamento prima pagina 
 		 */
 		lblNewLabel = new JLabel("");
-		npagina = new revisione_aView().firstPage(titolo, lblNewLabel , npagina, user);
+		npagina = new revisione_aView().firstPage(titolo, button, lblNewLabel , npagina, user);
 		new revisione_aView().vista(lblImg, titolo, npagina);
 		btnNewButton.setEnabled(false);
 		new revisione_aView().metadati(txtAcquisitore, textField, textField_1, titolo, npagina);

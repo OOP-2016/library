@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import packageBusiness.opera;
 import packageBusiness.utente;
 import packageController.operaController;
+import packageView.acquisizioneView;
 import packageView.operaView;
 import packageView.ricercaView;
 
@@ -134,6 +135,11 @@ public class ricercaPage extends JFrame {
 					new ricercaView().apriOpera(finestra, utente, titolo);
 					return; 
 				} else if(utente.getPermessi() == 2){
+					boolean tutteAcquisite = new acquisizioneView().tutteAcquisite(opera.getTitolo(), utente, finestra);
+					if(tutteAcquisite){
+						return; 
+					}
+					
 					new ricercaView().istanziaAcquisizionePage(finestra,utente,opera);
 					return;
 				} else if(utente.getPermessi() == 3){

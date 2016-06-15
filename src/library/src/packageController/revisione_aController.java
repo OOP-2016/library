@@ -116,6 +116,7 @@ public class revisione_aController {
 		args.clear();
 		args.add(titolo_opera); 
 		args.add(numero_pagine); 
+		args.add(utente); 
 		
 		boolean pubblicazione = new immagineDAO().controllaValidate(args); 
 		

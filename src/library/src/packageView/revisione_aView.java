@@ -126,11 +126,11 @@ public class revisione_aView {
 
 	}
 	
-	public int firstPage(String titolo, JLabel page, int npagina, utente utente){
-		opera opera = new revisione_aController().getOpera(titolo, utente); 
+	public int firstPage(String titolo, JButton avanti, JLabel page, int npagina, utente utente){
+		opera opera = new operaController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
-		page.setText(npagina + " / " + pageMax); 
-		
+		page.setText(npagina + " / " + pageMax);   				 		
+		if(pageMax == 1) avanti.setEnabled(false);  
 		return npagina; 
 	}
 	

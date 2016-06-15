@@ -107,8 +107,8 @@ public class operaView {
 	 * @param titolo Stringa che rappresenta il titolo dell'opera 
 	 * @param npagina intero che rappresenta il corrente numero di pagina
 	 */
-	public void vista(JLabel immagine, JTextPane trascrizione, String titolo_opera, int numero_pagina){
-		Object[] pagina = new operaController().vistaAction(titolo_opera, numero_pagina);
+	public void vista(JLabel immagine, JTextPane trascrizione, String titolo_opera, int numero_pagina, utente utente){
+		Object[] pagina = new operaController().vistaAction(titolo_opera, numero_pagina, utente);
 		immagine immagine_inter = (immagine)pagina[0];
 		trascrizione trascrizione_def = (trascrizione)pagina[1];
 		BufferedImage immagine_def = immagine_inter.getImmagine();
@@ -128,11 +128,11 @@ public class operaView {
 		
 	}
 	
-	public int firstPage(String titolo, JLabel page, int npagina, utente utente){
+	public int firstPage(String titolo, JButton avanti, JLabel page, int npagina, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
-		page.setText(npagina + " / " + pageMax); 
-		
+		page.setText(npagina + " / " + pageMax);   				 		
+		if(pageMax == 1) avanti.setEnabled(false);  
 		return npagina; 
 	}
 	

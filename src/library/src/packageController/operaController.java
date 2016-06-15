@@ -43,10 +43,11 @@ public class operaController {
 		new operaView().istanziaRicercaPage(user);
 	}
 	
-	public Object[] vistaAction(String titolo_opera, int numero_pagina){
+	public Object[] vistaAction(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(numero_pagina); 
 		args.add(titolo_opera); 
+		args.add(utente); 
 		immagine immagine = (immagine)new immagineDAO().retrieve(args);
 	    trascrizione trascrizione = (trascrizione)new trascrizioneDAO().retrieve(args);
 		Object[] pagina = new Object[2];

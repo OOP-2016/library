@@ -38,7 +38,7 @@ public class acquisizionePage extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private BufferedImage immagine;
-	
+	private int pagina; 
 	/**
 	 * Launch the application.
 	 */
@@ -108,8 +108,17 @@ public class acquisizionePage extends JFrame {
 		JButton btnNewButton = new JButton("CONFERMA");
 		btnNewButton.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent arg0){
-				new acquisizioneView().conferma(textField.getText(), textField_1.getText(), textField_2.getText(), opera, immagine, utente.getEmail());
+				boolean success = new acquisizioneView().conferma(textField.getText(), textField_1.getText(), textField_2.getText(), opera, immagine, utente.getEmail());
+				if(success){
+				textField.setText("");
+				textField_1.setText("");
+				textField_2.setText(String.format("%d", new acquisizioneView().paginaDaAcquisire(opera.getTitolo())));
+				lblNewLabel.setIcon(null);
 			}
+			
+			new acquisizioneView().tutteAcquisite(opera.getTitolo(), utente, window); 
+			
+		}
 		});
 		
 		JButton btnNewButton_1 = new JButton("CARICA");
@@ -133,6 +142,10 @@ public class acquisizionePage extends JFrame {
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
+		
+		textField_2.setText(String.format("%d", new acquisizioneView().paginaDaAcquisire(opera.getTitolo())));
+
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -195,5 +208,6 @@ public class acquisizionePage extends JFrame {
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
+		
 	}
 }

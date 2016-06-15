@@ -104,7 +104,7 @@ public class operaPage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new operaView().clickAvanti(titolo, lblNewLabel, npagina, button, btnNewButton, user);
-				new operaView().vista(lblImg, textPane, titolo, npagina);		
+				new operaView().vista(lblImg, textPane, titolo, npagina, user);		
 			}
 		});
 		
@@ -115,7 +115,7 @@ public class operaPage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new operaView().clickIndietro(titolo, lblNewLabel, npagina, button, btnNewButton, user);
-				new operaView().vista(lblImg, textPane, titolo, npagina);
+				new operaView().vista(lblImg, textPane, titolo, npagina, user);
 			}
 		});
 		
@@ -127,8 +127,8 @@ public class operaPage extends JFrame {
 		 * Caricamento prima pagina 
 		 */
 		lblNewLabel = new JLabel();
-		npagina = new operaView().firstPage(titolo, lblNewLabel , npagina, user);
-		new operaView().vista(lblImg, textPane, titolo, npagina);
+		npagina = new operaView().firstPage(titolo, button, lblNewLabel , npagina, user);
+		new operaView().vista(lblImg, textPane, titolo, npagina, user);
 		btnNewButton.setEnabled(false);
 		
 		
