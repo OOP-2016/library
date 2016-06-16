@@ -5,7 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.html.HTMLEditorKit;
+
 import packageBusiness.utente;
+import packageView.acquisizioneView;
 import packageView.operaView;
 import packageView.trascrizioneView;
 
@@ -38,6 +43,7 @@ public class trascrizionePage extends JFrame {
 	private JTextField textField_2;
 	private JTextPane textPane_1;
 	private JTextPane textPane;
+	private StringBuilder stringa; 
 	/**
 	 * Launch the application.
 	 */
@@ -63,7 +69,7 @@ public class trascrizionePage extends JFrame {
 		
 		trascrizionePage finestra = this; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1247, 775);
+		setBounds(100, 100, 1247, 735);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -83,6 +89,12 @@ public class trascrizionePage extends JFrame {
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
+		
+		textPane = new JTextPane();
+		textPane_1 = new JTextPane();
+		textPane.setContentType("text/html");
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
@@ -112,6 +124,8 @@ public class trascrizionePage extends JFrame {
 		
 		lblImg = new JLabel("");
 		
+		//Conferma button 
+		JButton btnNewButton_1 = new JButton("CONFERMA");
 		
 		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
@@ -124,7 +138,15 @@ public class trascrizionePage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new trascrizioneView().clickAvanti(titolo, lblNewLabel, textField_3, npagina, button, btnNewButton, user);
-				new trascrizioneView().vista(lblImg, titolo, npagina, user);		
+				new trascrizioneView().vista(lblImg, titolo, npagina, user);
+				
+				if(new trascrizioneView().esistePagina(npagina, titolo, user)){
+					textPane.setText("<h2>trascrizione già inserita</h2>");
+					btnNewButton_1.setEnabled(false);
+				} else {
+					btnNewButton_1.setEnabled(true);
+					textPane.setText(null);
+				}
 			}
 		});
 		
@@ -136,6 +158,14 @@ public class trascrizionePage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new trascrizioneView().clickIndietro(titolo, lblNewLabel, textField_3, npagina, button, btnNewButton, user);
 				new trascrizioneView().vista(lblImg, titolo, npagina, user);
+				
+				if(new trascrizioneView().esistePagina(npagina, titolo, user)){
+					textPane.setText("<h2>trascrizione già inserita</h2>");
+					btnNewButton_1.setEnabled(false);
+				} else {
+					btnNewButton_1.setEnabled(true);
+					textPane.setText(null);
+				}
 			}
 		});
 		
@@ -148,8 +178,18 @@ public class trascrizionePage extends JFrame {
 		 */
 		lblNewLabel = new JLabel();
 		npagina = new trascrizioneView().firstPage(titolo, button, lblNewLabel, textField_3, npagina, user);
+		new dialog().infoDialog(String.format("%d", npagina));
+		new trascrizioneView().vista(lblImg, titolo, npagina, user);	
+		textField_3.setText(String.format("%d", npagina));
 		btnNewButton.setEnabled(false);
 		
+		if(new trascrizioneView().esistePagina(npagina, titolo, user)){
+			textPane.setText("<h2>trascrizione già inserita</h2>");
+			btnNewButton_1.setEnabled(false);
+		} else {
+			btnNewButton_1.setEnabled(true);
+			textPane.setText(null);
+		}
 		
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -159,10 +199,10 @@ public class trascrizionePage extends JFrame {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("CONFERMA");
+		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				new trascrizioneView().conferma(textField_2.getText(), textPane.getText(), npagina, titolo, user);
 			}
 		});
 		
@@ -175,35 +215,62 @@ public class trascrizionePage extends JFrame {
 		
 		JLabel lblTitolo_1 = new JLabel("SOTTOTITOLO");
 		
+		stringa = new StringBuilder();
+		
 		JButton btnAnteprima = new JButton("APPLICA");
 		btnAnteprima.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				StringBuilder stringa = new StringBuilder();
-				stringa.append(textField_1.getText());
-				stringa.append(textField.getText());
-				stringa.append(textPane_1.toString());
+			public void actionPerformed(ActionEvent e){
 				
+				if(!(textField_1.getText().length() == 0))
+					stringa.append("<h1>" + textField_1.getText() + "</h1>");
+				if(!(textField.getText().length() == 0))
+					stringa.append("<h2>" + textField.getText() + "</h2>");
+				if(!(textPane_1.getText().length() == 0))
+					stringa.append("<p>" + textPane_1.getText() + "</p>");
+				
+				
+				//new dialog().infoDialog(stringa.toString());
 				textPane.setText(stringa.toString());
 				
 				textField_1.setText(null);
 				textField.setText(null);
 				textPane_1.setText(null);
+						
 			}
 		});
 		
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
 		
 		JButton btnVai = new JButton("VAI");
 		btnVai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				npagina = Integer.parseInt(textField_3.getText());
 				new trascrizioneView().vista(lblImg, titolo, npagina, user);
+				if(npagina == 1) btnNewButton.setEnabled(false);
+				else btnNewButton.setEnabled(true);
+				if(npagina == (new trascrizioneView().getPageMax(titolo, user))) button.setEnabled(false);
+				else button.setEnabled(true); 
+				
+				if(new trascrizioneView().esistePagina(npagina, titolo, user)){
+					textPane.setText("<h2>trascrizione già inserita</h2>");
+					btnNewButton_1.setEnabled(false);
+				} else {
+					btnNewButton_1.setEnabled(true);
+					textPane.setText(null);
+				}
+				
 			}
 		});
 		
 		JLabel lblData = new JLabel("DATA");
+		
+		JButton btnCancella = new JButton("CANCELLA");
+		btnCancella.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				stringa = new StringBuilder(); 
+				textPane.setText(null);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -217,26 +284,27 @@ public class trascrizionePage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(50)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(lblNewLabel)
-										.addGap(18)
-										.addComponent(btnVai))
-									.addPreferredGap(ComponentPlacement.RELATED, 563, Short.MAX_VALUE)
+									.addComponent(lblNewLabel)
+									.addGap(18)
+									.addComponent(btnVai)
+									.addPreferredGap(ComponentPlacement.RELATED, 599, Short.MAX_VALUE)
 									.addComponent(button))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 419, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+									.addPreferredGap(ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addComponent(lblData)
 										.addComponent(textField_1, Alignment.TRAILING)
 										.addComponent(textField, Alignment.TRAILING)
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(btnAnteprima)
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+											.addComponent(btnCancella)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addComponent(btnNewButton_1))
 										.addComponent(scrollPane_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
 										.addComponent(lblTesto)
@@ -257,7 +325,7 @@ public class trascrizionePage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblData)
-							.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
 							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblTitolo)
@@ -274,10 +342,11 @@ public class trascrizionePage extends JFrame {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnNewButton_1)
-								.addComponent(btnAnteprima))
+								.addComponent(btnAnteprima)
+								.addComponent(btnCancella))
 							.addPreferredGap(ComponentPlacement.RELATED))
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
-						.addComponent(lblImg, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE))
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+						.addComponent(lblImg, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(button)
@@ -288,10 +357,8 @@ public class trascrizionePage extends JFrame {
 					.addContainerGap())
 		);
 		
-		textPane_1 = new JTextPane();
-		scrollPane_1.setViewportView(textPane_1);
 		
-		textPane = new JTextPane();
+		scrollPane_1.setViewportView(textPane_1);
 		scrollPane.setViewportView(textPane);
 		contentPane.setLayout(gl_contentPane);
 	}

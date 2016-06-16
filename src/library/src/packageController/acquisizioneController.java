@@ -119,7 +119,7 @@ public boolean confermaAction(String risoluzione, String data_scatto, String num
 			return true; 
 		}
 		else {
-			new acquisizioneView().infoMessage("acquisizione fallita");
+			new acquisizioneView().errorMessage("acquisizione fallita");
 			return false; 
 		}
 		

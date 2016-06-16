@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -11,8 +12,10 @@ import packageBusiness.immagine;
 import packageBusiness.opera;
 import packageBusiness.trascrizione;
 import packageBusiness.utente;
+import packageController.acquisizioneController;
 import packageController.operaController;
 import packageController.trascrizioneController;
+import packageGUI.acquisizionePage;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.operaPage;
@@ -196,6 +199,47 @@ public class trascrizioneView {
 		
 		return npagina; 
 		
+	}
+	
+	public int getPageMax(String titolo, utente utente){
+		opera opera = new trascrizioneController().getOpera(titolo, utente); 
+		return opera.getNumero_pagine(); 
+	}
+	
+	public boolean conferma(String data_scrittura, String TEItext, int numero_pagina, String titolo, utente utente){
+		boolean success;
+		if(data_scrittura.length()==0||TEItext.length()==0){
+			new dialog().errorDialog("Campo data o trsacrizione mancante");
+			return false; 
+		}
+		
+		
+	    	
+		trascrizione trascrizione = new trascrizione(TEItext, titolo, numero_pagina, data_scrittura, utente.getEmail(), false);	
+		success = new trascrizioneController().confermaAction(trascrizione, utente);
+	    
+		return success;
+	}
+	
+	
+	public boolean esistePagina(int numero_pagina, String titolo_opera, utente utente){
+		boolean p = new trascrizioneController().esistePaginaAction(numero_pagina, titolo_opera, utente);
+		return p;
+	}
+	
+	
+	public boolean tutteTrascritte(String titolo_opera, utente utente, JFrame finestra){
+		boolean tutteTrascritte = new trascrizioneController().tutteTrascritteAction(titolo_opera, utente); 
+		
+		if(tutteTrascritte){
+			new dialog().errorDialog("Tutte le trascrizioni di quest'opera sono state trascritte");
+			if(finestra instanceof acquisizionePage){
+				new dialog().disposeDialog(finestra);
+				new trascrizioneView().istanziaRicercaPage(utente);
+			}
+		}
+		
+		return tutteTrascritte; 
 	}
 	
 }

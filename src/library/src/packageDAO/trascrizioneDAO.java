@@ -50,8 +50,8 @@ public boolean insert(ArrayList<Object> args){
 		preparedStatement = connect.prepareStatement("INSERT INTO library.trascrizione(numero_pagina,titolo_opera,testo,validata,data_scrittura,trascrittore) VALUES (?,?,?,?,?,?)");
 		preparedStatement.setInt(1, numero_pagina);
 		preparedStatement.setString(2,titolo_opera);
-		preparedStatement.setBoolean(3,false);
-		preparedStatement.setString(4,testo);
+		preparedStatement.setString(3,testo);
+		preparedStatement.setBoolean(4,false);
 		preparedStatement.setString(5,data_scrittura);
 		preparedStatement.setString(6,trascrittore);		
 		preparedStatement.executeUpdate();
@@ -126,7 +126,7 @@ public boolean insert(ArrayList<Object> args){
 				/**
 				 * Se l'utente è un revisore trascrizioni, viene salvato il testo anche se non validato
 				 */
-				if(utente.getPermessi()!=5){
+				if(utente.getPermessi()==0||utente.getPermessi()==1||utente.getPermessi()==2||utente.getPermessi()==3){
 				
 					if(validata){
 					testo = resultSet.getString("testo"); 
