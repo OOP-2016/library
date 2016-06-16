@@ -149,7 +149,7 @@ public class ricercaPage extends JFrame {
 					new ricercaView().istanziaRevisione_aPage(finestra,utente, titolo);
 					return; 
 				} else if(utente.getPermessi() == 4){
-					//new ricercaView().istanziaTrascrizionePage(finestra,utente, titolo);
+					new ricercaView().istanziaTrascrizionePage(finestra,utente, titolo);
 					return; 
 				} else if(utente.getPermessi() == 5){
 					new ricercaView().istanziaRevisione_tPage(finestra,utente, titolo);

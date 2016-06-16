@@ -18,6 +18,7 @@ import packageGUI.operaPage;
 import packageGUI.revisione_aPage;
 import packageGUI.revisione_tPage;
 import packageGUI.ricercaPage;
+import packageGUI.trascrizionePage;
 
 /**
  * Classe View ricercaView
@@ -59,6 +60,14 @@ public class ricercaView {
 		loginPage finestra = new loginPage();
 		finestra.setVisible(true);
 		finestra.setResizable(false);
+		
+	}
+	
+	public void istanziaTrascrizionePage(ricercaPage finestra, utente utente, String titolo){
+		new dialog().disposeDialog(finestra);
+		trascrizionePage trascrizionePage = new trascrizionePage(utente, titolo);
+		trascrizionePage.setVisible(true);
+		trascrizionePage.setResizable(false);
 		
 	}
 	
