@@ -38,11 +38,23 @@ public class operaController {
 		new operaView().istanziaLoginPage();
 	}
 	
+	/**
+	 * 
+	 * @param finestra
+	 * @param user
+	 */
 	public void indietroAction(operaPage finestra, utente user){
 		new operaView().dispose(finestra);
 		new operaView().istanziaRicercaPage(user);
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @param utente
+	 * @return
+	 */
 	public Object[] vistaAction(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(numero_pagina); 
@@ -56,6 +68,12 @@ public class operaController {
 		return pagina;
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param utente
+	 * @return
+	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(titolo); 

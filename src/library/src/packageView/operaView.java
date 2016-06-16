@@ -128,6 +128,15 @@ public class operaView {
 		
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param avanti
+	 * @param page
+	 * @param npagina
+	 * @param utente
+	 * @return
+	 */
 	public int firstPage(String titolo, JButton avanti, JLabel page, int npagina, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
@@ -136,6 +145,16 @@ public class operaView {
 		return npagina; 
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param page
+	 * @param npagina
+	 * @param avanti
+	 * @param indietro
+	 * @param utente
+	 * @return
+	 */
 	public int clickAvanti(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
@@ -150,6 +169,16 @@ public class operaView {
 		return npagina; 
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param page
+	 * @param npagina
+	 * @param avanti
+	 * @param indietro
+	 * @param utente
+	 * @return
+	 */
 	public int clickIndietro(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro, utente utente){
 
 		avanti.setEnabled(true); //abilita bottone avanti

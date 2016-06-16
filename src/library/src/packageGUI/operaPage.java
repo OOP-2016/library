@@ -64,6 +64,9 @@ public class operaPage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				new operaView().logOut(finestra);
 			}
@@ -71,6 +74,9 @@ public class operaPage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				new operaView().indietro(finestra, user);
 			}
@@ -80,6 +86,9 @@ public class operaPage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				new operaView().exit(finestra);
 			}

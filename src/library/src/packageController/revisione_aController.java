@@ -28,6 +28,13 @@ public class revisione_aController {
 	public void exitAction(revisione_aPage finestra){
 		new revisione_aView().dispose(finestra);
 	}
+	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @return
+	 */
 	public String[] metadatiAction(String titolo_opera, int numero_pagina){
 		ArrayList<Object> args = new ArrayList<Object>();
 		String[] metadati = new String[3];
@@ -46,6 +53,7 @@ public class revisione_aController {
 			}
 		return metadati;
 	}
+	
 	/**
 	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra e istanziare 
 	 * la finestra di loginPage
@@ -57,11 +65,22 @@ public class revisione_aController {
 		new revisione_aView().istanziaLoginPage();
 	}
 	
+	/**
+	 * 
+	 * @param finestra
+	 * @param user
+	 */
 	public void indietroAction(revisione_aPage finestra, utente user){
 		new revisione_aView().dispose(finestra);
 		new revisione_aView().istanziaRicercaPage(user);
 	}
-	
+
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @return
+	 */
 	public immagine vistaAction(String titolo_opera, int numero_pagina){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(numero_pagina); 
@@ -70,6 +89,12 @@ public class revisione_aController {
 		return immagine;
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param utente
+	 * @return
+	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(titolo); 
@@ -80,6 +105,14 @@ public class revisione_aController {
 		return opera; 
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @param validation
+	 * @param utente
+	 * @return
+	 */
 	public boolean confermaAction(String titolo_opera, int numero_pagina, boolean validation, utente utente){
 		
 		boolean success; 
@@ -102,6 +135,12 @@ public class revisione_aController {
 		return success; 
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param utente
+	 * @return
+	 */
 	public boolean validaOperaAction(String titolo_opera, utente utente){
 		
 		boolean success = false; 

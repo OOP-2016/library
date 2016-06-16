@@ -79,6 +79,9 @@ public class aggiungiOperaForm extends JFrame {
 		
 		JButton btnAggiungi = new JButton("AGGIUNGI");
 		btnAggiungi.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new ricercaView().aggiungiOpera(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), finestra); 

@@ -79,6 +79,9 @@ public class revisione_aPage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				new revisione_aView().logOut(finestra);
 			}
@@ -86,6 +89,9 @@ public class revisione_aPage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				new revisione_aView().indietro(finestra, user);
 			}
@@ -95,6 +101,9 @@ public class revisione_aPage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				new revisione_aView().exit(finestra);
 			}
@@ -197,6 +206,9 @@ public class revisione_aPage extends JFrame {
 		
 		btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				boolean validate; 
 				
@@ -229,6 +241,7 @@ public class revisione_aPage extends JFrame {
 					new revisione_aView().errorMessage("Errore");
 			}
 		});
+		
 		/**
 		 * Caricamento prima pagina 
 		 */

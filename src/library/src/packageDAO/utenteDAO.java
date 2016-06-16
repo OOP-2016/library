@@ -69,7 +69,8 @@ public class utenteDAO implements DAO {
 	
 	/**
 	 * Metodo che prende dati dal database
-	 * @param args ArrayList contententi i parametri da inserire nel database 
+	 * 
+	 * @param args ArrayList contententi i parametri che servono a costruire la query per il database
 	 * @return oggetto preso dal database 
 	 */
 	public Object retrieve(ArrayList<Object> args){

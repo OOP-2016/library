@@ -116,6 +116,9 @@ public class ricercaPage extends JFrame {
 		if(utente.getPermessi() == 0)
 			btnApri.setEnabled(false); 
 		btnApri.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 			
 				String titoloEautore = (String)list.getSelectedValue();
@@ -197,6 +200,9 @@ public class ricercaPage extends JFrame {
 			
 			JButton btnCerca = new JButton("CERCA");
 			btnCerca.addActionListener(new ActionListener() {
+				/**
+				 * 
+				 */
 				public void actionPerformed(ActionEvent arg0) {
 					listModel.clear();
 					String filtro;			
@@ -248,6 +254,9 @@ public class ricercaPage extends JFrame {
 			btnAggiungiOpera.hide();
 		}
 		btnAggiungiOpera.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				new ricercaView().apriAggiungiOperaForm(); 
 			}

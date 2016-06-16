@@ -74,6 +74,9 @@ public class acquisizionePage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				new acquisizioneView().logOut(window);
 			}
@@ -81,6 +84,9 @@ public class acquisizionePage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				new acquisizioneView().indietro(window, utente);
 			}
@@ -90,6 +96,9 @@ public class acquisizionePage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				new acquisizioneView().exit(window);
 			}
@@ -107,6 +116,9 @@ public class acquisizionePage extends JFrame {
 		
 		JButton btnNewButton = new JButton("CONFERMA");
 		btnNewButton.addActionListener(new ActionListener() {	
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0){
 				boolean success = new acquisizioneView().conferma(textField.getText(), textField_1.getText(), textField_2.getText(), opera, immagine, utente.getEmail());
 				if(success){
@@ -114,6 +126,7 @@ public class acquisizionePage extends JFrame {
 				textField_1.setText("");
 				textField_2.setText(String.format("%d", new acquisizioneView().paginaDaAcquisire(opera.getTitolo())));
 				lblNewLabel.setIcon(null);
+				immagine = null; 
 			}
 			
 			new acquisizioneView().tutteAcquisite(opera.getTitolo(), utente, window); 
@@ -123,6 +136,9 @@ public class acquisizionePage extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("CARICA");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			/**
+			 * 
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				immagine = new acquisizioneView().carica(lblNewLabel, acquisizionePage); 
 			}
@@ -143,6 +159,9 @@ public class acquisizionePage extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		
+		/**
+		 * 
+		 */
 		textField_2.setText(String.format("%d", new acquisizioneView().paginaDaAcquisire(opera.getTitolo())));
 
 		

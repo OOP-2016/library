@@ -30,6 +30,14 @@ public class revisione_tController {
 	public void exitAction(revisione_tPage finestra){
 		new revisione_tView().dispose(finestra);
 	}
+	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @param utente
+	 * @return
+	 */
 	public String[] metadatiAction(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>();
 		String[] metadati = new String[2];
@@ -47,6 +55,7 @@ public class revisione_tController {
 			}
 		return metadati;
 	}
+	
 	/**
 	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra e istanziare 
 	 * la finestra di loginPage
@@ -58,11 +67,23 @@ public class revisione_tController {
 		new revisione_tView().istanziaLoginPage();
 	}
 	
+	/**
+	 * 
+	 * @param finestra
+	 * @param user
+	 */
 	public void indietroAction(revisione_tPage finestra, utente user){
 		new revisione_tView().dispose(finestra);
 		new revisione_tView().istanziaRicercaPage(user);
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @param utente
+	 * @return
+	 */
 	public trascrizione vistaAction(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(numero_pagina); 
@@ -72,6 +93,12 @@ public class revisione_tController {
 		return trascrizione;
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param utente
+	 * @return
+	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(titolo); 
@@ -82,6 +109,14 @@ public class revisione_tController {
 		return opera; 
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @param validation
+	 * @param utente
+	 * @return
+	 */
 	public boolean confermaAction(String titolo_opera, int numero_pagina, boolean validation, utente utente){
 		
 		boolean success; 
@@ -104,6 +139,12 @@ public class revisione_tController {
 		return success; 
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param utente
+	 * @return
+	 */
 	public boolean validaOperaAction(String titolo_opera, utente utente){
 		
 		ArrayList<Object> args = new ArrayList<Object>();  

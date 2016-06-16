@@ -48,6 +48,12 @@ public class immagineDAO {
 	        }
 	    }
 	 
+/**
+ * Metodo che inserisce parametri nel database 
+ * 
+ * @param args ArrayList contententi i parametri da inserire nel database 
+ * @return true se insert termina senza errori, false altrimenti 
+ */
 @SuppressWarnings("finally")
 public boolean insert(ArrayList<Object> args){
 		
@@ -108,11 +114,12 @@ public boolean insert(ArrayList<Object> args){
 					    }
 	}
 	
-	/**
-	 * Metodo che prende dati dal database
-	 * @param args ArrayList contententi i parametri da inserire nel database 
-	 * @return oggetto preso dal database 
-	 */
+/**
+ * Metodo che prende dati dal database
+ * 
+ * @param args ArrayList contententi i parametri che servono a costruire la query per il database
+ * @return oggetto preso dal database 
+ */
 	@SuppressWarnings("finally")
 	public Object retrieve(ArrayList<Object> args){
 		Connection connect = null;
@@ -191,6 +198,12 @@ public boolean insert(ArrayList<Object> args){
 				      }
 	}
 	
+	/**
+	 * Il metodo modifica una riga nel database
+	 * 
+	 * @param args args ArrayList contententi i parametri da inserire nel database 
+	 * @return true se insert termina senza errori, false altrimenti 
+	 */
 	@SuppressWarnings("finally")
 	public boolean update(ArrayList<Object> args){
 		Connection connect = null;
@@ -243,6 +256,12 @@ public boolean insert(ArrayList<Object> args){
 					    }
 	}
 
+	/**
+	 * Il metodo cancella una riga dal database 
+	 * 
+	 * @param args args ArrayList contententi i parametri che servono a costruire la query per il database
+	 * @return true se insert termina senza errori, false altrimenti 
+	 */
 	@SuppressWarnings("finally")
 	public boolean delete(ArrayList<Object> args){
 		Connection connect = null;

@@ -18,7 +18,13 @@ import packageView.operaView;
 
 public class acquisizioneController {
 	
-public boolean esistePaginaAction(int numero_pagina, String titolo_opera){
+	/**
+	 * 
+	 * @param numero_pagina
+	 * @param titolo_opera
+	 * @return
+	 */
+	public boolean esistePaginaAction(int numero_pagina, String titolo_opera){
 	ArrayList<Object> immagine = new ArrayList<Object>();
 	immagine immagine_obj;
 	immagine.add(numero_pagina);
@@ -48,6 +54,12 @@ public void logOutAction(acquisizionePage finestra){
 	new acquisizioneView().istanziaLoginPage();
 }
 
+/**
+ * 
+ * @param titolo_opera
+ * @param utente
+ * @return
+ */
 public opera getOpera(String titolo_opera, utente utente){
 	ArrayList<Object> args = new ArrayList<Object>(); 
 	args.add(titolo_opera); 
@@ -58,11 +70,25 @@ public opera getOpera(String titolo_opera, utente utente){
 	return opera; 
 }
 
+/**
+ * 
+ * @param finestra
+ * @param user
+ */
 public void indietroAction(acquisizionePage finestra, utente user){
 	new acquisizioneView().dispose(finestra);
 	new acquisizioneView().istanziaRicercaPage(user);
 }
 
+/**
+ * 
+ * @param risoluzione
+ * @param data_scatto
+ * @param numero_pagina
+ * @param opera
+ * @param immagine
+ * @return
+ */
 public boolean confermaAction(String risoluzione, String data_scatto, String numero_pagina, opera opera, immagine immagine){
 	
 	try {
@@ -104,6 +130,13 @@ public boolean confermaAction(String risoluzione, String data_scatto, String num
 	}
 
 }
+
+/**
+ * 
+ * @param titolo_opera
+ * @param utente
+ * @return
+ */
 public boolean tutteAcquisiteAction(String titolo_opera, utente utente){
 	
 	ArrayList<Object> args = new ArrayList<Object>();  
@@ -123,6 +156,11 @@ public boolean tutteAcquisiteAction(String titolo_opera, utente utente){
 	return pubblicazione; 
 }
 
+/**
+ * 
+ * @param titolo_opera
+ * @return
+ */
 public int paginaDaAcquisireAction(String titolo_opera){
 	
 	ArrayList<Object> args = new ArrayList<Object>();  

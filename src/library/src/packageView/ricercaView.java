@@ -126,11 +126,25 @@ public class ricercaView {
 		new dialog().errorDialog(error);
 	}
 	
+	/**
+	 * 
+	 * @param filtro
+	 * @param listModel
+	 * @param utente
+	 */
 	public void cercaOpera(String filtro, DefaultListModel listModel, utente utente) {
 		ArrayList<String> titoli=new ricercaController().cercaOperaAction(filtro, utente);
 		for(int i=0;i<titoli.size();i++) listModel.addElement(titoli.get(i));
 		}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param autore
+	 * @param anno_pubblicazione
+	 * @param numero_pagine
+	 * @param finestra
+	 */
 	public void aggiungiOpera(String titolo, String autore, String anno_pubblicazione, String numero_pagine, aggiungiOperaForm finestra){
 		boolean success = new ricercaController().aggiungiOperaAction(titolo, autore, anno_pubblicazione, numero_pagine);
 		
@@ -140,6 +154,9 @@ public class ricercaView {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public void apriAggiungiOperaForm(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -156,6 +173,13 @@ public class ricercaView {
 		});
 		
 	}
+	
+	/**
+	 * 
+	 * @param finestra
+	 * @param utente
+	 * @param opera
+	 */
 	public void istanziaAcquisizionePage(ricercaPage finestra, utente utente, opera opera){
 		new dialog().disposeDialog(finestra);
 		acquisizionePage frame = new acquisizionePage(utente,opera);
@@ -163,6 +187,12 @@ public class ricercaView {
 		frame.setResizable(false);
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param utente
+	 * @return
+	 */
 	public opera getOpera(String titolo, utente utente){
 		return new ricercaController().getOpera(titolo, utente); 
 	}

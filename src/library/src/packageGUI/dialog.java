@@ -51,6 +51,11 @@ public class dialog {
 		
 	}
 	
+	/**
+	 * 
+	 * @param utente
+	 * @return
+	 */
 	public int modalit‡AccessoForm(utente utente){
 		
 		int permessi = utente.getPermessi(); 
@@ -107,6 +112,12 @@ public class dialog {
 		
 	}
 	
+	/**
+	 * 
+	 * @param labelImmagine
+	 * @param acquisizionePage
+	 * @return
+	 */
 	public BufferedImage fileChooser(JLabel labelImmagine, Component acquisizionePage){
 		Image img = null;
 		BufferedImage immagine = null;

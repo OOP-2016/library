@@ -22,11 +22,27 @@ import packageGUI.ricercaPage;
 
 public class acquisizioneView {
 	
+	/**
+	 * 
+	 * @param numero_pagina
+	 * @param titolo_opera
+	 * @return
+	 */
 public boolean esistePagina(int numero_pagina, String titolo_opera){
 	boolean p = new acquisizioneController().esistePaginaAction(numero_pagina, titolo_opera);
 	return p;
 }
 
+/**
+ * 
+ * @param risoluzione
+ * @param data_scatto
+ * @param numero_pagina
+ * @param opera
+ * @param immagine
+ * @param acquisitore
+ * @return
+ */
 public boolean conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
     boolean success;
 	if(risoluzione.length()==0||data_scatto.length()==0||numero_pagina.length()==0||immagine==null){
@@ -47,6 +63,12 @@ public boolean conferma(String risoluzione, String data_scatto, String numero_pa
 	return success;
 }
 
+/**
+ * 
+ * @param labelImmagine
+ * @param finestra
+ * @return
+ */
 public BufferedImage carica(JLabel labelImmagine, Component finestra){
 	
 	BufferedImage immagine = new dialog().fileChooser(labelImmagine , finestra); 
@@ -130,6 +152,13 @@ public void istanziaRicercaPage(utente user){
 	
 }
 
+/**
+ * 
+ * @param titolo_opera
+ * @param utente
+ * @param finestra
+ * @return
+ */
 public boolean tutteAcquisite(String titolo_opera, utente utente, JFrame finestra){
 	boolean tutteAcquisite = new acquisizioneController().tutteAcquisiteAction(titolo_opera, utente); 
 	
@@ -144,6 +173,11 @@ public boolean tutteAcquisite(String titolo_opera, utente utente, JFrame finestr
 	return tutteAcquisite; 
 }
 
+/**
+ * 
+ * @param titolo_opera
+ * @return
+ */
 public int paginaDaAcquisire(String titolo_opera){
 	return new acquisizioneController().paginaDaAcquisireAction(titolo_opera); 
 }

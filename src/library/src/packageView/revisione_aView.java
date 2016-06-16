@@ -126,6 +126,15 @@ public class revisione_aView {
 
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param avanti
+	 * @param page
+	 * @param npagina
+	 * @param utente
+	 * @return
+	 */
 	public int firstPage(String titolo, JButton avanti, JLabel page, int npagina, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
@@ -134,6 +143,16 @@ public class revisione_aView {
 		return npagina; 
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param page
+	 * @param npagina
+	 * @param avanti
+	 * @param indietro
+	 * @param utente
+	 * @return
+	 */
 	public int clickAvanti(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro, utente utente){
 		opera opera = new revisione_aController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
@@ -148,12 +167,31 @@ public class revisione_aView {
 		return npagina; 
 	}
 	
+	/**
+	 * 
+	 * @param TF1
+	 * @param TF2
+	 * @param TF3
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 */
 	public void metadati(JTextField TF1, JTextField TF2, JTextField TF3, String titolo_opera, int numero_pagina){
 		String[] metadati = new revisione_aController().metadatiAction(titolo_opera, numero_pagina);
 		TF1.setText(metadati[0]);
 		TF2.setText(metadati[1]);
 		TF3.setText(metadati[2]);
 	}
+	
+	/**
+	 * 
+	 * @param titolo
+	 * @param page
+	 * @param npagina
+	 * @param avanti
+	 * @param indietro
+	 * @param utente
+	 * @return
+	 */
 	public int clickIndietro(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro, utente utente){
 
 		avanti.setEnabled(true); //abilita bottone avanti
@@ -175,6 +213,12 @@ public class revisione_aView {
 		
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @return
+	 */
 	public String getValidazione (String titolo_opera, int numero_pagina) {
 		
 		immagine immagine = new revisione_aController().vistaAction(titolo_opera, numero_pagina);
@@ -192,10 +236,24 @@ public class revisione_aView {
 		
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param numero_pagina
+	 * @param validation
+	 * @param utente
+	 * @return
+	 */
 	public boolean conferma(String titolo_opera, int numero_pagina, boolean validation, utente utente){
 		return new revisione_aController().confermaAction(titolo_opera, numero_pagina, validation, utente); 
 	}
 	
+	/**
+	 * 
+	 * @param titolo_opera
+	 * @param utente
+	 * @return
+	 */
 	public boolean validaOpera(String titolo_opera, utente utente){
 		return new revisione_aController().validaOperaAction(titolo_opera, utente); 
 	}

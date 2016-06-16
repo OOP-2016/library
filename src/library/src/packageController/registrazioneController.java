@@ -87,7 +87,15 @@ public class registrazioneController {
 		/* dialog di successo o errore */ 
 		if(success){
 			new registrazioneView().infoMessage("registrazione avvenuta");
-			//new mailer().sendMail(email, nome);
+			
+			/**
+			 * Mando un'email all'utente appena registrato
+			 */
+			boolean sendEmail = new mailer().sendMail(email, nome, password);
+			if(sendEmail)
+				new registrazioneView().infoMessage("Una e-mail è stata mandata al contatto mail specificato");
+			else 
+				new registrazioneView().errorMessage("Non è stato possibile mandare un'e-mail al contatto mail specificato");
 		}
 		else
 			new registrazioneView().errorMessage("registrazione fallita");

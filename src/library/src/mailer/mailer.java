@@ -4,13 +4,25 @@ import java.util.*;
 import javax.mail.*; 
 import javax.mail.internet.*;
 
+/**
+ * Classe Mailer
+ * Si occupa di mandare un'email all'utente che ha appena effettuato la registrazione
+ */
 public class mailer {
 
-	public void sendMail(String to, String nome){
+	/**
+	 * Il metodo permette di inviare una mail ad un indirizzo di posta 
+	 * 
+	 * @param to Stringa che rappresenta l'indirizzo e-mail destinatario 
+	 * @param nome Stringa che rappresenta il nome del destinatario
+	 * @param userPassword Stringa che rappresenta la password del destinatario 
+	 * @return Booleano che mostra se l'operazione è andata a buon fine 
+	 */
+	public boolean sendMail(String to, String nome, String userPassword){
 		final String username = "sportnetmail@gmail.com";
 		final String password = "SportNetyolo";
 		final String from = "sportnetmail@gmail.com"; 
-		
+		boolean success = false; 
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -21,6 +33,9 @@ public class mailer {
 		//creazione sessione con dati SMTP + username e password 
 		Session session = Session.getInstance(props,
 		  new javax.mail.Authenticator() {
+			/**
+			 * Autenticatore 
+			 */
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
 			}
@@ -41,18 +56,27 @@ public class mailer {
 			// Send the actual HTML message, as big as you like
 	        message.setContent("<h1>Library</h1>"
 	        		+ "<p>Ciao " + nome + "</p>"
-	        		+ "<p>La registrazione a library è avvenuta con successo.</p>"
-	        		+ "<footer>" + "<small>© Copyright 2016, Library Group</small>"
+	        		+ "<p>La registrazione al sistema \"Library\" è avvenuta con successo.</p>"
+	        		+ "<p>Le sue credenziali di accesso sono: </p>"
+	        		+ "<ul>"
+	        		+ "<li>E-mail: " + to + "</li>"
+	        		+ "<li>Password: " + userPassword + "</li>"
+	        		+ "</ul>"
+	        		+ "<br>"
+	        		+ "<footer>" + "<small>&copy; Copyright 2016, Library Group</small>"
 	        		+ "</footer>", "text/html" );
 			
 			//send PlaneText 
 			//message.setText("Questa E-mail e' stata inviata tramite java.\nSaluti.");
 
 			Transport.send(message);
-
+			
+			success = true; 
+			return success; 
+			
 		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
+			return false; 
+		} 
 	}
 
 }

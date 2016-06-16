@@ -51,6 +51,12 @@ public class ricercaController {
 		new ricercaView().istanziaLoginPage();
 	}
 	
+	/**
+	 * 
+	 * @param filtro
+	 * @param utente
+	 * @return
+	 */
 	public ArrayList<String> cercaOperaAction(String filtro, utente utente) {
 		
 		ArrayList<String> titoli = new operaDAO().retrieveTitoli(filtro, utente);
@@ -58,6 +64,14 @@ public class ricercaController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param autore
+	 * @param annoPubblicazione
+	 * @param numeroPagine
+	 * @return
+	 */
 	public boolean aggiungiOperaAction(String titolo, String autore, String annoPubblicazione, String numeroPagine){
 		
 		if(titolo.length() == 0||autore.length() == 0||annoPubblicazione.length() == 0||numeroPagine.length() == 0){
@@ -96,6 +110,12 @@ public class ricercaController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param titolo
+	 * @param utente
+	 * @return
+	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(titolo); 
