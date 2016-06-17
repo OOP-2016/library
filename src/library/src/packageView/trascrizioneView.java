@@ -245,8 +245,8 @@ public class trascrizioneView {
 		boolean tutteTrascritte = new trascrizioneController().tutteTrascritteAction(titolo_opera, utente); 
 		
 		if(tutteTrascritte){
-			new dialog().errorDialog("Tutte le trascrizioni di quest'opera sono state trascritte");
-			if(finestra instanceof acquisizionePage){
+			new dialog().infoDialog("Tutte le trascrizioni di quest'opera sono state trascritte");
+			if(finestra instanceof trascrizionePage){
 				new dialog().disposeDialog(finestra);
 				new trascrizioneView().istanziaRicercaPage(utente);
 			}

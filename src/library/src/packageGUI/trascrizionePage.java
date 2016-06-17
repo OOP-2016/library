@@ -262,6 +262,7 @@ public class trascrizionePage extends JFrame {
 					btnNewButton_1.setEnabled(false);
 					btnAnteprima.setEnabled(false);
 					btnCancella.setEnabled(false);
+					stringa = new StringBuilder(); 
 				} else {
 					btnNewButton_1.setEnabled(true);
 					btnAnteprima.setEnabled(true);
@@ -271,6 +272,9 @@ public class trascrizionePage extends JFrame {
 					textField.setEditable(true);
 					textPane_1.setEditable(true);
 				}
+				
+				new trascrizioneView().tutteTrascritte(titolo, user, finestra); 
+				
 			}
 		});
 		

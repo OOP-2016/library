@@ -43,6 +43,7 @@ public class revisione_tPage extends JFrame {
 	private JRadioButton rdbtnValidaTrascrizione; 
 	private JRadioButton rdbtnRifiutaTrascrizione;
 	private JButton btnConferma; 
+	private JTextField textField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -115,13 +116,16 @@ public class revisione_tPage extends JFrame {
 		lblNewLabel_3 = new JLabel();
 		lblNewLabel_3.setText("trascrizione validata in precedenza");
 		
+		JTextPane textPane = new JTextPane();
+		
 		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
 		
 		//pannello immagine
 		JLabel lblNewLabel_2 = new JLabel("New label");
-				
-		JTextPane textPane = new JTextPane();
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
 		
 		//Avanti button
 		JButton button = new JButton("\u25BA");
@@ -130,7 +134,7 @@ public class revisione_tPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new revisione_tView().clickAvanti(titolo, lblNewLabel, npagina, button, btnNewButton, user);
+				npagina = new revisione_tView().clickAvanti(titolo, lblNewLabel, textField_1, npagina, button, btnNewButton, user);
 				new revisione_tView().vistatrascrizione(textPane,titolo, npagina, user);
 				new revisione_tView().vistaimmagine(lblNewLabel_2, titolo, npagina, user);
 				new revisione_tView().metadati(txtTrascrittore, textField, titolo, npagina, user);
@@ -159,7 +163,7 @@ public class revisione_tPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new revisione_tView().clickIndietro(titolo, lblNewLabel, npagina, button, btnNewButton, user);
+				npagina = new revisione_tView().clickIndietro(titolo, lblNewLabel, textField_1, npagina, button, btnNewButton, user);
 				new revisione_tView().vistatrascrizione(textPane, titolo, npagina, user);
 				new revisione_tView().vistaimmagine(lblNewLabel_2, titolo, npagina, user);
 				new revisione_tView().metadati(txtTrascrittore, textField, titolo, npagina, user);
@@ -245,8 +249,8 @@ public class revisione_tPage extends JFrame {
 		/**
 		 * Caricamento prima pagina 
 		 */
-		lblNewLabel = new JLabel("estfgswtfbgws");
-		npagina = new revisione_tView().firstPage(titolo, button, lblNewLabel , npagina, user);
+		lblNewLabel = new JLabel();
+		npagina = new revisione_tView().firstPage(titolo, button, lblNewLabel , textField_1, npagina, user);
 		new revisione_tView().vistatrascrizione(textPane, titolo, npagina, user);
 		new revisione_tView().vistaimmagine(lblNewLabel_2, titolo, npagina, user);
 		btnNewButton.setEnabled(false);
@@ -270,6 +274,21 @@ public class revisione_tPage extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
+		JButton btnNewButton_1 = new JButton("VAI");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				npagina = Integer.parseInt(textField_1.getText());
+				new revisione_tView().vistatrascrizione(textPane, titolo, npagina, user);
+				new revisione_tView().vistaimmagine(lblNewLabel_2, titolo, npagina, user);
+				if(npagina == 1) btnNewButton.setEnabled(false);
+				else btnNewButton.setEnabled(true);
+				if(npagina == (new revisione_tView().getPageMax(titolo, user))) button.setEnabled(false);
+				else button.setEnabled(true); 
+			}
+		});
+		
+		
+		
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -280,22 +299,17 @@ public class revisione_tPage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblTooo)
-							.addPreferredGap(ComponentPlacement.RELATED, 944, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 1002, Short.MAX_VALUE)
 							.addComponent(lblUser))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnNewButton)
 								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel)
-									.addPreferredGap(ComponentPlacement.RELATED, 541, Short.MAX_VALUE)
-									.addComponent(button))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(33)
+									.addGap(17)
 									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
-									.addGap(31)
+									.addGap(18)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addComponent(lblNewLabel_3)
 										.addComponent(txtTrascrittore, 198, 198, 198)
@@ -303,8 +317,17 @@ public class revisione_tPage extends JFrame {
 										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
 										.addComponent(textField, 198, 198, 198)
 										.addComponent(rdbtnValidaTrascrizione)
-										.addComponent(rdbtnRifiutaTrascrizione, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-										.addComponent(btnConferma))))))
+										.addComponent(rdbtnRifiutaTrascrizione, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+										.addComponent(btnConferma)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(59)
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblNewLabel)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnNewButton_1)
+									.addPreferredGap(ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
+									.addComponent(button)))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -335,13 +358,18 @@ public class revisione_tPage extends JFrame {
 							.addComponent(lblNewLabel_3))
 						.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
 					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button)
-						.addComponent(btnNewButton)
-						.addComponent(lblNewLabel))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(button)
+							.addComponent(btnNewButton))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel)
+								.addComponent(btnNewButton_1)
+								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap())
 		);
-		
 		
 		scrollPane.setViewportView(textPane);
 		contentPane.setLayout(gl_contentPane);

@@ -5,12 +5,14 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import packageBusiness.immagine;
 import packageBusiness.opera;
 import packageBusiness.trascrizione;
 import packageBusiness.utente;
 import packageController.operaController;
+import packageController.revisione_tController;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.operaPage;
@@ -137,10 +139,11 @@ public class operaView {
 	 * @param utente
 	 * @return
 	 */
-	public int firstPage(String titolo, JButton avanti, JLabel page, int npagina, utente utente){
+	public int firstPage(String titolo, JButton avanti, JLabel page, JTextField page2, int npagina, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
-		page.setText(npagina + " / " + pageMax);   				 		
+		page.setText(" / " + pageMax); 
+		page2.setText(""+npagina); 				 		
 		if(pageMax == 1) avanti.setEnabled(false);  
 		return npagina; 
 	}
@@ -155,7 +158,7 @@ public class operaView {
 	 * @param utente
 	 * @return
 	 */
-	public int clickAvanti(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro, utente utente){
+	public int clickAvanti(String titolo, JLabel page, JTextField page2, int npagina, JButton avanti, JButton indietro, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
 		int pageMax = opera.getNumero_pagine();  
 		
@@ -164,7 +167,8 @@ public class operaView {
 		npagina+=1; 
 		if(pageMax == npagina) avanti.setEnabled(false);
 		
-		page.setText(npagina + " / " + pageMax); 
+		page.setText(" / " + pageMax); 
+		page2.setText(""+npagina);
 		
 		return npagina; 
 	}
@@ -179,7 +183,7 @@ public class operaView {
 	 * @param utente
 	 * @return
 	 */
-	public int clickIndietro(String titolo, JLabel page, int npagina, JButton avanti, JButton indietro, utente utente){
+	public int clickIndietro(String titolo, JLabel page, JTextField page2, int npagina, JButton avanti, JButton indietro, utente utente){
 
 		avanti.setEnabled(true); //abilita bottone avanti
 		
@@ -189,7 +193,8 @@ public class operaView {
 		int pageMax = opera.getNumero_pagine();  
 		
 		
-		page.setText(npagina + " / " + pageMax); 
+		page.setText(" / " + pageMax); 
+		page2.setText(""+npagina);
 		
 		if(npagina == 1){
 			indietro.setEnabled(false); //disabilito bottone indietro 
@@ -199,5 +204,11 @@ public class operaView {
 		return npagina; 
 		
 	}
+	
+	public int getPageMax(String titolo, utente utente){
+		opera opera = new operaController().getOpera(titolo, utente); 
+		return opera.getNumero_pagine(); 
+	}
+	
 	
 }

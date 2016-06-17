@@ -9,6 +9,7 @@ import packageBusiness.utente;
 import packageView.loginView;
 import packageView.operaView;
 import packageView.revisione_aView;
+import packageView.trascrizioneView;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -44,6 +45,7 @@ public class revisione_aPage extends JFrame {
 	private JRadioButton rdbtnValidaAcquisizione; 
 	private JRadioButton rdbtnRifiutaAcquisizione;
 	private JButton btnConferma; 
+	private JTextField textField_2;
 	/**
 	 * Launch the application.
 	 */
@@ -117,6 +119,9 @@ public class revisione_aPage extends JFrame {
 		
 		lblNewLabel_3 = new JLabel();
 		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		
 		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
 				
@@ -127,7 +132,7 @@ public class revisione_aPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new revisione_aView().clickAvanti(titolo, lblNewLabel, npagina, button, btnNewButton, user);
+				npagina = new revisione_aView().clickAvanti(titolo, lblNewLabel, textField_2, npagina, button, btnNewButton, user);
 				new revisione_aView().vista(lblImg,titolo, npagina);
 				new revisione_aView().metadati(txtAcquisitore, textField, textField_1, titolo, npagina);
 				lblNewLabel_3.setText(new revisione_aView().getValidazione(titolo, npagina));
@@ -155,7 +160,7 @@ public class revisione_aPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new revisione_aView().clickIndietro(titolo, lblNewLabel, npagina, button, btnNewButton, user);
+				npagina = new revisione_aView().clickIndietro(titolo, lblNewLabel, textField_2, npagina, button, btnNewButton, user);
 				new revisione_aView().vista(lblImg, titolo, npagina);
 				new revisione_aView().metadati(txtAcquisitore, textField, textField_1, titolo, npagina);
 				lblNewLabel_3.setText(new revisione_aView().getValidazione(titolo, npagina));
@@ -245,8 +250,9 @@ public class revisione_aPage extends JFrame {
 		/**
 		 * Caricamento prima pagina 
 		 */
-		lblNewLabel = new JLabel("");
-		npagina = new revisione_aView().firstPage(titolo, button, lblNewLabel , npagina, user);
+		lblNewLabel = new JLabel();
+		
+		npagina = new revisione_aView().firstPage(titolo, button, lblNewLabel , textField_2, npagina, user);
 		new revisione_aView().vista(lblImg, titolo, npagina);
 		btnNewButton.setEnabled(false);
 		new revisione_aView().metadati(txtAcquisitore, textField, textField_1, titolo, npagina);
@@ -267,6 +273,21 @@ public class revisione_aPage extends JFrame {
 			btnConferma.setEnabled(true);
 		}
 		
+		
+		
+		JButton btnNewButton_1 = new JButton("VAI");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				npagina = Integer.parseInt(textField_2.getText());
+				new revisione_aView().vista(lblImg, titolo, npagina);
+				if(npagina == 1) btnNewButton.setEnabled(false);
+				else btnNewButton.setEnabled(true);
+				if(npagina == (new revisione_aView().getPageMax(titolo, user))) button.setEnabled(false);
+				else button.setEnabled(true); 
+				
+			}
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -284,8 +305,12 @@ public class revisione_aPage extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addComponent(lblNewLabel)
-									.addPreferredGap(ComponentPlacement.RELATED, 353, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnNewButton_1)
+									.addPreferredGap(ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
 									.addComponent(button))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(37)
@@ -317,9 +342,11 @@ public class revisione_aPage extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(button)
 								.addComponent(btnNewButton)
-								.addComponent(lblNewLabel)))
+								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel)
+								.addComponent(btnNewButton_1)))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblAcquisitore, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblAcquisitore, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(txtAcquisitore, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(31)

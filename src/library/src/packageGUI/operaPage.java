@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import packageBusiness.utente;
 import packageView.operaView;
+import packageView.revisione_tView;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 /**
  * Classe JFrame operaPage
@@ -29,6 +32,7 @@ public class operaPage extends JFrame {
 	private static int npagina = 1; /* Current page */ 
 	private JLabel lblNewLabel; /* Page label */
 	private static JLabel lblImg; 
+	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -101,6 +105,8 @@ public class operaPage extends JFrame {
 		lblImg = new JLabel("");
 		JTextPane textPane = new JTextPane();
 		
+		textField = new JTextField();
+		textField.setColumns(10);
 		
 		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
@@ -112,7 +118,7 @@ public class operaPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new operaView().clickAvanti(titolo, lblNewLabel, npagina, button, btnNewButton, user);
+				npagina = new operaView().clickAvanti(titolo, lblNewLabel, textField, npagina, button, btnNewButton, user);
 				new operaView().vista(lblImg, textPane, titolo, npagina, user);		
 			}
 		});
@@ -123,7 +129,7 @@ public class operaPage extends JFrame {
 			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				npagina = new operaView().clickIndietro(titolo, lblNewLabel, npagina, button, btnNewButton, user);
+				npagina = new operaView().clickIndietro(titolo, lblNewLabel, textField, npagina, button, btnNewButton, user);
 				new operaView().vista(lblImg, textPane, titolo, npagina, user);
 			}
 		});
@@ -136,13 +142,24 @@ public class operaPage extends JFrame {
 		 * Caricamento prima pagina 
 		 */
 		lblNewLabel = new JLabel();
-		npagina = new operaView().firstPage(titolo, button, lblNewLabel , npagina, user);
+		npagina = new operaView().firstPage(titolo, button, lblNewLabel , textField, npagina, user);
 		new operaView().vista(lblImg, textPane, titolo, npagina, user);
 		btnNewButton.setEnabled(false);
 		
 		
-		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		JButton btnNewButton_1 = new JButton("VAI");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				npagina = Integer.parseInt(textField.getText());
+				new operaView().vista(lblImg, textPane, titolo, npagina, user);
+				if(npagina == 1) btnNewButton.setEnabled(false);
+				else btnNewButton.setEnabled(true);
+				if(npagina == (new operaView().getPageMax(titolo, user))) button.setEnabled(false);
+				else button.setEnabled(true); 
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -151,18 +168,26 @@ public class operaPage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblTooo)
-							.addPreferredGap(ComponentPlacement.RELATED, 714, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 685, Short.MAX_VALUE)
 							.addComponent(lblUser))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnNewButton)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnNewButton)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblImg, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblNewLabel)
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(button)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE))))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(12)
+									.addComponent(btnNewButton_1)
+									.addPreferredGap(ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+									.addComponent(button)))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -180,7 +205,9 @@ public class operaPage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(button)
 						.addComponent(btnNewButton)
-						.addComponent(lblNewLabel))
+						.addComponent(lblNewLabel)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton_1))
 					.addContainerGap())
 		);
 		
