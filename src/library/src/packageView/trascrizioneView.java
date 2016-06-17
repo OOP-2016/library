@@ -113,8 +113,8 @@ public class trascrizioneView {
 	 * @param titolo Stringa che rappresenta il titolo dell'opera 
 	 * @param npagina intero che rappresenta il corrente numero di pagina
 	 */
-	public void vista(JLabel immagine, String titolo_opera, int numero_pagina, utente utente){
-		immagine immagine_inter = new trascrizioneController().vistaAction(titolo_opera, numero_pagina, utente);
+	public void vistaimmagine(JLabel immagine, String titolo_opera, int numero_pagina, utente utente){
+		immagine immagine_inter = new trascrizioneController().vistaActionimmagine(titolo_opera, numero_pagina, utente);
 		
 		BufferedImage immagine_def = immagine_inter.getImmagine();
 		Image im = null; 
@@ -124,6 +124,19 @@ public class trascrizioneView {
 		
 		immagine.setIcon(new ImageIcon(im));
 
+	}
+	
+	public void vistatrascrizione(JTextPane trascrizione, JTextField data, String titolo_opera, int numero_pagina, utente utente){
+		trascrizione trascrizione_def = new trascrizioneController().vistaActiontrascrizione(titolo_opera, numero_pagina, utente);
+		
+		String trascrizionetei = trascrizione_def.getTesto();
+		String data_scrittura = trascrizione_def.getData_scrittura(); 
+		
+		StringBuilder stringa = new StringBuilder();
+		stringa.append(trascrizionetei); 
+		trascrizione.setText(stringa.toString());
+		
+		data.setText(data_scrittura);
 	}
 	
 	/**

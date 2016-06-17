@@ -84,13 +84,22 @@ public class revisione_tController {
 	 * @param utente
 	 * @return
 	 */
-	public trascrizione vistaAction(String titolo_opera, int numero_pagina, utente utente){
+	public trascrizione vistaActiontrascrizione(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(numero_pagina); 
 		args.add(titolo_opera); 
 		args.add(utente); 
 		trascrizione trascrizione = (trascrizione)new trascrizioneDAO().retrieve(args);
 		return trascrizione;
+	}
+	
+	public immagine vistaActionimmagine(String titolo_opera, int numero_pagina, utente utente){
+		ArrayList<Object> args = new ArrayList<Object>(); 
+		args.add(numero_pagina); 
+		args.add(titolo_opera); 
+		args.add(utente); 
+		immagine immagine = (immagine)new immagineDAO().retrieve(args);
+		return immagine;
 	}
 	
 	/**

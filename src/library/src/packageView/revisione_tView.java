@@ -14,6 +14,7 @@ import packageBusiness.utente;
 import packageController.operaController;
 import packageController.revisione_aController;
 import packageController.revisione_tController;
+import packageController.trascrizioneController;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.operaPage;
@@ -112,14 +113,27 @@ public class revisione_tView {
 	 * @param titolo Stringa che rappresenta il titolo dell'opera 
 	 * @param npagina intero che rappresenta il corrente numero di pagina
 	 */
-	public void vista(JTextPane trascrizione, String titolo_opera, int numero_pagina, utente utente){
-		trascrizione trascrizione_inter = new revisione_tController().vistaAction(titolo_opera, numero_pagina, utente);
+	public void vistatrascrizione(JTextPane trascrizione, String titolo_opera, int numero_pagina, utente utente){
+		trascrizione trascrizione_inter = new revisione_tController().vistaActiontrascrizione(titolo_opera, numero_pagina, utente);
 		String TEItext = trascrizione_inter.getTesto();
 
 		trascrizione.setEditable(false);
 		trascrizione.setContentType("text/html");
 		trascrizione.setText(TEItext);
 		
+	}
+	
+	public void vistaimmagine(JLabel immagine, String titolo_opera, int numero_pagina, utente utente){
+		immagine immagine_inter = new revisione_tController().vistaActionimmagine(titolo_opera, numero_pagina, utente);
+		
+		BufferedImage immagine_def = immagine_inter.getImmagine();
+		Image im = null; 
+		im = immagine_def.getScaledInstance(395, 569,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		
+		//new dialog().infoDialog(immagine.getWidth() + "x" + immagine.getHeight());
+		
+		immagine.setIcon(new ImageIcon(im));
+
 	}
 	
 	/**
@@ -217,7 +231,7 @@ public class revisione_tView {
 	 */
 	public String getValidazione (String titolo_opera, int numero_pagina, utente utente) {
 		
-		trascrizione trascrizione = new revisione_tController().vistaAction(titolo_opera, numero_pagina, utente);
+		trascrizione trascrizione = new revisione_tController().vistaActiontrascrizione(titolo_opera, numero_pagina, utente);
 		String risposta;
 		
 		if(trascrizione.getTesto().equals("<h2>Testo non disponibile</h2>")){

@@ -51,7 +51,7 @@ public class trascrizionePage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					trascrizionePage frame = new trascrizionePage(new utente("prva",1), "provatitolo");
+					trascrizionePage frame = new trascrizionePage(new utente("prova",1), "provatitolo");
 					frame.setVisible(true);
 					frame.setResizable(false);
 				} catch (Exception e) {
@@ -87,10 +87,14 @@ public class trascrizionePage extends JFrame {
 			}
 		});
 		
+		textField = new JTextField();
+		textField.setColumns(10);
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
 		textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane_1 = new JTextPane();
 		textPane.setContentType("text/html");
 		textField_2 = new JTextField();
@@ -127,6 +131,13 @@ public class trascrizionePage extends JFrame {
 		//Conferma button 
 		JButton btnNewButton_1 = new JButton("CONFERMA");
 		
+		//Anteprima button
+		JButton btnAnteprima = new JButton("APPLICA");
+		
+		//Cancella button
+		JButton btnCancella = new JButton("CANCELLA");
+
+		
 		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
 				
@@ -138,14 +149,29 @@ public class trascrizionePage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new trascrizioneView().clickAvanti(titolo, lblNewLabel, textField_3, npagina, button, btnNewButton, user);
-				new trascrizioneView().vista(lblImg, titolo, npagina, user);
+				new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);
 				
 				if(new trascrizioneView().esistePagina(npagina, titolo, user)){
-					textPane.setText("<h2>trascrizione già inserita</h2>");
+					new trascrizioneView().vistatrascrizione(textPane, textField_2, titolo, npagina, user);
+					textField_2.setEditable(false);
+					textField_1.setEditable(false);
+					textField.setEditable(false);
+					textPane_1.setEditable(false);
 					btnNewButton_1.setEnabled(false);
+					btnAnteprima.setEnabled(false);
+					btnCancella.setEnabled(false);
+					
 				} else {
 					btnNewButton_1.setEnabled(true);
+					btnAnteprima.setEnabled(true);
+					btnCancella.setEnabled(true);
 					textPane.setText(null);
+					textField_2.setText(null);
+					textField_2.setEditable(true);
+					textField_1.setEditable(true);
+					textField.setEditable(true);
+					textPane_1.setEditable(true);
+					
 				}
 			}
 		});
@@ -157,14 +183,28 @@ public class trascrizionePage extends JFrame {
 			 */
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new trascrizioneView().clickIndietro(titolo, lblNewLabel, textField_3, npagina, button, btnNewButton, user);
-				new trascrizioneView().vista(lblImg, titolo, npagina, user);
+				new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);
 				
 				if(new trascrizioneView().esistePagina(npagina, titolo, user)){
-					textPane.setText("<h2>trascrizione già inserita</h2>");
+					new trascrizioneView().vistatrascrizione(textPane, textField_2, titolo, npagina, user);
+					textField_2.setEditable(false);
+					textField_1.setEditable(false);
+					textField.setEditable(false);
+					textPane_1.setEditable(false);
 					btnNewButton_1.setEnabled(false);
+					btnAnteprima.setEnabled(false);
+					btnCancella.setEnabled(false);
+					
 				} else {
 					btnNewButton_1.setEnabled(true);
+					btnAnteprima.setEnabled(true);
+					btnCancella.setEnabled(true);
 					textPane.setText(null);
+					textField_2.setText(null);
+					textField_2.setEditable(true);
+					textField_1.setEditable(true);
+					textField.setEditable(true);
+					textPane_1.setEditable(true);
 				}
 			}
 		});
@@ -178,17 +218,30 @@ public class trascrizionePage extends JFrame {
 		 */
 		lblNewLabel = new JLabel();
 		npagina = new trascrizioneView().firstPage(titolo, button, lblNewLabel, textField_3, npagina, user);
-		new dialog().infoDialog(String.format("%d", npagina));
-		new trascrizioneView().vista(lblImg, titolo, npagina, user);	
+		new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);	
 		textField_3.setText(String.format("%d", npagina));
 		btnNewButton.setEnabled(false);
 		
 		if(new trascrizioneView().esistePagina(npagina, titolo, user)){
-			textPane.setText("<h2>trascrizione già inserita</h2>");
+			new trascrizioneView().vistatrascrizione(textPane, textField_2, titolo, npagina, user);
+			textField_2.setEditable(false);
+			textField_1.setEditable(false);
+			textField.setEditable(false);
+			textPane_1.setEditable(false);
 			btnNewButton_1.setEnabled(false);
+			btnAnteprima.setEnabled(false);
+			btnCancella.setEnabled(false);
+			
 		} else {
 			btnNewButton_1.setEnabled(true);
+			btnAnteprima.setEnabled(true);
+			btnCancella.setEnabled(true);
 			textPane.setText(null);
+			textField_2.setText(null);
+			textField_2.setEditable(true);
+			textField_1.setEditable(true);
+			textField.setEditable(true);
+			textPane_1.setEditable(true);
 		}
 		
 		
@@ -196,18 +249,31 @@ public class trascrizionePage extends JFrame {
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		
-		textField = new JTextField();
-		textField.setColumns(10);
 		
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new trascrizioneView().conferma(textField_2.getText(), textPane.getText(), npagina, titolo, user);
+				boolean caricamento = new trascrizioneView().conferma(textField_2.getText(), textPane.getText(), npagina, titolo, user);
+				if(caricamento){
+					textField_2.setEditable(false);
+					textField_1.setEditable(false);
+					textField.setEditable(false);
+					textPane_1.setEditable(false);
+					btnNewButton_1.setEnabled(false);
+					btnAnteprima.setEnabled(false);
+					btnCancella.setEnabled(false);
+				} else {
+					btnNewButton_1.setEnabled(true);
+					btnAnteprima.setEnabled(true);
+					btnCancella.setEnabled(true);
+					textField_2.setEditable(true);
+					textField_1.setEditable(true);
+					textField.setEditable(true);
+					textPane_1.setEditable(true);
+				}
 			}
 		});
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
 		
 		JLabel lblTesto = new JLabel("CORPO");
 		
@@ -217,7 +283,7 @@ public class trascrizionePage extends JFrame {
 		
 		stringa = new StringBuilder();
 		
-		JButton btnAnteprima = new JButton("APPLICA");
+		
 		btnAnteprima.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				
@@ -245,26 +311,38 @@ public class trascrizionePage extends JFrame {
 		btnVai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				npagina = Integer.parseInt(textField_3.getText());
-				new trascrizioneView().vista(lblImg, titolo, npagina, user);
+				new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);
 				if(npagina == 1) btnNewButton.setEnabled(false);
 				else btnNewButton.setEnabled(true);
 				if(npagina == (new trascrizioneView().getPageMax(titolo, user))) button.setEnabled(false);
 				else button.setEnabled(true); 
 				
 				if(new trascrizioneView().esistePagina(npagina, titolo, user)){
-					textPane.setText("<h2>trascrizione già inserita</h2>");
+					new trascrizioneView().vistatrascrizione(textPane, textField_2, titolo, npagina, user);
+					textField_2.setEditable(false);
+					textField_1.setEditable(false);
+					textField.setEditable(false);
+					textPane_1.setEditable(false);
 					btnNewButton_1.setEnabled(false);
+					btnAnteprima.setEnabled(false);
+					btnCancella.setEnabled(false);
+					
 				} else {
 					btnNewButton_1.setEnabled(true);
+					btnAnteprima.setEnabled(true);
+					btnCancella.setEnabled(true);
 					textPane.setText(null);
+					textField_2.setText(null);
+					textField_2.setEditable(true);
+					textField_1.setEditable(true);
+					textField.setEditable(true);
+					textPane_1.setEditable(true);
 				}
-				
 			}
 		});
 		
 		JLabel lblData = new JLabel("DATA");
 		
-		JButton btnCancella = new JButton("CANCELLA");
 		btnCancella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				stringa = new StringBuilder(); 
