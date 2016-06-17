@@ -68,7 +68,7 @@ public class revisione_tPage extends JFrame {
 		
 		revisione_tPage finestra = this; 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1100, 724);
+		setBounds(100, 100, 1158, 724);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -118,12 +118,11 @@ public class revisione_tPage extends JFrame {
 		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
 		
-		//pannello trascrizione
-		JTextPane textPane = new JTextPane();
-		
 		//pannello immagine
 		JLabel lblNewLabel_2 = new JLabel("New label");
 				
+		JTextPane textPane = new JTextPane();
+		
 		//Avanti button
 		JButton button = new JButton("\u25BA");
 		button.addActionListener(new ActionListener() {
@@ -281,7 +280,7 @@ public class revisione_tPage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblTooo)
-							.addPreferredGap(ComponentPlacement.RELATED, 918, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 944, Short.MAX_VALUE)
 							.addComponent(lblUser))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -291,7 +290,7 @@ public class revisione_tPage extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblNewLabel)
-									.addPreferredGap(ComponentPlacement.RELATED, 608, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 541, Short.MAX_VALUE)
 									.addComponent(button))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(33)
@@ -299,12 +298,12 @@ public class revisione_tPage extends JFrame {
 									.addGap(31)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addComponent(lblNewLabel_3)
-										.addComponent(txtTrascrittore)
+										.addComponent(txtTrascrittore, 198, 198, 198)
 										.addComponent(lblAcquisitore, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField)
+										.addComponent(textField, 198, 198, 198)
 										.addComponent(rdbtnValidaTrascrizione)
-										.addComponent(rdbtnRifiutaTrascrizione, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(rdbtnRifiutaTrascrizione, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
 										.addComponent(btnConferma))))))
 					.addContainerGap())
 		);
@@ -317,31 +316,29 @@ public class revisione_tPage extends JFrame {
 						.addComponent(lblTooo))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 540, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblAcquisitore)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtTrascrittore, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lblNewLabel_1)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(69)
-									.addComponent(rdbtnValidaTrascrizione)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(rdbtnRifiutaTrascrizione)
-									.addGap(18)
-									.addComponent(btnConferma)
-									.addGap(116)
-									.addComponent(lblNewLabel_3))
-								.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
+							.addComponent(lblAcquisitore)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtTrascrittore, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(button)
-								.addComponent(btnNewButton)
-								.addComponent(lblNewLabel))))
+							.addComponent(lblNewLabel_1)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(69)
+							.addComponent(rdbtnValidaTrascrizione)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(rdbtnRifiutaTrascrizione)
+							.addGap(18)
+							.addComponent(btnConferma)
+							.addGap(116)
+							.addComponent(lblNewLabel_3))
+						.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(button)
+						.addComponent(btnNewButton)
+						.addComponent(lblNewLabel))
 					.addContainerGap())
 		);
 		
