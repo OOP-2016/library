@@ -323,7 +323,8 @@ public boolean insert(ArrayList<Object> args){
 			
 			while(resultSet.next()){
 				
-				if(utente.getPermessi()!=2){
+				
+				if((!(utente.getPermessi()==2))&&(!(utente.getPermessi()==4))){
 				
 					paginePresenti++; 
 					validata = resultSet.getBoolean("validata"); 
@@ -336,7 +337,7 @@ public boolean insert(ArrayList<Object> args){
 					if(paginePresenti == numero_pagine)
 						tutteValidate = true; 
 					
-			} else if(utente.getPermessi() == 2){
+			} else {
 				paginePresenti++; 
 				
 				if(paginePresenti == numero_pagine)

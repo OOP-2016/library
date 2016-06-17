@@ -13,6 +13,7 @@ import packageController.operaController;
 import packageView.acquisizioneView;
 import packageView.operaView;
 import packageView.ricercaView;
+import packageView.trascrizioneView;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -149,8 +150,11 @@ public class ricercaPage extends JFrame {
 					new ricercaView().istanziaRevisione_aPage(finestra,utente, titolo);
 					return; 
 				} else if(utente.getPermessi() == 4){
+					boolean tutteTrascritte = new trascrizioneView().tutteTrascritte(opera.getTitolo(), utente, finestra);
+					if(tutteTrascritte){
+						return; 
+					} 
 					new ricercaView().istanziaTrascrizionePage(finestra,utente, titolo);
-					return; 
 				} else if(utente.getPermessi() == 5){
 					new ricercaView().istanziaRevisione_tPage(finestra,utente, titolo);
 					return; 					
