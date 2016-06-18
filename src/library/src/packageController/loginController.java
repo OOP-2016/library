@@ -89,7 +89,9 @@ public class loginController {
 			    
 			    
 			    new loginView().dispose(finestra);
-			    new loginView().istanziaRicercaPage(utente);
+			    if(utente.getPermessi() != 6)
+			    	new loginView().istanziaRicercaPage(utente);
+			    else new loginView().istanziaAmministrazionePage(utente);
 			    }
 		
 	}

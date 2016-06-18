@@ -1,5 +1,6 @@
 package packageView;
 
+import packageGUI.amministrazionePage;
 import packageGUI.dialog;
 import packageGUI.loginPage;
 import packageGUI.registrazionePage;
@@ -102,5 +103,10 @@ public class loginView {
 		return choice; 
 	}
 	
-	
+
+	public void istanziaAmministrazionePage(utente user){
+		amministrazionePage finestra = new amministrazionePage(user);
+		finestra.setVisible(true);
+		finestra.setResizable(false);
+	}
 }
