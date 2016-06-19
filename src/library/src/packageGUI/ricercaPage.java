@@ -38,11 +38,12 @@ public class ricercaPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private int keyInTextField = 0; //indispensabile per la disattivazione della comboBox se la TextField è piena
+	private int keyInTextField = 0; 
 	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,6 +61,7 @@ public class ricercaPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public ricercaPage(utente utente) { 
 		super("Library"); 			
 		
@@ -75,9 +77,11 @@ public class ricercaPage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia ricercaView alla scelta del menuItem "Log Out"
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new ricercaView().logOut(finestra);
 			}
@@ -87,9 +91,11 @@ public class ricercaPage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia ricercaView alla scelta del menuItem "Exit"
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new ricercaView().exit(finestra);
 			}
@@ -117,9 +123,11 @@ public class ricercaPage extends JFrame {
 		if(utente.getPermessi() == 0)
 			btnApri.setEnabled(false); 
 		btnApri.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che permette di filtrare i risultati delle ricerche in base ai permessi dell'utente
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 			
 				String titoloEautore = (String)list.getSelectedValue();
@@ -169,8 +177,9 @@ public class ricercaPage extends JFrame {
 		
 		
 		/**
-		 * ComboBox riempita automaticamente con i simboli dell'alfabeto + ALL
+		 * ComboBox riempita automaticamente con i simboli dell'alfabeto
 		 */
+		
 		JComboBox comboBox = new JComboBox();
 			comboBox.addItem("-");
 			comboBox.addItem("A");
@@ -204,9 +213,11 @@ public class ricercaPage extends JFrame {
 			
 			JButton btnCerca = new JButton("CERCA");
 			btnCerca.addActionListener(new ActionListener() {
+				
 				/**
-				 * 
+				 * ActionPerformed handler che permette di effettuare la ricerca alla pressione del bottone cerca
 				 */
+				
 				public void actionPerformed(ActionEvent arg0) {
 					listModel.clear();
 					String filtro;			
@@ -226,6 +237,7 @@ public class ricercaPage extends JFrame {
 			/**
 			 * KeyListener che viene invocato ad ogni tasto premuto 
 			 */
+			
 			textField.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent arg0) {
@@ -258,9 +270,12 @@ public class ricercaPage extends JFrame {
 			btnAggiungiOpera.hide();
 		}
 		btnAggiungiOpera.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe ricercaView e permette di aprire la form di aggiunta opera
+			 * alla pressione del tasto aggiungi opera quando i permessi dell'utente sono uguali a 2
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new ricercaView().apriAggiungiOperaForm(); 
 			}

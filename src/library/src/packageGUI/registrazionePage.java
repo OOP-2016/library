@@ -39,6 +39,7 @@ public class registrazionePage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,6 +57,7 @@ public class registrazionePage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public registrazionePage() {
 		super("Library"); 
 		registrazionePage finestra = this;
@@ -92,9 +94,11 @@ public class registrazionePage extends JFrame {
 		
 		JButton btnNewButton = new JButton("INDIETRO");
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia la classe registrazioneView al click del bottone "Indietro" 
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				new registrazioneView().indietro(finestra);
@@ -104,9 +108,11 @@ public class registrazionePage extends JFrame {
 		
 		JButton btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia la classe registrazioneView al click del bottone "Conferma" 
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				new registrazioneView().confermaRegistrazione(textField.getText(), textField_1.getText(), textField_2.getText(), passwordField.getText(), passwordField_1.getText(), finestra); 

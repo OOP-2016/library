@@ -30,6 +30,7 @@ public class loginPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		
 		/**
@@ -41,9 +42,11 @@ public class loginPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					/**
 					 * Se il Look di Windows non è installato allora viene applicato il Look di default
 					 */
+					
 					UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels(); 
 					for(int i = 0; i < looks.length ; i++ )
 						if(looks[i].getName().equals("Windows"))
@@ -63,6 +66,7 @@ public class loginPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public loginPage() {
 		super("Library");
 		loginPage finestra = this; 
@@ -83,9 +87,11 @@ public class loginPage extends JFrame {
 		
 		JButton btnNewButton = new JButton("ACCEDI");
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia la classe loginView al click del bottone "Accedi" 
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new loginView().accedi(textField.getText(), passwordField.getText(), finestra); 
@@ -95,9 +101,11 @@ public class loginPage extends JFrame {
 		
 		JButton btnAccediComeOspite = new JButton("ACCEDI COME OSPITE");
 		btnAccediComeOspite.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia la classe loginView al click del bottone "Accedi come ospite" 
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				new loginView().accediComeOspite(finestra);
@@ -108,9 +116,11 @@ public class loginPage extends JFrame {
 		JButton btnRegistrati = new JButton("REGISTRATI");
 		
 		btnRegistrati.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia la classe loginView al click del bottone "Registrati" 
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new loginView().registrati(finestra);

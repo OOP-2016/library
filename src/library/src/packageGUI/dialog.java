@@ -21,7 +21,7 @@ import packageBusiness.utente;
 public class dialog {
 	
 	/**
-	 * Il metodo crea un MessageDialog di informazione
+	 * Il metodo crea un MessageDialog d'informazione
 	 * @param info Stringa che descrive l'informazione
 	 */
 	public void infoDialog(String info){
@@ -46,7 +46,6 @@ public class dialog {
 	
 	/**
 	 * Il metodo ha il compito di chiamare il metodo dispose() su un oggetto di tipo JFrame
-	 * 
 	 * @param window La finestra sulla quale chiamare il metodo dispose()
 	 */
 	public void disposeDialog(Object window){
@@ -60,6 +59,7 @@ public class dialog {
 	}
 	
 	/**
+	 * Metodo che aprela lista di ruoli dell'utente in base ai permessi di quest'ultimo
 	 * 
 	 * @param utente
 	 * @return
@@ -121,6 +121,7 @@ public class dialog {
 	}
 	
 	/**
+	 * Metodo che permette di importare una buffered immage durante un'acquisizione in acquisizionePage
 	 * 
 	 * @param labelImmagine
 	 * @param acquisizionePage

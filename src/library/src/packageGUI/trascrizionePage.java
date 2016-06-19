@@ -31,6 +31,7 @@ import javax.swing.JTextField;
 /**
  * Classe JFrame operaPage
  */
+
 public class trascrizionePage extends JFrame {
 
 	private JPanel contentPane;
@@ -43,10 +44,12 @@ public class trascrizionePage extends JFrame {
 	private JTextField textField_2;
 	private JTextPane textPane_1;
 	private JTextPane textPane;
-	private StringBuilder stringa; 
+	private StringBuilder stringa;
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,6 +67,7 @@ public class trascrizionePage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public trascrizionePage(utente user, String titolo) {
 		super("Library");
 		
@@ -79,9 +83,11 @@ public class trascrizionePage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe trascrizioneView alla pressione del tasto logout
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new trascrizioneView().logOut(finestra);
 			}
@@ -102,9 +108,11 @@ public class trascrizionePage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe trascrizioneView alla pressione del tasto indietro
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new trascrizioneView().indietro(finestra, user);
 			}
@@ -114,9 +122,11 @@ public class trascrizionePage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe trascrizioneView alla pressione del tasto exit
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new trascrizioneView().exit(finestra);
 			}
@@ -128,25 +138,22 @@ public class trascrizionePage extends JFrame {
 		
 		lblImg = new JLabel("");
 		
-		//Conferma button 
 		JButton btnNewButton_1 = new JButton("CONFERMA");
 		
-		//Anteprima button
 		JButton btnAnteprima = new JButton("APPLICA");
 		
-		//Cancella button
 		JButton btnCancella = new JButton("CANCELLA");
 
 		
-		//Indietro button
 		JButton btnNewButton = new JButton("\u25C4");
 				
-		//Avanti button
 		JButton button = new JButton("\u25BA");
 		button.addActionListener(new ActionListener() {
+			
 			/**
-			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
+			 * actionListener che istanzia la classe trascrizioneView al click del bottone "Avanti"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new trascrizioneView().clickAvanti(titolo, lblNewLabel, textField_3, npagina, button, btnNewButton, user);
 				new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);
@@ -178,9 +185,11 @@ public class trascrizionePage extends JFrame {
 		
 		
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			/**
-			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
+			 * actionListener che istanzia la classe trascrizioneView al click del bottone "Indietro"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new trascrizioneView().clickIndietro(titolo, lblNewLabel, textField_3, npagina, button, btnNewButton, user);
 				new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);
@@ -216,6 +225,7 @@ public class trascrizionePage extends JFrame {
 		/**
 		 * Caricamento prima pagina 
 		 */
+		
 		lblNewLabel = new JLabel();
 		npagina = new trascrizioneView().firstPage(titolo, button, lblNewLabel, textField_3, npagina, user);
 		new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);	
@@ -252,6 +262,11 @@ public class trascrizionePage extends JFrame {
 		
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+		/**
+		 * ActionPerformed handler che gestisce il pulsante conferma
+		 */
+			
 			public void actionPerformed(ActionEvent e) {
 				boolean caricamento = new trascrizioneView().conferma(textField_2.getText(), textPane.getText(), npagina, titolo, user);
 				if(caricamento){
@@ -299,7 +314,8 @@ public class trascrizionePage extends JFrame {
 					stringa.append("<p>" + textPane_1.getText() + "</p>");
 				
 				
-				//new dialog().infoDialog(stringa.toString());
+				
+				
 				textPane.setText(stringa.toString());
 				
 				textField_1.setText(null);
@@ -313,6 +329,12 @@ public class trascrizionePage extends JFrame {
 		
 		JButton btnVai = new JButton("VAI");
 		btnVai.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe trascrizioneView alla pressione del tasto vai
+			 * (permette il caricamento di una pagina prendendo come paramentro un intero digitato dall'utente)
+			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				npagina = Integer.parseInt(textField_3.getText());
 				new trascrizioneView().vistaimmagine(lblImg, titolo, npagina, user);
@@ -348,6 +370,11 @@ public class trascrizionePage extends JFrame {
 		JLabel lblData = new JLabel("DATA");
 		
 		btnCancella.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che, alla pressione del tasto cancella, elimina tutta la trascrizione TEI inserita
+			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				stringa = new StringBuilder(); 
 				textPane.setText(null);

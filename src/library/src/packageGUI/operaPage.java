@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 /**
  * Classe JFrame operaPage
  */
+
 public class operaPage extends JFrame {
 
 	private JPanel contentPane;
@@ -33,9 +34,11 @@ public class operaPage extends JFrame {
 	private JLabel lblNewLabel; /* Page label */
 	private static JLabel lblImg; 
 	private JTextField textField;
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,6 +56,7 @@ public class operaPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public operaPage(utente user, String titolo) {
 		super("Library");
 		
@@ -68,9 +72,12 @@ public class operaPage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			
 			/**
+			 * ActionPerformed handler che istanzia la classe operaView alla pressione del tasto logout
 			 * 
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new operaView().logOut(finestra);
 			}
@@ -78,9 +85,11 @@ public class operaPage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe operaView alla pressione del tasto indietro
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new operaView().indietro(finestra, user);
 			}
@@ -90,9 +99,11 @@ public class operaPage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe operaView alla pressione del tasto exit
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new operaView().exit(finestra);
 			}
@@ -114,9 +125,11 @@ public class operaPage extends JFrame {
 		//Avanti button
 		JButton button = new JButton("\u25BA");
 		button.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new operaView().clickAvanti(titolo, lblNewLabel, textField, npagina, button, btnNewButton, user);
 				new operaView().vista(lblImg, textPane, titolo, npagina, user);		
@@ -125,9 +138,11 @@ public class operaPage extends JFrame {
 		
 		
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			/**
 			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new operaView().clickIndietro(titolo, lblNewLabel, textField, npagina, button, btnNewButton, user);
 				new operaView().vista(lblImg, textPane, titolo, npagina, user);
@@ -141,6 +156,7 @@ public class operaPage extends JFrame {
 		/**
 		 * Caricamento prima pagina 
 		 */
+		
 		lblNewLabel = new JLabel();
 		npagina = new operaView().firstPage(titolo, button, lblNewLabel , textField, npagina, user);
 		new operaView().vista(lblImg, textPane, titolo, npagina, user);

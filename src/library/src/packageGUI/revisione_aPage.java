@@ -32,6 +32,7 @@ import javax.swing.JRadioButton;
 /**
  * Classe JFrame operaPage
  */
+
 public class revisione_aPage extends JFrame {
 
 	private JPanel contentPane;
@@ -46,9 +47,11 @@ public class revisione_aPage extends JFrame {
 	private JRadioButton rdbtnRifiutaAcquisizione;
 	private JButton btnConferma; 
 	private JTextField textField_2;
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -66,6 +69,7 @@ public class revisione_aPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public revisione_aPage(utente user, String titolo) {
 		super("Library");
 		
@@ -81,9 +85,11 @@ public class revisione_aPage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_aView alla pressione del tasto logout
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new revisione_aView().logOut(finestra);
 			}
@@ -91,9 +97,11 @@ public class revisione_aPage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_aView alla pressione del tasto indietro
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new revisione_aView().indietro(finestra, user);
 			}
@@ -103,9 +111,11 @@ public class revisione_aPage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_aView alla pressione del tasto exit
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new revisione_aView().exit(finestra);
 			}
@@ -122,15 +132,17 @@ public class revisione_aPage extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		
-		//Indietro button
+		
 		JButton btnNewButton = new JButton("\u25C4");
 				
-		//Avanti button
+		
 		JButton button = new JButton("\u25BA");
 		button.addActionListener(new ActionListener() {
+			
 			/**
-			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
+			 * actionListener che istanzia la classe revisione_aView al click del bottone "Avanti"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new revisione_aView().clickAvanti(titolo, lblNewLabel, textField_2, npagina, button, btnNewButton, user);
 				new revisione_aView().vista(lblImg,titolo, npagina);
@@ -156,9 +168,11 @@ public class revisione_aPage extends JFrame {
 		
 		
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			/**
-			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
+			 * actionListener che istanzia la classe revisione_aView al click del bottone "Indietro"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new revisione_aView().clickIndietro(titolo, lblNewLabel, textField_2, npagina, button, btnNewButton, user);
 				new revisione_aView().vista(lblImg, titolo, npagina);
@@ -211,9 +225,12 @@ public class revisione_aPage extends JFrame {
 		
 		btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_aView alla pressione del tasto conferma
+			 * (permette di confermare e validare un'immagine)
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				boolean validate; 
 				
@@ -250,6 +267,7 @@ public class revisione_aPage extends JFrame {
 		/**
 		 * Caricamento prima pagina 
 		 */
+		
 		lblNewLabel = new JLabel();
 		
 		npagina = new revisione_aView().firstPage(titolo, button, lblNewLabel , textField_2, npagina, user);
@@ -277,6 +295,10 @@ public class revisione_aPage extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("VAI");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+		/**
+		 * ActionPerformed handler che permette di scorrere le pagine attraverso l'immissione di un intero da parte dell'utente
+		 */
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = Integer.parseInt(textField_2.getText());
 				new revisione_aView().vista(lblImg, titolo, npagina);

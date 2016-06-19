@@ -4,6 +4,7 @@ package packageBusiness;
  * Classe Business Trascrizione 
  * La classe rappresenta una qualsiasi trascrizione
  */
+
 public class trascrizione {
 	
 	private String testo;
@@ -23,6 +24,7 @@ public class trascrizione {
 	  * @param trascrittore Stringa che mostra l'email del trascrittore 
 	  * @param validata Booleano che mostra se la trascrizione è stata validata oppure no
 	  */
+	 
  public trascrizione(String testo, String titolo_opera, int numero_pagina, String data_scrittura,
 			String trascrittore, boolean validata) {
 		this.testo = testo;
@@ -38,6 +40,7 @@ public class trascrizione {
   * 
   * @return Stringa TEI
   */
+ 
 public String getTesto() {
 	return testo;
 }
@@ -47,6 +50,7 @@ public String getTesto() {
  * 
  * @param testo Stringa TEI
  */
+
 public void setTesto(String testo) {
 	this.testo = testo;
 }
@@ -56,6 +60,7 @@ public void setTesto(String testo) {
  * 
  * @return Stringa che rappresenta il titolo dell'opera 
  */
+
 public String getTitolo_opera() {
 	return titolo_opera;
 }
@@ -65,6 +70,7 @@ public String getTitolo_opera() {
  * 
  * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
  */
+
 public void setTitolo_opera(String titolo_opera) {
 	this.titolo_opera = titolo_opera;
 }
@@ -74,6 +80,7 @@ public void setTitolo_opera(String titolo_opera) {
  * 
  * @return Intero che rappresenta il numero di pagina nell'opera 
  */
+
 public int getNumero_pagina() {
 	return numero_pagina;
 }
@@ -83,6 +90,7 @@ public int getNumero_pagina() {
  * 
  * @param numero_pagina Intero che rappresenta il numero di pagina nell'opera 
  */
+
 public void setNumero_pagina(int numero_pagina) {
 	this.numero_pagina = numero_pagina;
 }
@@ -92,6 +100,7 @@ public void setNumero_pagina(int numero_pagina) {
  * 
  * @return Stringa immessa dal trascrittore che mostra la data in cui la trascrizione è stata inserita nel sistema
  */
+
 public String getData_scrittura() {
 	return data_scrittura;
 }
@@ -101,6 +110,7 @@ public String getData_scrittura() {
  * 
  * @param data_scrittura Stringa immessa dal trascrittore che mostra la data in cui la trascrizione è stata inserita nel sistema
  */
+
 public void setData_scrittura(String data_scrittura) {
 	this.data_scrittura = data_scrittura;
 }
@@ -110,6 +120,7 @@ public void setData_scrittura(String data_scrittura) {
  * 
  * @return Stringa che mostra l'email del trascrittore 
  */
+
 public String getTrascrittore() {
 	return trascrittore;
 }
@@ -119,6 +130,7 @@ public String getTrascrittore() {
  * 
  * @param trascrittore Stringa che mostra l'email del trascrittore 
  */
+
 public void setTrascrittore(String trascrittore) {
 	this.trascrittore = trascrittore;
 }
@@ -128,6 +140,7 @@ public void setTrascrittore(String trascrittore) {
  * 
  * @return Booleano che mostra se la trascrizione è stata validata oppure no
  */
+
 public boolean isValidata() {
 	return validata;
 }
@@ -137,6 +150,7 @@ public boolean isValidata() {
  * 
  * @param validata Booleano che mostra se la trascrizione è stata validata oppure no
  */
+
 public void setValidata(boolean validata) {
 	this.validata = validata;
 }

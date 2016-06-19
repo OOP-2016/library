@@ -26,9 +26,11 @@ public class aggiungiOperaForm extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,9 +45,11 @@ public class aggiungiOperaForm extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
+	
 	public aggiungiOperaForm() {
 		super("Library"); 
 		aggiungiOperaForm finestra = this; 
@@ -79,9 +83,13 @@ public class aggiungiOperaForm extends JFrame {
 		
 		JButton btnAggiungi = new JButton("AGGIUNGI");
 		btnAggiungi.addActionListener(new ActionListener() {
+			
 			/**
+			 * ActionPerformed handler che istanzia la classe ricercaView alla pressione del tasto aggiungi
+			 * (permette il caricamento di una nuova opera)
 			 * 
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				
 				new ricercaView().aggiungiOpera(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(), finestra); 

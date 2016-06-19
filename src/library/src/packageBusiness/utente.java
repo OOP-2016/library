@@ -12,6 +12,7 @@ public class utente {
 	/**
 	 * Costruttore per creare un utente base 
 	 */
+	
 	public utente(){
 		this.email = null; 
 		this.permessi = 0; 
@@ -23,6 +24,7 @@ public class utente {
 	 * @param email Stringa che spacifica l'email dell'utente 
 	 * @param permessi Intero che specifica i permessi dell'utente nel sistema 
 	 */
+	
 	public utente(String email, int permessi){
 		this.email = email; 
 		this.permessi = permessi; 
@@ -33,6 +35,7 @@ public class utente {
 	 * 
 	 * @return Stringa che spacifica l'email dell'utente 
 	 */
+	
 	public String getEmail() {
 		return email;
 	}
@@ -42,9 +45,16 @@ public class utente {
 	 * 
 	 * @return Intero che specifica i permessi dell'utente nel sistema 
 	 */
+	
 	public int getPermessi() {
 		return permessi;
 	}
+	
+	/**
+	 * Il metodo imposta i permessi dell'utente
+	 * 
+	 * @return Intero che specifica i permessi dell'utente nel sistema 
+	 */
 	
 	public void setPermessi(int permessi) {
 		this.permessi = permessi;

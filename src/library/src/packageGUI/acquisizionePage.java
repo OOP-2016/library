@@ -39,9 +39,12 @@ public class acquisizionePage extends JFrame {
 	private JTextField textField_2;
 	private BufferedImage immagine;
 	private int pagina; 
+	
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,9 +59,11 @@ public class acquisizionePage extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
+	
 	public acquisizionePage(utente utente, opera opera) {
 		super("Library");
 		Component acquisizionePage = this;
@@ -74,9 +79,12 @@ public class acquisizionePage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe acquisizioneView alla pressione del tasto logout
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new acquisizioneView().logOut(window);
 			}
@@ -84,8 +92,10 @@ public class acquisizionePage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe acquisizioneView alla pressione del tasto indietro
 			 */
 			public void actionPerformed(ActionEvent e) {
 				new acquisizioneView().indietro(window, utente);
@@ -96,9 +106,12 @@ public class acquisizionePage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe acquisizioneView alla pressione del tasto exit
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new acquisizioneView().exit(window);
 			}
@@ -116,9 +129,14 @@ public class acquisizionePage extends JFrame {
 		
 		JButton btnNewButton = new JButton("CONFERMA");
 		btnNewButton.addActionListener(new ActionListener() {	
+			
+			
 			/**
+			 * ActionPerformed handler che istanzia la classe acquisizioneView alla pressione del tasto conferma
+			 * (permette il caricamento di una acquisizione)
 			 * 
 			 */
+			
 			public void actionPerformed(ActionEvent arg0){
 				boolean success = new acquisizioneView().conferma(textField.getText(), textField_1.getText(), textField_2.getText(), opera, immagine, utente.getEmail());
 				if(success){
@@ -136,9 +154,12 @@ public class acquisizionePage extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("CARICA");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe acquisizioneView alla pressione del tasto carica
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				immagine = new acquisizioneView().carica(lblNewLabel, acquisizionePage); 
 			}
@@ -159,9 +180,6 @@ public class acquisizionePage extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		
-		/**
-		 * 
-		 */
 		textField_2.setText(String.format("%d", new acquisizioneView().paginaDaAcquisire(opera.getTitolo())));
 
 		

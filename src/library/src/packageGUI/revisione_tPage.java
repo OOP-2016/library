@@ -32,6 +32,7 @@ import javax.swing.JRadioButton;
 /**
  * Classe JFrame operaPage
  */
+
 public class revisione_tPage extends JFrame {
 
 	private JPanel contentPane;
@@ -44,9 +45,11 @@ public class revisione_tPage extends JFrame {
 	private JRadioButton rdbtnRifiutaTrascrizione;
 	private JButton btnConferma; 
 	private JTextField textField_1;
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,6 +67,7 @@ public class revisione_tPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public revisione_tPage(utente user, String titolo) {
 		super("Library");
 		
@@ -79,9 +83,11 @@ public class revisione_tPage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_tView alla pressione del tasto logout
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new revisione_tView().logOut(finestra);
 			}
@@ -89,9 +95,11 @@ public class revisione_tPage extends JFrame {
 		
 		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
 		mntmIndietro.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_tView alla pressione del tasto indietro
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new revisione_tView().indietro(finestra, user);
 			}
@@ -101,9 +109,11 @@ public class revisione_tPage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_tView alla pressione del tasto exit
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new revisione_tView().exit(finestra);
 			}
@@ -118,21 +128,23 @@ public class revisione_tPage extends JFrame {
 		
 		JTextPane textPane = new JTextPane();
 		
-		//Indietro button
+		
 		JButton btnNewButton = new JButton("\u25C4");
 		
-		//pannello immagine
+		
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		
-		//Avanti button
+		
 		JButton button = new JButton("\u25BA");
 		button.addActionListener(new ActionListener() {
+			
 			/**
-			 * actionListener che istanzia la classe loginView al click del bottone "Avanti"
+			 * actionListener che istanzia la classe revisione_tView al click del bottone "Avanti"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new revisione_tView().clickAvanti(titolo, lblNewLabel, textField_1, npagina, button, btnNewButton, user);
 				new revisione_tView().vistatrascrizione(textPane,titolo, npagina, user);
@@ -159,9 +171,11 @@ public class revisione_tPage extends JFrame {
 		
 		
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			/**
-			 * actionListener che istanzia la classe loginView al click del bottone "Indietro"
+			 * actionListener che istanzia la classe revisione_tView al click del bottone "Indietro"
 			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = new revisione_tView().clickIndietro(titolo, lblNewLabel, textField_1, npagina, button, btnNewButton, user);
 				new revisione_tView().vistatrascrizione(textPane, titolo, npagina, user);
@@ -210,9 +224,11 @@ public class revisione_tPage extends JFrame {
 		
 		btnConferma = new JButton("CONFERMA");
 		btnConferma.addActionListener(new ActionListener() {
+			
 			/**
-			 * 
+			 * ActionPerformed handler che istanzia la classe revisione_tView alla pressione del tasto conferma
 			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				boolean validate; 
 				
@@ -249,6 +265,7 @@ public class revisione_tPage extends JFrame {
 		/**
 		 * Caricamento prima pagina 
 		 */
+		
 		lblNewLabel = new JLabel();
 		npagina = new revisione_tView().firstPage(titolo, button, lblNewLabel , textField_1, npagina, user);
 		new revisione_tView().vistatrascrizione(textPane, titolo, npagina, user);
@@ -276,6 +293,11 @@ public class revisione_tPage extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("VAI");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che permette di scorrere le pagine attraverso l'immissione di un intero da parte dell'utente
+			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				npagina = Integer.parseInt(textField_1.getText());
 				new revisione_tView().vistatrascrizione(textPane, titolo, npagina, user);

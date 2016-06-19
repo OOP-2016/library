@@ -42,9 +42,12 @@ public class amministrazionePage extends JFrame {
 	private Connection connect = null;
 	private Statement statement = null;
 	private DefaultTableModel tm; 
+	
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,9 +61,11 @@ public class amministrazionePage extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
+	
 	public amministrazionePage(utente utente) {
 		
 		new dialog().warningDialog("Si informa che la modifica irresponsabile dei dati potrebbe causare errori nel sistema");
@@ -85,6 +90,13 @@ public class amministrazionePage extends JFrame {
 	    
 		JButton btnSeleziona = new JButton("SELEZIONA");
 		btnSeleziona.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto seleziona
+			 * (permette di selezionare una tabella dal database e caricarla nella jtable)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new amministrazioneView().seleziona(listener, columnNames, tm, (String)comboBox.getSelectedItem());
 			}
@@ -94,6 +106,12 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnRicarica = new JButton("RICARICA");
 		btnRicarica.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto ricarica
+			 * (permette il refresh della tabella selezionata del database) 
+			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new amministrazioneView().ricarica(listener, columnNames, tm, (String)comboBox.getSelectedItem());
 			}
@@ -101,6 +119,13 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnDelete = new JButton("DELETE");
 		btnDelete.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto delete
+			 * (permette la cancellazione di una riga dal database)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new amministrazioneView().delete(table, (String)comboBox.getSelectedItem());
 			}
@@ -108,6 +133,13 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnInserisciUtente = new JButton("INSERISCI IMMAGINI");
 		btnInserisciUtente.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto inserisci immagini
+			 * (apre la pagina di caricamento immagine)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				utente.setPermessi(2);
 				new amministrazioneView().istanziaRicercaPage(utente);
@@ -116,6 +148,13 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnInserisciOpera = new JButton("INSERISCI OPERA");
 		btnInserisciOpera.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto inserisci opera
+			 * (apre la pagina di caricamento opera)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				utente.setPermessi(2);
 				new amministrazioneView().apriAggiungiOperaForm();
@@ -124,6 +163,13 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnInserisciImmagine = new JButton("INSERISCI UTENTE");
 		btnInserisciImmagine.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto inserisci utente
+			 * (apre la pagina di registrazione)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				new amministrazioneView().istanziaRegistrazionePage();
 			}
@@ -131,6 +177,13 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnRevisionaImmagini = new JButton("REVISIONA IMMAGINI");
 		btnRevisionaImmagini.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto revisiona immagini
+			 * (apre la pagina di revisione immagini)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				utente.setPermessi(3);
 				new amministrazioneView().istanziaRicercaPage(utente);
@@ -139,6 +192,13 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnInserisciTrascrizione = new JButton("INSERISCI TRASCRIZIONI");
 		btnInserisciTrascrizione.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto inserisci trascrizione
+			 * (apre la pagina di caricamento trascrizione)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				utente.setPermessi(4);
 				new amministrazioneView().istanziaRicercaPage(utente);
@@ -147,6 +207,13 @@ public class amministrazionePage extends JFrame {
 		
 		JButton btnRevisionaTrascrizione = new JButton("REVISIONA TRASCRIZIONI");
 		btnRevisionaTrascrizione.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto revisiona trascrizioni
+			 * (apre la pagina di revisione trascrizione)
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				utente.setPermessi(5);
 				new amministrazioneView().istanziaRicercaPage(utente);
@@ -188,6 +255,12 @@ public class amministrazionePage extends JFrame {
 		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
 		mntmLogOut.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto logout
+			 * 
+			 */
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new amministrazioneView().logOut(finestra);
 			}
@@ -196,6 +269,13 @@ public class amministrazionePage extends JFrame {
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
 		mntmExit.addActionListener(new ActionListener() {
+			
+			/**
+			 * ActionPerformed handler che istanzia la classe amministrazioneView alla pressione del tasto exit
+			 * 
+			 */
+			
+			
 			public void actionPerformed(ActionEvent arg0) {
 				new amministrazioneView().exit(finestra);
 			}
