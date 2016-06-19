@@ -63,6 +63,13 @@ public class ricercaView {
 		
 	}
 	
+	/**
+	 * il metodo permette di invocare una nuova finestra di trascrizione
+	 * 
+	 * @param finestra finestrra da chiudere 
+	 * @param utente utente che ha effettuato l'accesso
+	 * @param titolo titolo dell'opera in considerazione
+	 */
 	public void istanziaTrascrizionePage(ricercaPage finestra, utente utente, String titolo){
 		new dialog().disposeDialog(finestra);
 		trascrizionePage trascrizionePage = new trascrizionePage(utente, titolo);
@@ -75,6 +82,7 @@ public class ricercaView {
 	 * Il metodo permette di invocare una nuova finestra di operaPage
 	 * 
 	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 * @param titolo titolo dell'opera in considerazione
 	 */
 	public void istanziaOperaPage(utente utente, String titolo){
 		operaPage finestra = new operaPage(utente, titolo);
@@ -83,9 +91,11 @@ public class ricercaView {
 	}
 	
 	/**
-	 * Il metodo permette di invocare una nuova finestra di operaPage
+	 * Il metodo permette di invocare una nuova finestra di revisione_aPage
 	 * 
-	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 * @param finestra finestra da chiudere
+	 * @param utente Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 * @param titolo titolo dell'opera in considerazione
 	 */
 	public void istanziaRevisione_aPage(ricercaPage finestra, utente utente, String titolo){
 		new dialog().disposeDialog(finestra);
@@ -95,9 +105,11 @@ public class ricercaView {
 	}
 	
 	/**
-	 * Il metodo permette di invocare una nuova finestra di operaPage
+	 * Il metodo permette di invocare una nuova finestra di revisione_tPage
 	 * 
-	 * @param user Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 * @param finestra finestra da chiudere
+	 * @param utente Utente che ha effettuato l'accesso, il parametro ha il compito di gestire la sessione
+	 * @param titolo titolo dell'opera in considerazione
 	 */
 	public void istanziaRevisione_tPage(ricercaPage finestra, utente utente, String titolo){
 		new dialog().disposeDialog(finestra);
@@ -110,8 +122,8 @@ public class ricercaView {
 	 * Il metodo permette di invocare il controller ricercaController
 	 * 
 	 * @param finestra Finestra ricercaPage chiamante
-	 * @param user Utente che ha effettuato l'accesso
-	 * @param title Stringa che rappresenta il titolo del manoscritto 
+	 * @param utente Utente che ha effettuato l'accesso
+	 * @param titolo Stringa che rappresenta il titolo del manoscritto 
 	 */
 	public void apriOpera(ricercaPage finestra, utente utente, String titolo){
 		new ricercaController().apriOperaAction(finestra, utente, titolo);
@@ -136,10 +148,11 @@ public class ricercaView {
 	}
 	
 	/**
+	 * metodo che istanzia ricercaController
 	 * 
-	 * @param filtro
-	 * @param listModel
-	 * @param utente
+	 * @param filtro permette di filtrare la ricerca
+	 * @param listModel lista delle opera
+	 * @param utente utente che ha effettuato l'acesso
 	 */
 	public void cercaOpera(String filtro, DefaultListModel listModel, utente utente) {
 		ArrayList<String> titoli=new ricercaController().cercaOperaAction(filtro, utente);
@@ -147,12 +160,13 @@ public class ricercaView {
 		}
 	
 	/**
+	 * metodo che istanzia ricercaController
 	 * 
-	 * @param titolo
-	 * @param autore
-	 * @param anno_pubblicazione
-	 * @param numero_pagine
-	 * @param finestra
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param autore autore dell'opera
+	 * @param anno_pubblicazione anno di pubblicazione dell'opera
+	 * @param numero_pagine numero di pagine di un'opera
+	 * @param finestra finestra da chiudere
 	 */
 	public void aggiungiOpera(String titolo, String autore, String anno_pubblicazione, String numero_pagine, aggiungiOperaForm finestra){
 		boolean success = new ricercaController().aggiungiOperaAction(titolo, autore, anno_pubblicazione, numero_pagine);
@@ -164,7 +178,9 @@ public class ricercaView {
 	}
 	
 	/**
+	 * permette di aprire la form di aggiunta di un'opera
 	 * 
+	 * @exception Exception messaggio di errore in caso di fallimento nell'apertura della pagina
 	 */
 	public void apriAggiungiOperaForm(){
 		EventQueue.invokeLater(new Runnable() {
@@ -184,10 +200,11 @@ public class ricercaView {
 	}
 	
 	/**
+	 * permette di istanziare una pagina di acquisizionePage
 	 * 
-	 * @param finestra
-	 * @param utente
-	 * @param opera
+	 * @param finestra finestra da chiudere
+	 * @param utente utente che ha effettuato l'accesso
+	 * @param opera opera presa in considerazione
 	 */
 	public void istanziaAcquisizionePage(ricercaPage finestra, utente utente, opera opera){
 		new dialog().disposeDialog(finestra);
@@ -197,10 +214,11 @@ public class ricercaView {
 	}
 	
 	/**
+	 * metodo che istanzia ricercaController
 	 * 
-	 * @param titolo
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un oggetto di tipoopera
 	 */
 	public opera getOpera(String titolo, utente utente){
 		return new ricercaController().getOpera(titolo, utente); 

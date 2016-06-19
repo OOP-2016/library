@@ -107,7 +107,7 @@ public class registrazioneController {
 	}
 	
 	/**
-	 * Il metodo istanzia la classe registrazioneView 
+	 * Il metodo istanzia la classe registrazioneView che ha il compito di istanziare la loginPage
 	 */
 	public void istanziaLoginAction() {
 		

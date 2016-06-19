@@ -19,22 +19,40 @@ import packageGUI.operaPage;
 import packageGUI.registrazionePage;
 import packageGUI.ricercaPage;
 
+/**
+ * classe amministrazioneView
+ */
 public class amministrazioneView {
 	
+	/**
+	 * Il metodo istanzia amministrazioneController 
+	 * 
+	 * @param finestra finestra da chiudere
+	 */
 	public void exit(amministrazionePage finestra){
 		new amministrazioneController().exitAction(finestra); 
 	}
 	
+	/**
+	 * Il metodo istanzia amministrazioneController 
+	 * 
+	 * @param finestra finestra da chiudere
+	 */
 	public void logOut(amministrazionePage finestra){
 		new amministrazioneController().logOutAction(finestra); 
 	}
 	
+	/**
+	 * Il metodo istanzia dialog
+	 * 
+	 * @param finestra finestra da chiudere
+	 */
 	public void dispose(amministrazionePage finestra){
 		new dialog().disposeDialog(finestra);
 	}
 	
 	/**
-	 * Il metodo richiama la classe AlertDialog che crea un MessageDialog di informazione 
+	 * Il metodo richiama la classe dialog che crea un MessageDialog di informazione 
 	 * 
 	 * @param info Stringa informativa
 	 */
@@ -51,6 +69,9 @@ public class amministrazioneView {
 		new dialog().errorDialog(error);
 	}
 	
+	/**
+	 * Il metodo istanzia una pagina di login
+	 */
 	public void istanziaLoginPage(){
 
 		loginPage finestra = new loginPage();
@@ -59,6 +80,9 @@ public class amministrazioneView {
 		
 	}
 	
+	/**
+	 * Il metodo istanzia una pagina di registrazione
+	 */
 	public void istanziaRegistrazionePage(){
 
 		registrazionePage finestra = new registrazionePage();
@@ -68,6 +92,12 @@ public class amministrazioneView {
 		
 	}
 	
+	/**
+	 * Il metodo istanzia aggiungiOperaForm 
+	 * 
+	 * @param finestra finestra da chiudere
+	 * @exception Exception in caso di fallimento di creazione di istanza
+	 */
 	public void apriAggiungiOperaForm(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -83,6 +113,11 @@ public class amministrazioneView {
 			}
 		});
 		
+		/**
+		 * Il metodo istanzia ricercaPage
+		 * 
+		 * @param utente utente che ha effettuato l'accesso
+		 */	
 	}
 	public void istanziaRicercaPage(utente user){
 		ricercaPage finestra = new ricercaPage(user);
@@ -92,13 +127,36 @@ public class amministrazioneView {
 
 	}
 	
+	/**
+	 * Il metodo istanzia amministrazioneController 
+	 * 
+	 * @param listener gestisce i cambiamenti sulla JTable collegata al database
+	 * @param columnNames contiene i nomi delle colonna di una singola tabella
+	 * @param tm tabella contenente i dati di una tabella corrispondente del database
+	 * @param tableName nome della tabella presa in considerazione
+	 */
 	public void seleziona(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
 		new amministrazioneController().selezionaAction(listener, columnNames, tm, tableName); 
 	}
 	
+	/**
+	 * Il metodo istanzia amministrazioneController 
+	 * 
+	 * @param listener gestisce i cambiamenti sulla JTable collegata al database
+	 * @param columnNames contiene i nomi delle colonna di una singola tabella
+	 * @param tm tabella contenente i dati di una tabella corrispondente del database
+	 * @param tableName nome della tabella presa in considerazione
+	 */
 	public void ricarica(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
 		new amministrazioneController().ricaricaAction(listener, columnNames, tm, tableName); 
 	}
+	
+	/**
+	 * Il metodo istanzia amministrazioneController 
+	 * 
+	 * @param table tabella contenente i dati di una tabella corrispondente del database
+	 * @param tableName nome della tabella presa in considerazione
+	 */
 	public void delete(JTable table, String tableName){
 		new amministrazioneController().deleteAction(table, tableName); 
 	}

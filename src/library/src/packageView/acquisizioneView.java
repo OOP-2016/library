@@ -20,13 +20,17 @@ import packageGUI.loginPage;
 import packageGUI.operaPage;
 import packageGUI.ricercaPage;
 
+/**
+ * classe acquiisizioneView
+ */
 public class acquisizioneView {
 	
 	/**
-	 * 
-	 * @param numero_pagina
-	 * @param titolo_opera
-	 * @return
+	 *  il metodo chiama il acquiizioneController, passandogli il numero della pagina e il titolo dell'opera in considerazione
+	 *  
+	 * @param numero_pagina numero de3lla pagina in acquisizione
+	 * @param titolo_opera titolo dell'opera di cui stiamo effettuando l'acquisizione
+	 * @return ritorna un valore di tipo boolean
 	 */
 public boolean esistePagina(int numero_pagina, String titolo_opera){
 	boolean p = new acquisizioneController().esistePaginaAction(numero_pagina, titolo_opera);
@@ -34,14 +38,16 @@ public boolean esistePagina(int numero_pagina, String titolo_opera){
 }
 
 /**
+ * il metodo chiama il controller passandogli le variabili che permetteranno di inserire un'acquisizione nel database
  * 
- * @param risoluzione
- * @param data_scatto
- * @param numero_pagina
- * @param opera
- * @param immagine
- * @param acquisitore
- * @return
+ * @param risoluzione variabile che rappresenta la risoluzione dell'acquisizione effettuata
+ * @param data_scatto variabile che contiene la data in cui è stata effettuata l'acquisizione
+ * @param numero_pagina variabile che contiene il numero della pagina acquisita
+ * @param opera oggetto che contiene l'opera presa in considerazione
+ * @param immagine variabile che contiene l'immagine acquisita
+ * @param acquisitore oggetto che contiene l'utente che ha effettuato l'acquisizione
+ * @exception Exception in caso di fallimento della conversione, verrà stampato un messaggio di errore
+ * @return il metodo ritorna un boolean in caso di successo delle operazioni effettuate, false altrimenti
  */
 public boolean conferma(String risoluzione, String data_scatto, String numero_pagina, opera opera, BufferedImage immagine, String acquisitore){
     boolean success;
@@ -64,10 +70,11 @@ public boolean conferma(String risoluzione, String data_scatto, String numero_pa
 }
 
 /**
+ * il metodo chiama un open file dialog
  * 
- * @param labelImmagine
- * @param finestra
- * @return
+ * @param labelImmagine label in cui verrà inserita l'anteprima dell'imagine
+ * @param finestra finestra da cui proviene la chiamata del metodo in questione
+ * @return il metodo ritorna l'immagine scelta tramite l'open file dialog
  */
 public BufferedImage carica(JLabel labelImmagine, Component finestra){
 	
@@ -76,18 +83,18 @@ public BufferedImage carica(JLabel labelImmagine, Component finestra){
 }
 
 /**
- * Il metodo istanzia il controller operaController
+ * Il metodo istanzia acquisizioneController
  * 
- * @param finestra Finestra operaPage da chiudere 
+ * @param finestra Finestra di acquisizione da chiudere
  */
 public void exit(acquisizionePage finestra){
 	new acquisizioneController().exitAction(finestra); 
 }
 
 /**
- * Il metodo istanzia il controller operaController
+ * Il metodo istanzia acquisizioneController
  * 
- * @param finestra Finestra operaPage da chiudere 
+ * @param finestra Finestra di acquisizione da chiudere quando viene effettuato il logout
  */
 public void logOut(acquisizionePage finestra){
 	new acquisizioneController().logOutAction(finestra); 
@@ -107,7 +114,7 @@ public void istanziaLoginPage(){
 /**
  * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
  * 
- * @param finestra Finestra operaPage da chiudere 
+ * @param finestra Finestra di acquisizione da chiudere
  */
 public void dispose(acquisizionePage finestra){
 	new dialog().disposeDialog(finestra);
@@ -132,9 +139,9 @@ public void errorMessage(String error){
 }
 
 /**
- * Il metodo istanzia il controller operaController
+ * Il metodo istanzia il controller acquisizioneController
  * 
- * @param finestra Finestra operaPage da chiudere 
+ * @param finestra Finestra acquisizionePage da chiudere 
  * @param user Utente che ha effettuato l'accesso nel sistema 
  */
 public void indietro(acquisizionePage finestra, utente user){
@@ -143,6 +150,8 @@ public void indietro(acquisizionePage finestra, utente user){
 
 /**
  * Il metodo permette di invocare una nuova finestra di loginPage
+ * 
+ * @param utente utente che ha effettuato l'accesso nel sistema
  */
 public void istanziaRicercaPage(utente user){
 
@@ -154,10 +163,12 @@ public void istanziaRicercaPage(utente user){
 
 /**
  * 
- * @param titolo_opera
- * @param utente
- * @param finestra
- * @return
+ * Il metodo chiama acquisizioneController passandogli l'opera da controllare, l'utente che ha effettuato l'accesso e la finestra da cui proviene la chiamata
+ * 
+ * @param titolo_opera titolo dell'opera da controllare
+ * @param utente utente che ha effettuato l'accesso nel sistema
+ * @param finestra finestra da chiudere
+ * @return ritorna un valore di tipo booleano
  */
 public boolean tutteAcquisite(String titolo_opera, utente utente, JFrame finestra){
 	boolean tutteAcquisite = new acquisizioneController().tutteAcquisiteAction(titolo_opera, utente); 
@@ -174,9 +185,10 @@ public boolean tutteAcquisite(String titolo_opera, utente utente, JFrame finestr
 }
 
 /**
+ * il metodo istanzia acquisizioneController
  * 
- * @param titolo_opera
- * @return
+ * @param titolo_opera titolo dell'opera in considerazione
+ * @return ritorna un valore di tipo intero
  */
 public int paginaDaAcquisire(String titolo_opera){
 	return new acquisizioneController().paginaDaAcquisireAction(titolo_opera); 

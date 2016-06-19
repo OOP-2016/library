@@ -20,7 +20,7 @@ public class loginController {
 												"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	/**
-	 * Il metodo istanzia la classe loginView 
+	 * Il metodo istanzia la classe loginView che ha il compito di istanziare la registrazionePage
 	 */
 	public void instanziaRegistrazioneAction(){
 		

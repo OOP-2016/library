@@ -53,7 +53,9 @@ public class operaView {
 	}
 	
 	/**
-	 * Il metodo permette di invocare una nuova finestra di loginPage
+	 * Il metodo permette di invocare una nuova finestra di ricercaPage
+	 * 
+	 * @param utente utente che ha effettuato l'accesso
 	 */
 	public void istanziaRicercaPage(utente user){
 
@@ -106,8 +108,9 @@ public class operaView {
 	 * 
 	 * @param immagine Riquadro dove verrà visualizzata l'immagine
 	 * @param trascrizione Riquadro dove verrà visualizzata la trascrizione 
-	 * @param titolo Stringa che rappresenta il titolo dell'opera 
-	 * @param npagina intero che rappresenta il corrente numero di pagina
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina intero che rappresenta il corrente numero di pagina
+	 * @param utente utente che ha effetuato l'accesso nel sistema
 	 */
 	public void vista(JLabel immagine, JTextPane trascrizione, String titolo_opera, int numero_pagina, utente utente){
 		Object[] pagina = new operaController().vistaAction(titolo_opera, numero_pagina, utente);
@@ -131,13 +134,15 @@ public class operaView {
 	}
 	
 	/**
+	 * il metodo apre la prima pagina di un'opera 
 	 * 
-	 * @param titolo
-	 * @param avanti
-	 * @param page
-	 * @param npagina
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera da aprire
+	 * @param avanti contiene il bottone che permette di cambiare pagina
+	 * @param page contiene il valore dell'ultima pagina dell'opera
+	 * @param page2 permette di inserire la pagina da visualizzare
+	 * @param npagina numero della pagina corrente
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int firstPage(String titolo, JButton avanti, JLabel page, JTextField page2, int npagina, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
@@ -149,14 +154,16 @@ public class operaView {
 	}
 	
 	/**
+	 * il metodo permette di passare alla pagina successiva
 	 * 
-	 * @param titolo
-	 * @param page
-	 * @param npagina
-	 * @param avanti
-	 * @param indietro
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera presa in considerazione
+	 * @param page numero dell'ultima pagina dell'opera
+	 * @param page2 permette di scegliere la pagina da visualizzare
+	 * @param npagina numero di pagina corrente
+	 * @param avanti contiene il bottone che permette di passare alla pagina successiva
+	 * @param indietro contiene il bottone che permette di passare alla pagina precedente
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int clickAvanti(String titolo, JLabel page, JTextField page2, int npagina, JButton avanti, JButton indietro, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
@@ -174,14 +181,16 @@ public class operaView {
 	}
 	
 	/**
+	 * il metodo permette di passare alla pagina precedente
 	 * 
-	 * @param titolo
-	 * @param page
-	 * @param npagina
-	 * @param avanti
-	 * @param indietro
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera presa in considerazione
+	 * @param page numero dell'ultima pagina dell'opera
+	 * @param page2 permette di scegliere la pagina da visualizzare
+	 * @param npagina numero di pagina corrente
+	 * @param avanti contiene il bottone che permette di passare alla pagina successiva
+	 * @param indietro contiene il bottone che permette di passare alla pagina precedente
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int clickIndietro(String titolo, JLabel page, JTextField page2, int npagina, JButton avanti, JButton indietro, utente utente){
 
@@ -205,10 +214,16 @@ public class operaView {
 		
 	}
 	
+	/**
+	 * il metodo permette di conoscere il numero di pagine di un'opera
+	 * 
+	 * @param titolo titolo dell'opera di cui si vuole conoscere il numero di pagine
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
+	 */
 	public int getPageMax(String titolo, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
 		return opera.getNumero_pagine(); 
 	}
-	
 	
 }

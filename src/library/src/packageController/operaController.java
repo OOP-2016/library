@@ -39,9 +39,10 @@ public class operaController {
 	}
 	
 	/**
+	 * Il metodo ha il compito di istanziare ricercaPage e di chiudere operaPage
 	 * 
-	 * @param finestra
-	 * @param user
+	 * @param finestra Finestra operaPage da chiudere 
+	 * @param user utente che ha effettuato l'accesso al sistema 
 	 */
 	public void indietroAction(operaPage finestra, utente user){
 		new operaView().dispose(finestra);
@@ -49,10 +50,11 @@ public class operaController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'immagine e la trascrizione di una pagina 
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param utente
+	 * @param titolo_opera Stringa che rappresenta il titolo di un opera
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
 	 * @return
 	 */
 	public Object[] vistaAction(String titolo_opera, int numero_pagina, utente utente){
@@ -69,10 +71,11 @@ public class operaController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'opera richiesta
 	 * 
-	 * @param titolo
-	 * @param utente
-	 * @return
+	 * @param titolo Stringa che rappresenta il titolo di un opera
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return opera richiesta 
 	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 

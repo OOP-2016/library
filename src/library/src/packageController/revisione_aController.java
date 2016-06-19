@@ -16,24 +16,25 @@ import packageView.revisione_aView;
 
 
 /**
- * Classe controller operaController 
+ * Classe controller revisione_aController 
  */
 public class revisione_aController {
 
 	/**
-	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra 
+	 * Il metodo richiama la classe revisione_aView con il compito di chiudere la finestra 
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_aPage da chiudere 
 	 */
 	public void exitAction(revisione_aPage finestra){
 		new revisione_aView().dispose(finestra);
 	}
 	
 	/**
+	 * Il metodo ha il compito di ritornare un array contenente i metadati associati all'immagine 
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @return array contenente i metadati associati all'immagine 
 	 */
 	public String[] metadatiAction(String titolo_opera, int numero_pagina){
 		ArrayList<Object> args = new ArrayList<Object>();
@@ -55,10 +56,10 @@ public class revisione_aController {
 	}
 	
 	/**
-	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra e istanziare 
+	 * Il metodo richiama la classe revisione_aView con il compito di chiudere la finestra e istanziare 
 	 * la finestra di loginPage
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_aPage da chiudere 
 	 */
 	public void logOutAction(revisione_aPage finestra){
 		new revisione_aView().dispose(finestra);
@@ -66,9 +67,10 @@ public class revisione_aController {
 	}
 	
 	/**
+	 * Il metodo gestisce il click del bottone "Indietro"
 	 * 
-	 * @param finestra
-	 * @param user
+	 * @param finestra revisione_aPage da chiudere 
+	 * @param user Utente che ha effettuato l'accesso al sistema
 	 */
 	public void indietroAction(revisione_aPage finestra, utente user){
 		new revisione_aView().dispose(finestra);
@@ -76,10 +78,11 @@ public class revisione_aController {
 	}
 
 	/**
+	 * Ritorna l'oggetto immagine richiesto 
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @return l'oggetto immagine richiesto 
 	 */
 	public immagine vistaAction(String titolo_opera, int numero_pagina){
 		ArrayList<Object> args = new ArrayList<Object>(); 
@@ -90,10 +93,11 @@ public class revisione_aController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'oggetto opera richiesto 
 	 * 
-	 * @param titolo
-	 * @param utente
-	 * @return
+	 * @param titolo Stringa che rappresenta il titolo dell'opera
+	 * @param utente Utente che ha effettuato l'accesso al sistema
+	 * @return l'oggetto opera richiesto 
 	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
@@ -106,12 +110,13 @@ public class revisione_aController {
 	}
 	
 	/**
+	 * Il metodo gestisce il click "Conferma" su revisione_aPage 
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param validation
-	 * @param utente
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param validation booleano che rappresenta la scelta del revisore 
+	 * @param utente Utente che ha effettuato l'accesso al sistema
+	 * @return booleano che mostra se l'operazione è andata a buon fine oppure no
 	 */
 	public boolean confermaAction(String titolo_opera, int numero_pagina, boolean validation, utente utente){
 		
@@ -136,10 +141,11 @@ public class revisione_aController {
 	}
 	
 	/**
+	 * Il metodo gestisce la validazione dell'opera
 	 * 
-	 * @param titolo_opera
-	 * @param utente
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @param utente Utente che ha effettuato l'accesso al sistema
+	 * @return booleano che mostra se l'operazione è andata a buon fine oppure no
 	 */
 	public boolean validaOperaAction(String titolo_opera, utente utente){
 		

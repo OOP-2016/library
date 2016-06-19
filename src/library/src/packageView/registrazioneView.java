@@ -47,7 +47,7 @@ public class registrazioneView {
 	}
 	
 	/**
-	 * Il metodo permette di istanziare la classe registrazioneController
+	 * Il metodo permette di istanziare le classi registrazioneController e dialog
 	 * 
 	 * @param finestra La finestra registrazionePage chiamante
 	 */

@@ -18,7 +18,7 @@ import packageController.loginController;
 public class loginView {
 		
 	/**
-	 * Il metodo permette di istanziare la classe loginController
+	 * Il metodo permette di istanziare le classi loginController e dialog
 	 * 
 	 * @param finestra La finestra loginPage chiamante
 	 */
@@ -45,17 +45,17 @@ public class loginView {
 	 * 
 	 * @param email Stringa che rappresenta l'email dell'utente
 	 * @param password Stringa che rappresenta la password dell'utente
-	 */
-	
+	 * @param finestra finestra da chiudere
+	 */	
 	public void accedi(String email, String password, loginPage finestra){
 		new loginController().accediAction(email, password, finestra); 
 	}
 	
 	/**
 	 * Il metodo permette di istanziare la classe loginController che far‡ l'azione di accesso come utente base
+	 * 
 	 * @param finestra Finestra loginPage da chiudere 
 	 */
-	
 	public void accediComeOspite(loginPage finestra){
 		new loginController().accediComeOspiteAction(finestra);
 	}
@@ -98,12 +98,22 @@ public class loginView {
 		new dialog().disposeDialog(finestra);
 	}
 	
+	/**
+	 * il metodo istanzia la classe dialog
+	 * 
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return il metodo ritorna un un valore di tipo intero
+	 */
 	public int modalit‡Accesso(utente utente){
 		int choice = new dialog().modalit‡AccessoForm(utente);
 		return choice; 
 	}
 	
-
+	/**
+	 * il metoto istanzia amministrazionePage
+	 * 
+	 * @param user utente che ha effettuato l'accesso come amministratore
+	 */
 	public void istanziaAmministrazionePage(utente user){
 		amministrazionePage finestra = new amministrazionePage(user);
 		finestra.setVisible(true);

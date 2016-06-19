@@ -23,23 +23,23 @@ import packageGUI.ricercaPage;
 import packageGUI.trascrizionePage;
 
 /**
- * Classe View operaView
+ * Classe View trascrizioneView
  */
 public class trascrizioneView {
 		
 	/**
-	 * Il metodo istanzia il controller operaController
+	 * Il metodo istanzia il controller trascrizioneController
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra trascrizionePage da chiudere 
 	 */
 	public void exit(trascrizionePage finestra){
 		new trascrizioneController().exitAction(finestra); 
 	}
 	
 	/**
-	 * Il metodo istanzia il controller operaController
+	 * Il metodo istanzia il controller trascrizioneController
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra trascrizionePage da chiudere 
 	 */
 	public void logOut(trascrizionePage finestra){
 		new trascrizioneController().logOutAction(finestra); 
@@ -57,7 +57,7 @@ public class trascrizioneView {
 	}
 	
 	/**
-	 * Il metodo permette di invocare una nuova finestra di loginPage
+	 * Il metodo permette di invocare una nuova finestra di ricercaPage
 	 */
 	public void istanziaRicercaPage(utente user){
 
@@ -70,7 +70,7 @@ public class trascrizioneView {
 	/**
 	 * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra trascrizionePage da chiudere 
 	 */
 	public void dispose(trascrizionePage finestra){
 		new dialog().disposeDialog(finestra);
@@ -95,9 +95,9 @@ public class trascrizioneView {
 	}
 	
 	/**
-	 * Il metodo istanzia il controller operaController
+	 * Il metodo istanzia il controller trascrizioneController
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra trascrizionePage da chiudere 
 	 * @param user Utente che ha effettuato l'accesso nel sistema 
 	 */
 	public void indietro(trascrizionePage finestra, utente user){
@@ -105,13 +105,12 @@ public class trascrizioneView {
 	}
 	
 	/**
-	 * Il metodo istanzia operaController e setta operaPage in modo
-	 * da accogliere l'immagine e la trascrizione da visualizzare all'utente
+	 * Il metodo istanzia trascrizioneController
 	 * 
 	 * @param immagine Riquadro dove verrà visualizzata l'immagine
-	 * @param trascrizione Riquadro dove verrà visualizzata la trascrizione 
-	 * @param titolo Stringa che rappresenta il titolo dell'opera 
-	 * @param npagina intero che rappresenta il corrente numero di pagina
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina intero che rappresenta il corrente numero di pagina
+	 * @param utente utente che ha effettuato l'accesso
 	 */
 	public void vistaimmagine(JLabel immagine, String titolo_opera, int numero_pagina, utente utente){
 		immagine immagine_inter = new trascrizioneController().vistaActionimmagine(titolo_opera, numero_pagina, utente);
@@ -126,6 +125,14 @@ public class trascrizioneView {
 
 	}
 	
+	/**
+	 * Il metodo istanzia trascrizioneController e funge da editor per il trascrittore
+	 * 
+	 * @param trascrizione Riquadro dove verrà visualizzata la trascrizione
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina intero che rappresenta il corrente numero di pagina
+	 * @param utente utente che ha effettuato l'accesso
+	 */
 	public void vistatrascrizione(JTextPane trascrizione, JTextField data, String titolo_opera, int numero_pagina, utente utente){
 		trascrizione trascrizione_def = new trascrizioneController().vistaActiontrascrizione(titolo_opera, numero_pagina, utente);
 		
@@ -140,13 +147,15 @@ public class trascrizioneView {
 	}
 	
 	/**
+	 * metodo che permette di visualizzare la prima pagina di un'opera
 	 * 
-	 * @param titolo
-	 * @param avanti
-	 * @param page
-	 * @param npagina
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param avanti bottone che permette di passare alla pagina successiva
+	 * @param page contiene il numero dell'ultima pagina di un'opera
+	 * @param currentpage permette di scegliere quale pagina visualizzare
+	 * @param npagina numero di pagina attuale
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int firstPage(String titolo, JButton avanti, JLabel page, JTextField currentpage, int npagina, utente utente){
 		opera opera = new trascrizioneController().getOpera(titolo, utente); 
@@ -158,14 +167,16 @@ public class trascrizioneView {
 	}
 	
 	/**
+	 * metodo che permette di visualizzare la pagina successiva di un'opera
 	 * 
-	 * @param titolo
-	 * @param page
-	 * @param npagina
-	 * @param avanti
-	 * @param indietro
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param page contiene il numero dell'ultima pagina di un'opera
+	 * @param currentpage permette di scegliere quale pagina visualizzare
+	 * @param npagina numero di pagina attuale
+	 * @param avanti bottone che permette di passare alla pagina successiva
+	 * @param indietro bottone che permette di passare alla pagine precedente
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int clickAvanti(String titolo, JLabel page, JTextField currentpage, int npagina, JButton avanti, JButton indietro, utente utente){
 		opera opera = new trascrizioneController().getOpera(titolo, utente); 
@@ -183,14 +194,16 @@ public class trascrizioneView {
 	}
 	
 	/**
+	 * metodo che permette di visualizzare la pagina precedente di un'opera
 	 * 
-	 * @param titolo
-	 * @param page
-	 * @param npagina
-	 * @param avanti
-	 * @param indietro
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param page contiene il numero dell'ultima pagina di un'opera
+	 * @param currentpage permette di scegliere quale pagina visualizzare
+	 * @param npagina numero di pagina attuale
+	 * @param avanti bottone che permette di passare alla pagina successiva
+	 * @param indietro bottone che permette di passare alla pagine precedente
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int clickIndietro(String titolo, JLabel page, JTextField currentpage, int npagina, JButton avanti, JButton indietro, utente utente){
 
@@ -214,11 +227,28 @@ public class trascrizioneView {
 		
 	}
 	
+	/**
+	 * metodo che permette di conoscere il numero di pagine di un'opera
+	 * 
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
+	 */
 	public int getPageMax(String titolo, utente utente){
 		opera opera = new trascrizioneController().getOpera(titolo, utente); 
 		return opera.getNumero_pagine(); 
 	}
 	
+	/**
+	 * metodo che istanzia trascrizione controller
+	 * 
+	 * @param data_scrittura data in cui è stata effettuata la trascrizione
+	 * @param TEItext trascrizione effettiva
+	 * @param numero_pagina numero di pagina della trascrizione
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo boolean
+	 */
 	public boolean conferma(String data_scrittura, String TEItext, int numero_pagina, String titolo, utente utente){
 		boolean success;
 		if(data_scrittura.length()==0||TEItext.length()==0){
@@ -226,21 +256,32 @@ public class trascrizioneView {
 			return false; 
 		}
 		
-		
-	    	
 		trascrizione trascrizione = new trascrizione(TEItext, titolo, numero_pagina, data_scrittura, utente.getEmail(), false);	
 		success = new trascrizioneController().confermaAction(trascrizione, utente);
 	    
 		return success;
 	}
 	
-	
+	/** metodo che istanzia trascrizione controller
+	 * 
+	 * @param numero_pagina numero di pagina corrente
+	 * @param titolo_opera titolo dell'opera in considerazione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo booleano
+	 */
 	public boolean esistePagina(int numero_pagina, String titolo_opera, utente utente){
 		boolean p = new trascrizioneController().esistePaginaAction(numero_pagina, titolo_opera, utente);
 		return p;
 	}
 	
-	
+	/**
+	 * metodo che istanzia trascrizioneController e, in seguito, istanzia una pagina di ricerca
+	 * 
+	 * @param titolo_opera titolo dell'opera in considerazione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @param finestra finestra da chiuedere
+	 * @return ritorna un valore di tipo booleano
+	 */
 	public boolean tutteTrascritte(String titolo_opera, utente utente, JFrame finestra){
 		boolean tutteTrascritte = new trascrizioneController().tutteTrascritteAction(titolo_opera, utente); 
 		
