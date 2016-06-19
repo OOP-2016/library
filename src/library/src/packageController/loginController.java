@@ -69,7 +69,7 @@ public class loginController {
 			if(utente == null) 
 				new loginView().errorMessage("login fallito");
 			else{
-			    new loginView().infoMessage("login riuscito");
+			   
 			    
 			    /**
 			     * Scelta

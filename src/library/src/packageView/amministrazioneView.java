@@ -77,7 +77,7 @@ public class amministrazioneView {
 		loginPage finestra = new loginPage();
 		finestra.setVisible(true);
 		finestra.setResizable(false);
-		
+		finestra.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
 	/**

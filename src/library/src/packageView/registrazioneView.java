@@ -1,6 +1,7 @@
 package packageView;
 
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import packageController.loginController;
 import packageController.registrazioneController;
@@ -66,7 +67,7 @@ public class registrazioneView {
 		loginPage finestra = new loginPage();
 		finestra.setVisible(true);
 		finestra.setResizable(false);
-		
+		finestra.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
 	/**

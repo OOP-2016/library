@@ -252,7 +252,7 @@ public class trascrizioneView {
 	public boolean conferma(String data_scrittura, String TEItext, int numero_pagina, String titolo, utente utente){
 		boolean success;
 		if(data_scrittura.length()==0||TEItext.length()==0){
-			new dialog().errorDialog("Campo data o trsacrizione mancante");
+			new dialog().errorDialog("Campo data o trascrizione mancante");
 			return false; 
 		}
 		
@@ -286,7 +286,7 @@ public class trascrizioneView {
 		boolean tutteTrascritte = new trascrizioneController().tutteTrascritteAction(titolo_opera, utente); 
 		
 		if(tutteTrascritte){
-			new dialog().infoDialog("Tutte le trascrizioni di quest'opera sono state trascritte");
+			new dialog().infoDialog("Tutte le trascrizioni di quest'opera sono state inserite");
 			if(finestra instanceof trascrizionePage){
 				new dialog().disposeDialog(finestra);
 				new trascrizioneView().istanziaRicercaPage(utente);
