@@ -8,7 +8,6 @@ La cartella 'src' conterra' la sottocartella 'library' che racchiudera' l'intero
 
 ### Struttura cartella 'src/library'
 
-* **jar:** directory che conterra' il file .jar dell'applicazione. 
 * **src:** directory che conterra' i file .java
-* **lib:** directory che conterra' le librerie aggiuntive necessarie al corretto funzionamento del programma.  
-* **exe:** directory che conterra' il file eseguibile dell'applicazione.  
+* **lib:** directory che conterra' le librerie aggiuntive necessarie al corretto funzionamento del programma.   
+* **file "dump_library":** file che importato nel database mysql consentirà il corretto funzionamento del programma. 
