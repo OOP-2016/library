@@ -16,13 +16,17 @@ import packageGUI.operaPage;
 import packageView.acquisizioneView;
 import packageView.operaView;
 
+/**
+ * Classe acquisizioneController
+ */
 public class acquisizioneController {
 	
 	/**
+	 * Il metodo ritorna true se la pagina numero_pagina in titolo_opera esiste 
 	 * 
-	 * @param numero_pagina
-	 * @param titolo_opera
-	 * @return
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @return booleano
 	 */
 	public boolean esistePaginaAction(int numero_pagina, String titolo_opera){
 	ArrayList<Object> immagine = new ArrayList<Object>();
@@ -35,19 +39,19 @@ public class acquisizioneController {
 }
 
 /**
- * Il metodo richiama la classe operaView con il compito di chiudere la finestra 
+ * Il metodo richiama la classe acquisizioneView con il compito di chiudere la finestra 
  * 
- * @param finestra Finestra operaPage da chiudere 
+ * @param finestra Finestra acquisizionePage da chiudere 
  */
 public void exitAction(acquisizionePage finestra){
 	new acquisizioneView().dispose(finestra);
 }
 
 /**
- * Il metodo richiama la classe operaView con il compito di chiudere la finestra e istanziare 
+ * Il metodo richiama la classe acquisizioneView con il compito di chiudere la finestra e istanziare 
  * la finestra di loginPage
  * 
- * @param finestra Finestra operaPage da chiudere 
+ * @param finestra Finestra acquisizionePage da chiudere 
  */
 public void logOutAction(acquisizionePage finestra){
 	new acquisizioneView().dispose(finestra);
@@ -55,10 +59,11 @@ public void logOutAction(acquisizionePage finestra){
 }
 
 /**
+ * Il metodo ritorna l'opera richiesta
  * 
- * @param titolo_opera
- * @param utente
- * @return
+ * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+ * @param utente utente che ha fatto l'accesso al sistema
+ * @return opera richiesta
  */
 public opera getOpera(String titolo_opera, utente utente){
 	ArrayList<Object> args = new ArrayList<Object>(); 
@@ -71,23 +76,27 @@ public opera getOpera(String titolo_opera, utente utente){
 }
 
 /**
+ * Il metodo ha il compito di gestire il Click sul tasto "indietro"
  * 
- * @param finestra
- * @param user
+ * @param finestra Finestra acquisizionePage da chiudere
+ * @param user utente che ha fatto l'accesso al sistema
  */
 public void indietroAction(acquisizionePage finestra, utente user){
 	new acquisizioneView().dispose(finestra);
 	new acquisizioneView().istanziaRicercaPage(user);
 }
 
+
 /**
+ * Il metodo gestisce il click sul bottone "Conferma"
  * 
- * @param risoluzione
- * @param data_scatto
- * @param numero_pagina
- * @param opera
- * @param immagine
- * @return
+ * @param risoluzione Stringa che rappresenta la risoluzione dell'immagine immessa dall'utente
+ * @param data_scatto Stringa che rappresenta la data immessa dall'utente
+ * @param numero_pagina Intero che rappresenta il numero della pagina
+ * @param opera Oggetto che contiene l'opera in considerazione
+ * @param immagine Oggetto che contiene l'immagine di una pagina dell'opera
+ * @exception Exception eccezione in caso di errore nei campi 
+ * @return booleano che in caso di errore restituisce false, altrimenti ritorna true
  */
 public boolean confermaAction(String risoluzione, String data_scatto, String numero_pagina, opera opera, immagine immagine){
 	
@@ -132,10 +141,11 @@ public boolean confermaAction(String risoluzione, String data_scatto, String num
 }
 
 /**
+ * Il metodo ritorna true se tutte le immagini di quell'opera sono state acquisite
  * 
- * @param titolo_opera
- * @param utente
- * @return
+ * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+ * @param utente utente che ha effettuato l'accesso al sistema 
+ * @return booleano
  */
 public boolean tutteAcquisiteAction(String titolo_opera, utente utente){
 	
@@ -157,9 +167,10 @@ public boolean tutteAcquisiteAction(String titolo_opera, utente utente){
 }
 
 /**
+ * Il metodo ritorna l'intero che rappresenta la pagina da acquisire 
  * 
- * @param titolo_opera
- * @return
+ * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+ * @return intero che rappresenta la pagina da acquisire  
  */
 public int paginaDaAcquisireAction(String titolo_opera){
 	

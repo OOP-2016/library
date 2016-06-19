@@ -23,23 +23,23 @@ import packageGUI.revisione_tPage;
 import packageGUI.ricercaPage;
 
 /**
- * Classe View operaView
+ * Classe View revisione_tView
  */
 public class revisione_tView {
 		
 	/**
-	 * Il metodo istanzia il controller operaController
+	 * Il metodo istanzia il controller revisione_tController
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_tPage da chiudere 
 	 */
 	public void exit(revisione_tPage finestra){
 		new revisione_tController().exitAction(finestra); 
 	}
 	
 	/**
-	 * Il metodo istanzia il controller operaController
+	 * Il metodo istanzia il controller revisione_tController
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_tPage da chiudere 
 	 */
 	public void logOut(revisione_tPage finestra){
 		new revisione_tController().logOutAction(finestra); 
@@ -57,7 +57,9 @@ public class revisione_tView {
 	}
 	
 	/**
-	 * Il metodo permette di invocare una nuova finestra di loginPage
+	 * Il metodo permette di invocare una nuova finestra di riceercaPage
+	 * 
+	 * @param user utente che ha effettuato l'acceso
 	 */
 	public void istanziaRicercaPage(utente user){
 	
@@ -70,7 +72,7 @@ public class revisione_tView {
 	/**
 	 * Il metodo istanzia la classe dialog che si occuperà di chiudere la finestra
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_tPage da chiudere 
 	 */
 	public void dispose(revisione_tPage finestra){
 		new dialog().disposeDialog(finestra);
@@ -95,9 +97,9 @@ public class revisione_tView {
 	}
 	
 	/**
-	 * Il metodo istanzia il controller operaController
+	 * Il metodo istanzia il controller revisione_tController
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_tPage da chiudere 
 	 * @param user Utente che ha effettuato l'accesso nel sistema 
 	 */
 	public void indietro(revisione_tPage finestra, utente user){
@@ -105,13 +107,12 @@ public class revisione_tView {
 	}
 	
 	/**
-	 * Il metodo istanzia operaController e setta operaPage in modo
-	 * da accogliere l'immagine e la trascrizione da visualizzare all'utente
-	 * 
-	 * @param immagine Riquadro dove verrà visualizzata l'immagine
-	 * @param trascrizione Riquadro dove verrà visualizzata la trascrizione 
-	 * @param titolo Stringa che rappresenta il titolo dell'opera 
-	 * @param npagina intero che rappresenta il corrente numero di pagina
+	 * Il metodo istanzia revisione_tController
+	 * 	
+	 * @param trascrizione Riquadro in cui verrà visualizzata la trascrizione 
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina intero che rappresenta il corrente numero di pagina
+	 * @param utente utente che ha effettuato l'accesso
 	 */
 	public void vistatrascrizione(JTextPane trascrizione, String titolo_opera, int numero_pagina, utente utente){
 		trascrizione trascrizione_inter = new revisione_tController().vistaActiontrascrizione(titolo_opera, numero_pagina, utente);
@@ -123,6 +124,14 @@ public class revisione_tView {
 		
 	}
 	
+	/**
+	 * Il metodo istanzia revisione_tController
+	 * 
+	 * @param immagine Riquadro in cui verrà visualizzata l'immagine 
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina intero che rappresenta il corrente numero di pagina
+	 * @param utente utente che ha effettuato l'accesso
+	 */
 	public void vistaimmagine(JLabel immagine, String titolo_opera, int numero_pagina, utente utente){
 		immagine immagine_inter = new revisione_tController().vistaActionimmagine(titolo_opera, numero_pagina, utente);
 		
@@ -137,13 +146,15 @@ public class revisione_tView {
 	}
 	
 	/**
+	 * il metodo permette di ottenre la prima pagina dell'opera
 	 * 
-	 * @param titolo
-	 * @param avanti
-	 * @param page
-	 * @param npagina
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera da visualizzare
+	 * @param avanti bottone che permette di passare alla pagina successiva
+	 * @param page contiene il numero dell'ultima pagina dell'opera in considerazione
+	 * @param page2 permette di scegliere la pagina da visualizzare
+	 * @param npagina contiene il numero di pagina attuale
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int firstPage(String titolo, JButton avanti, JLabel page, JTextField page2, int npagina, utente utente){
 		opera opera = new operaController().getOpera(titolo, utente); 
@@ -156,14 +167,16 @@ public class revisione_tView {
 	}
 	
 	/**
+	 * il metodo permette di passare alla pagina successiva
 	 * 
-	 * @param titolo
-	 * @param page
-	 * @param npagina
-	 * @param avanti
-	 * @param indietro
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera da visualizzare
+	 * @param page contiene il numero dell'ultima pagina dell'opera in considerazione
+	 * @param page2 permette di scegliere la pagina da visualizzare
+	 * @param npagina contiene il numero di pagina attuale
+	 * @param avanti bottone che permette di passare alla pagina successiva
+	 * @param indietro bottone che permette di passare alla pagina precedente
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int clickAvanti(String titolo, JLabel page, JTextField page2, int npagina, JButton avanti, JButton indietro, utente utente){
 		opera opera = new revisione_tController().getOpera(titolo, utente); 
@@ -181,12 +194,13 @@ public class revisione_tView {
 	}
 	
 	/**
+	 * il metodo permette di ottenere i metadati di una trascrizione istanziando revisione_tController
 	 * 
-	 * @param TF1
-	 * @param TF2
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param utente
+	 * @param TF1 textfield su cui verranno visualizzati i metadati
+	 * @param TF2 textfield su cui verrano visualizzati i metadati
+	 * @param TF3 textfield su cui verrano visualizzati i metadati
+	 * @param titolo_opera titolo dell'opera in considerazione
+	 * @param numero_pagina numero della pagina corrente
 	 */
 	public void metadati(JTextField TF1, JTextField TF2, String titolo_opera, int numero_pagina, utente utente){
 		String[] metadati = new revisione_tController().metadatiAction(titolo_opera, numero_pagina, utente);
@@ -195,14 +209,16 @@ public class revisione_tView {
 	}
 	
 	/**
+	 * il metodo permette di passare alla pagina precedente
 	 * 
-	 * @param titolo
-	 * @param page
-	 * @param npagina
-	 * @param avanti
-	 * @param indietro
-	 * @param utente
-	 * @return
+	 * @param titolo titolo dell'opera da visualizzare
+	 * @param page contiene il numero dell'ultima pagine dell'opera
+	 * @param page2 permette di scegliere la pagina da visualizzare
+	 * @param npagina contiene la pagina attuale
+	 * @param avanti bottone che permette di passare alla pagina successiva
+	 * @param jbutton indietro bottone che permette di passare alla pagina precedente 
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
 	 */
 	public int clickIndietro(String titolo, JLabel page, JTextField page2, int npagina, JButton avanti, JButton indietro, utente utente){
 
@@ -227,11 +243,12 @@ public class revisione_tView {
 	}
 	
 	/**
+	 * il metodo ottiene un'immagine istanziando revisione_tController
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param utente
-	 * @return
+	 * @param titolo_opera titolo dell'opera in considerazione
+	 * @param numero_pagina numero della pagina in revisione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo Stringa
 	 */
 	public String getValidazione (String titolo_opera, int numero_pagina, utente utente) {
 		
@@ -251,27 +268,36 @@ public class revisione_tView {
 	}
 	
 	/**
+	 * il metodo istanzia revisione_tController
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param validation
-	 * @param utente
-	 * @return
+	 * @param titolo_opera titolo dell'opera in considerazione
+	 * @param numero_pagina numero della pagina in revisione
+	 * @param validation valore che permette di sapere se la trascrizione è stata già validata
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo booleano
 	 */
 	public boolean conferma(String titolo_opera, int numero_pagina, boolean validation, utente utente){
 		return new revisione_tController().confermaAction(titolo_opera, numero_pagina, validation, utente); 
 	}
 	
 	/**
+	 * il metodo istanzia revisione_tController
 	 * 
-	 * @param titolo_opera
-	 * @param utente
-	 * @return
+	 * @param titolo_opera titolo dell'opera in considerazione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo booleano
 	 */
 	public boolean validaOpera(String titolo_opera, utente utente){
 		return new revisione_tController().validaOperaAction(titolo_opera, utente); 
 	}
 	
+	/**
+	 * metodo che permette di conoscere il numero di pagine di un'opera
+	 * 
+	 * @param titolo titolo dell'opera in considerazione
+	 * @param utente utente che ha effettuato l'accesso
+	 * @return ritorna un valore di tipo intero
+	 */
 	public int getPageMax(String titolo, utente utente){
 		opera opera = new revisione_tController().getOpera(titolo, utente); 
 		return opera.getNumero_pagine(); 

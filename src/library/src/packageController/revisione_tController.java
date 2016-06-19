@@ -18,25 +18,26 @@ import packageView.revisione_tView;
 
 
 /**
- * Classe controller operaController 
+ * Classe controller revisione_tController 
  */
 public class revisione_tController {
 
 	/**
-	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra 
+	 * Il metodo richiama la classe revisione_tView con il compito di chiudere la finestra 
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_tPage da chiudere 
 	 */
 	public void exitAction(revisione_tPage finestra){
 		new revisione_tView().dispose(finestra);
 	}
 	
 	/**
+	 * Il metodo ritorna un array di stringhe che rappresentano i metadati associati alla trascrizione
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param utente
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return array di stringhe che rappresentano i metadati associati alla trascrizione
 	 */
 	public String[] metadatiAction(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>();
@@ -57,10 +58,10 @@ public class revisione_tController {
 	}
 	
 	/**
-	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra e istanziare 
+	 * Il metodo richiama la classe revisione_tView con il compito di chiudere la finestra e istanziare 
 	 * la finestra di loginPage
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra revisione_tPage da chiudere 
 	 */
 	public void logOutAction(revisione_tPage finestra){
 		new revisione_tView().dispose(finestra);
@@ -68,9 +69,10 @@ public class revisione_tController {
 	}
 	
 	/**
+	 * Il metodo gestisce il click "Indietro"
 	 * 
-	 * @param finestra
-	 * @param user
+	 * @param finestra Finestra revisione_tPage da chiudere 
+	 * @param user Utente che ha effettuato l'accesso al sistema 
 	 */
 	public void indietroAction(revisione_tPage finestra, utente user){
 		new revisione_tView().dispose(finestra);
@@ -78,11 +80,12 @@ public class revisione_tController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'oggetto trascrizione richiesto 
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param utente
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto trascrizione richiesta 
 	 */
 	public trascrizione vistaActiontrascrizione(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
@@ -93,6 +96,14 @@ public class revisione_tController {
 		return trascrizione;
 	}
 	
+	/**
+	 * Il metodo ritorna l'oggetto immagine richiesto 
+	 * 
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto immagine richiesta 
+	 */
 	public immagine vistaActionimmagine(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(numero_pagina); 
@@ -103,10 +114,11 @@ public class revisione_tController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'oggetto opera richiesto 
 	 * 
-	 * @param titolo
-	 * @param utente
-	 * @return
+	 * @param titolo Stringa che rappresenta il titolo dell'opera 
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto opera richiesto 
 	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
@@ -119,12 +131,13 @@ public class revisione_tController {
 	}
 	
 	/**
+	 * Il metodo gestisce il click "Conferma" su revisione_tPage 
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param validation
-	 * @param utente
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param validation booleano che rappresenta la scelta del revisore 
+	 * @param utente Utente che ha effettuato l'accesso al sistema
+	 * @return booleano che mostra se l'operazione è andata a buon fine oppure no
 	 */
 	public boolean confermaAction(String titolo_opera, int numero_pagina, boolean validation, utente utente){
 		
@@ -149,10 +162,11 @@ public class revisione_tController {
 	}
 	
 	/**
+	 * Il metodo gestisce la validazione dell'opera
 	 * 
-	 * @param titolo_opera
-	 * @param utente
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @param utente Utente che ha effettuato l'accesso al sistema
+	 * @return booleano che mostra se l'operazione è andata a buon fine oppure no
 	 */
 	public boolean validaOperaAction(String titolo_opera, utente utente){
 		

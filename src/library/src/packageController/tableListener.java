@@ -14,11 +14,18 @@ import packageDAO.amministrazioneDAO;
 import packageGUI.dialog;
 import packageView.amministrazioneView;
 
+/**
+ * Classe tableListener che viene invocata ad ogni modifica sulla JTable
+ */
 public class tableListener implements TableModelListener{
 
 	public ArrayList<String> array; 
 	public String tableName; 
 	
+	/**
+	 * Il metodo gestisce le modifiche sulla JTable e chiama amministrazioneDAO per gli opportuni
+	 * Update sul database 
+	 */
 	 public void tableChanged(TableModelEvent e) {  
 	        int row = e.getFirstRow(); 
 	        int column = e.getColumn();  
@@ -29,7 +36,7 @@ public class tableListener implements TableModelListener{
 	        String id = (String)model.getValueAt(row, 0);
 	        int key = Integer.parseInt(id);
 	        
-	        boolean success =new amministrazioneDAO().update(tableName, columnName, data, key); 
+	        boolean success = new amministrazioneDAO().update(tableName, columnName, data, key); 
 	        
 	        if(!success) new amministrazioneView().errorMessage("Errore");
 	

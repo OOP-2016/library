@@ -52,10 +52,11 @@ public class ricercaController {
 	}
 	
 	/**
+	 * Il medodo gestisce la ricerca delle opere 
 	 * 
-	 * @param filtro
-	 * @param utente
-	 * @return
+	 * @param filtro Stringa che permette di filtrare la ricerca 
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return ArrayList contenente i risultati della ricerca 
 	 */
 	public ArrayList<String> cercaOperaAction(String filtro, utente utente) {
 		
@@ -65,12 +66,13 @@ public class ricercaController {
 	}
 	
 	/**
+	 * Il metodo gestisce l'aggiunta di un opera 
 	 * 
-	 * @param titolo
-	 * @param autore
-	 * @param annoPubblicazione
-	 * @param numeroPagine
-	 * @return
+	 * @param titolo Stringa che rappresenta il titolo dell'opera scelta 
+	 * @param autore Stringa che rappresenta il nome dell'autore dell'opera 
+	 * @param annoPubblicazione Stringa che rappresenta l'anno di pubblicazione dell'opera 
+	 * @param numeroPagine Intero che rappresenta il numero di pagine totali dell'opera 
+	 * @return booleano che ritorna true se l'operazione è andata a buon fine, false altrimenti 
 	 */
 	public boolean aggiungiOperaAction(String titolo, String autore, String annoPubblicazione, String numeroPagine){
 		
@@ -111,10 +113,11 @@ public class ricercaController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'oggetto opera richiesto 
 	 * 
-	 * @param titolo
-	 * @param utente
-	 * @return
+	 * @param titolo Stringa che rappresenta il titolo dell'opera scelta 
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto opera richiesto 
 	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
