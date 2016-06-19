@@ -1,7 +1,14 @@
 package packageController;
 
+import java.util.ArrayList;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import packageBusiness.utente;
+import packageDAO.amministrazioneDAO;
 import packageGUI.amministrazionePage;
+import packageGUI.dialog;
 import packageGUI.operaPage;
 import packageView.amministrazioneView;
 import packageView.operaView;
@@ -12,25 +19,42 @@ public class amministrazioneController {
 		new amministrazioneView().dispose(finestra);
 	}
 	
-	/**
-	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra e istanziare 
-	 * la finestra di loginPage
-	 * 
-	 * @param finestra Finestra operaPage da chiudere 
-	 */
 	public void logOutAction(amministrazionePage finestra){
 		new amministrazioneView().dispose(finestra);
 		new amministrazioneView().istanziaLoginPage();
 	}
 	
-	/**
-	 * 
-	 * @param finestra
-	 * @param user
-	 */
-	public void indietroAction(amministrazionePage finestra, utente user){
-		new amministrazioneView().dispose(finestra);
-		new amministrazioneView().istanziaRicercaPage(user);
+	public void selezionaAction(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
+		
+		
+		boolean success = new amministrazioneDAO().seleziona(listener, columnNames, tm, tableName); 
+		
+		if(!success){
+			new dialog().errorDialog("Errore");
+			return; 
+		}
+		
+	}
+	
+	public void ricaricaAction(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
+		
+		
+		boolean success = new amministrazioneDAO().ricarica(listener, columnNames, tm, tableName); 
+		
+		if(!success){
+			new dialog().errorDialog("Errore");
+			return; 
+		}
+		
+	}
+	
+	public void deleteAction(JTable table, String tableName){
+		boolean success = new amministrazioneDAO().delete(table, tableName); 
+		
+		if(!success){
+			new dialog().errorDialog("Errore");
+			return; 
+		}
 	}
 
 }

@@ -29,6 +29,14 @@ public class dialog {
 	}
 	
 	/**
+	 * Il metodo crea un MessageDialog di warning
+	 * @param info Stringa che descrive il warning
+	 */
+	public void warningDialog(String info){
+		JOptionPane.showMessageDialog(null, info , "Messaggio", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	/**
 	 * Il metodo crea un MessageDialog di errore
 	 * @param error Stringa che descrive l'errore
 	 */

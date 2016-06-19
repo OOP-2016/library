@@ -1,12 +1,16 @@
 package packageView;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
+import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 import packageBusiness.utente;
 import packageController.amministrazioneController;
 import packageController.operaController;
+import packageController.tableListener;
 import packageGUI.aggiungiOperaForm;
 import packageGUI.amministrazionePage;
 import packageGUI.dialog;
@@ -23,10 +27,6 @@ public class amministrazioneView {
 	
 	public void logOut(amministrazionePage finestra){
 		new amministrazioneController().logOutAction(finestra); 
-	}
-	
-	public void indietro(amministrazionePage finestra, utente user){
-		new amministrazioneController().indietroAction(finestra, user);
 	}
 	
 	public void dispose(amministrazionePage finestra){
@@ -90,5 +90,16 @@ public class amministrazioneView {
 		finestra.setResizable(false);
 		finestra.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
+	}
+	
+	public void seleziona(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
+		new amministrazioneController().selezionaAction(listener, columnNames, tm, tableName); 
+	}
+	
+	public void ricarica(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
+		new amministrazioneController().ricaricaAction(listener, columnNames, tm, tableName); 
+	}
+	public void delete(JTable table, String tableName){
+		new amministrazioneController().deleteAction(table, tableName); 
 	}
 }

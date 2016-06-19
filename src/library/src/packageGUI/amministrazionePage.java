@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,6 +18,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import packageBusiness.utente;
+import packageController.tableListener;
 import packageView.amministrazioneView;
 
 import javax.swing.GroupLayout;
@@ -60,16 +62,23 @@ public class amministrazionePage extends JFrame {
 	 * Create the frame.
 	 */
 	public amministrazionePage(utente utente) {
+		
+		new dialog().warningDialog("Si informa che la modifica irresponsabile dei dati potrebbe causare errori nel sistema");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 786, 607);
-		
+		amministrazionePage finestra = this;
 		JLabel lblNewLabel = new JLabel(utente.getEmail());
 		
 		JComboBox comboBox = new JComboBox();
 		
+		ArrayList <String> columnNames=new ArrayList<String>(); 
+		
 		JLabel lblSelezionaTabella = new JLabel("Seleziona Tabella");
 		
-		listener a = new listener(); 
+		//listener a = new listener(); 
+		
+		tableListener listener = new tableListener(); 
 		
 		table = new JTable();
 		tm = (DefaultTableModel) table.getModel();
@@ -77,55 +86,25 @@ public class amministrazionePage extends JFrame {
 		JButton btnSeleziona = new JButton("SELEZIONA");
 		btnSeleziona.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-				    statement = connect.createStatement();
-				    ResultSet rs = statement.executeQuery("SELECT * FROM " + comboBox.getSelectedItem());
-				    tm.removeTableModelListener(a);
-				    // get columns info
-				    ResultSetMetaData rsmd = rs.getMetaData();
-				    int columnCount = rsmd.getColumnCount();
-				    
-				    // for changing column and row model
-				   
-				    // clear existing columns 
-				    tm.setColumnCount(0);
-
-				    // add specified columns to table
-				    for (int i = 1; i <= columnCount; i++ ) {
-				        tm.addColumn(rsmd.getColumnName(i));
-				    }   
-
-				    // clear existing rows
-				    tm.setRowCount(0);
-
-				    // add rows to table
-				    while (rs.next()) {
-				        String[] a = new String[columnCount];
-				        for(int i = 0; i < columnCount; i++) {
-				            a[i] = rs.getString(i+1);
-				        }
-				    tm.addRow(a);
-				    }
-				    tm.fireTableDataChanged();
-					tm.fireTableStructureChanged();
-					tm.addTableModelListener(a);
-					
-				    // Close ResultSet and Statement
-				    rs.close();
-				    statement.close();
-				} catch (Exception ex) { 
-				    new dialog().errorDialog("db error 2" + ex.getMessage());
-				    ex.printStackTrace();
-				    return;
-				}
+				new amministrazioneView().seleziona(listener, columnNames, tm, (String)comboBox.getSelectedItem());
 			}
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
 		JButton btnRicarica = new JButton("RICARICA");
+		btnRicarica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new amministrazioneView().ricarica(listener, columnNames, tm, (String)comboBox.getSelectedItem());
+			}
+		});
 		
 		JButton btnDelete = new JButton("DELETE");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new amministrazioneView().delete(table, (String)comboBox.getSelectedItem());
+			}
+		});
 		
 		JButton btnInserisciUtente = new JButton("INSERISCI IMMAGINI");
 		btnInserisciUtente.addActionListener(new ActionListener() {
@@ -183,33 +162,21 @@ public class amministrazionePage extends JFrame {
 		    return;
 		}
 		
-		// Connect to host
-		try {
-		    connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
-		} catch (SQLException e) {
-			new dialog().errorDialog("Database connection error");
-		return;
-		}
 		
-		// Clear combobox with tables names
-		comboBox.removeAllItems();
 		try{
-			// Get all DB's tables and put them to combobox...
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+			
+			comboBox.removeAllItems();
 			statement = connect.createStatement();
-			// !!! and now QUOTES, NOT BACKTICKS !!!
-			// !!! because "jComboBox1.getSelectedItem().toString()" is column value, 
-			// not column/table/db name !!!
-			/*ResultSet rs = statement.executeQuery("SELECT TABLE_NAME FROM information_schema.TABLES" +
-	    	" WHERE TABLE_SCHEMA = '" + jComboBox1.getSelectedItem().toString() + "'");*/
-	    
 	    	ResultSet rs = statement.executeQuery("SHOW TABLES;");
 	    
 	    	// Add tables list to combobox
 	    	while (rs.next()) {
 	    		comboBox.addItem(rs.getString(1));
 	    	}
+	    	
 	    } catch(SQLException e) {
-	    	new dialog().errorDialog("db error");
+	    	new dialog().errorDialog("Errore");
 	    	return;
 	    }
 	    
@@ -219,13 +186,20 @@ public class amministrazionePage extends JFrame {
 		JMenu mnComandi = new JMenu("Comandi");
 		menuBar.add(mnComandi);
 		
-		JMenuItem mntmIndietro = new JMenuItem("INDIETRO");
-		mnComandi.add(mntmIndietro);
-		
 		JMenuItem mntmLogOut = new JMenuItem("LOG OUT");
+		mntmLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new amministrazioneView().logOut(finestra);
+			}
+		});
 		mnComandi.add(mntmLogOut);
 		
 		JMenuItem mntmExit = new JMenuItem("EXIT");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new amministrazioneView().exit(finestra);
+			}
+		});
 		mnComandi.add(mntmExit);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -296,18 +270,7 @@ public class amministrazionePage extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	class listener implements TableModelListener {
-		 
-		 public void tableChanged(TableModelEvent e) {  
-		        int row = e.getFirstRow(); 
-		        int column = e.getColumn();  
-		        DefaultTableModel model = (DefaultTableModel)e.getSource();  
-		        Object data = model.getValueAt(row, column);  
-		//now you have the data in the cell and the place in the grid where the   
-
-		//cell is so you can use the data as you want  
-		    }
-		
 	}
 	
-}
+	
+
