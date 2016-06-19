@@ -17,14 +17,14 @@ import packageView.trascrizioneView;
 
 
 /**
- * Classe controller operaController 
+ * Classe controller trascrizioneController 
  */
 public class trascrizioneController {
 
 	/**
-	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra 
+	 * Il metodo richiama la classe trascrizioneView con il compito di chiudere la finestra 
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra trascrizionePage da chiudere 
 	 */
 	public void exitAction(trascrizionePage finestra){
 		new trascrizioneView().dispose(finestra);
@@ -34,7 +34,7 @@ public class trascrizioneController {
 	 * Il metodo richiama la classe operaView con il compito di chiudere la finestra e istanziare 
 	 * la finestra di loginPage
 	 * 
-	 * @param finestra Finestra operaPage da chiudere 
+	 * @param finestra Finestra trascrizionePage da chiudere 
 	 */
 	public void logOutAction(trascrizionePage finestra){
 		new trascrizioneView().dispose(finestra);
@@ -42,9 +42,10 @@ public class trascrizioneController {
 	}
 	
 	/**
+	 * Il metodo gestisce il click del pulsante "Indietro"
 	 * 
-	 * @param finestra
-	 * @param user
+	 * @param finestra Finestra trascrizionePage da chiudere 
+	 * @param user Utente che ha effettuato l'accesso al sistema 
 	 */
 	public void indietroAction(trascrizionePage finestra, utente user){
 		new trascrizioneView().dispose(finestra);
@@ -52,11 +53,12 @@ public class trascrizioneController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'oggetto immagine richiesto 
 	 * 
-	 * @param titolo_opera
-	 * @param numero_pagina
-	 * @param utente
-	 * @return
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto immagine richiesta 
 	 */
 	public immagine vistaActionimmagine(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
@@ -67,6 +69,14 @@ public class trascrizioneController {
 		return immagine;
 	}
 	
+	/**
+	 * Il metodo ritorna l'oggetto trascrizione richiesto 
+	 * 
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto trascrizione richiesta 
+	 */
 	public trascrizione vistaActiontrascrizione(String titolo_opera, int numero_pagina, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
 		args.add(numero_pagina); 
@@ -77,10 +87,11 @@ public class trascrizioneController {
 	}
 	
 	/**
+	 * Il metodo ritorna l'oggetto opera richiesto 
 	 * 
-	 * @param titolo
-	 * @param utente
-	 * @return
+	 * @param titolo Stringa che rappresenta il titolo dell'opera 
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto opera richiesto 
 	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
@@ -92,6 +103,13 @@ public class trascrizioneController {
 		return opera; 
 	}
 	
+	/**
+	 * Il metodo gestisce il click del bottone "conferma" su trascrizionePage 
+	 * 
+	 * @param trascrizione Oggetto trascrizione da importare sul database 
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return booleano, true se l'operazione va a buon fine, false altrimenti 
+	 */
 	public boolean confermaAction(trascrizione trascrizione, utente utente){
 	
 			
@@ -118,6 +136,13 @@ public class trascrizioneController {
 			
 		} 
 
+	/**
+	 * Il metodo ritorna true se tutte le trascrizioni di quell'opera sono state inserite
+	 * 
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera 
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return booleano true se tutte le trascrizioni di quell'opera sono state inserite
+	 */
 	public boolean tutteTrascritteAction(String titolo_opera, utente utente){
 		
 		ArrayList<Object> args = new ArrayList<Object>();  
@@ -137,14 +162,26 @@ public class trascrizioneController {
 		return pubblicazione; 
 	}
 	
+	/**
+	 * Il metodo ritorna true se la pagina numero_pagina in titolo_opera esiste 
+	 * 
+	 * @param numero_pagina Intero che rappresenta il numero della pagina
+	 * @param titolo_opera Stringa che rappresenta il titolo dell'opera
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return booleano true se la pagina numero_pagina in titolo_opera esiste 
+	 */
 	public boolean esistePaginaAction(int numero_pagina, String titolo_opera, utente utente){
 	ArrayList<Object> trascrizioneArgs = new ArrayList<Object>();
 	trascrizione trascrizione;
+	
 	trascrizioneArgs.add(numero_pagina);
 	trascrizioneArgs.add(titolo_opera);
 	trascrizioneArgs.add(utente);
 	trascrizione = (trascrizione)new trascrizioneDAO().retrieve(trascrizioneArgs);
-	if(!trascrizione.getTesto().equals("<h2>Testo non disponibile</h2>")) return true;
+	
+	if(!trascrizione.getTesto().equals("<h2>Testo non disponibile</h2>")) 
+		return true;
+	
 	return false;
 }
 	

@@ -113,11 +113,11 @@ public class ricercaController {
 	}
 	
 	/**
-	 * Il metodo ritorna l'opera 
+	 * Il metodo ritorna l'oggetto opera richiesto 
 	 * 
-	 * @param titolo
-	 * @param utente
-	 * @return
+	 * @param titolo Stringa che rappresenta il titolo dell'opera scelta 
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @return l'oggetto opera richiesto 
 	 */
 	public opera getOpera(String titolo, utente utente){
 		ArrayList<Object> args = new ArrayList<Object>(); 
