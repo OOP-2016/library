@@ -23,8 +23,11 @@ import packageBusiness.utente;
 import packageGUI.dialog;
 
 public class immagineDAO {
-	
-	 public void bubbleSort(int [] array) {
+	/**
+	 * 
+	 * @param array
+	 */
+	 public static void bubbleSort(int [] array) {
 
 	        for(int i = 0; i < array.length; i++) {
 	            boolean flag = false;

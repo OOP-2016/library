@@ -202,4 +202,62 @@ public boolean ricarica(tableListener listener, ArrayList<String> columnNames, D
 		  
 	}
 	
+	@SuppressWarnings("finally")
+	public boolean update(String tableName, String columnName, String data, int key){
+		Connection connect = null;
+		Statement Statement = null;
+		
+		data = data.replaceAll("'", "''"); 
+		
+		String query; 
+		String sanitizedColumn; 
+		
+		try{
+		Class.forName("com.mysql.jdbc.Driver");
+		connect = DriverManager.getConnection("jdbc:mysql://localhost/library?" + "user=root&password=");
+		
+		Statement = connect.createStatement(); 
+		
+		query = "UPDATE library." + tableName + " SET " + columnName;  
+		if(columnName.equals("id")||columnName.equals("numero_pagina")||columnName.equals("validata")||columnName.equals("anno_pubblicazione")||columnName.equals("numero_pagine")||columnName.equals("pubblicata")||columnName.equals("permessi")){
+			
+			query+="="; 
+			sanitizedColumn = String.format("%s", data);
+			query+=sanitizedColumn; 
+			
+		} else {
+			query+="='"; 
+			sanitizedColumn = String.format("%s", data);
+			query+=sanitizedColumn;
+			query+="'"; 
+		}
+		
+		query+=" WHERE id="; 
+		query+=String.format("%d", key); 
+		
+		Statement.executeUpdate(query);
+		
+		}
+			catch(SQLException j){
+
+			new dialog().errorDialog("Errore Database: " + j.getMessage());
+			}
+			catch(ClassNotFoundException h){
+			new dialog().errorDialog("Errore Database: " + h.getMessage());
+			}
+			catch(Exception l){
+			new dialog().errorDialog("Errore generico:" + l.getMessage());
+			}finally{
+				try{
+					if(connect!=null) connect.close();
+					if(Statement!=null) Statement.close();
+					return true;
+					}
+				catch(SQLException e){
+					new dialog().errorDialog("Errore Database: "+ e.getMessage());
+					return false;
+					}
+				   }
+	}
+	
 }

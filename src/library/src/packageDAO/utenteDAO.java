@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import packageBusiness.utente;
+import packageBusiness.utenteAvanzato;
 import packageGUI.dialog;
 /**
  * La classe utenteDAO che implementa l'interfaccia DAO ha il compito
@@ -93,8 +94,20 @@ public class utenteDAO implements DAO {
 			String password = resultSet.getString("password");
 			int permessi = resultSet.getInt("permessi");
 			
+			String nomeutente = resultSet.getString("nome");
+			String cognomeutente = resultSet.getString("cognome");
+			String passwordutente = resultSet.getString("password");
+			
 			if(email.equals((String)args.get(0)) && password.equals((String)args.get(1))){
-				utente = new utente(email,permessi);
+				/**
+				 * Dynamic binding
+				 */
+				utente = new utenteAvanzato(email, permessi, nomeutente, cognomeutente, passwordutente);
+				
+				connect.close();
+				Statement.close();
+				resultSet.close();
+				
 				return utente; 
 			}
 			else{

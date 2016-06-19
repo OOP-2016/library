@@ -6,7 +6,7 @@ package packageBusiness;
  */
 public class utente {
 
-	private String email; 
+	private final String email; 
 	private int permessi;
 	
 	/**

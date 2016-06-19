@@ -10,6 +10,17 @@ import javax.mail.internet.*;
  */
 public class mailer {
 
+	static Session session;
+	static Properties props; 
+	
+	static {
+		props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+	}
+	
 	/**
 	 * Il metodo permette di inviare una mail ad un indirizzo di posta 
 	 * 
@@ -23,24 +34,18 @@ public class mailer {
 		final String password = "SportNetyolo";
 		final String from = "sportnetmail@gmail.com"; 
 		boolean success = false; 
+			
+			//creazione sessione con dati SMTP + username e password 
+			session = Session.getInstance(props,
+			  new javax.mail.Authenticator() {
+				/**
+				 * Autenticatore 
+				 */
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(username, password);
+				}
+			  });
 		
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-
-		//creazione sessione con dati SMTP + username e password 
-		Session session = Session.getInstance(props,
-		  new javax.mail.Authenticator() {
-			/**
-			 * Autenticatore 
-			 */
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		  });
-
 		try {
 			
 			//message creation
