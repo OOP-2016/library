@@ -11,12 +11,18 @@ import packageBusiness.opera;
 import packageBusiness.utente;
 import packageGUI.dialog;
 
+/**
+ * Classe DAO operaDAO
+ */
 public class operaDAO implements DAO {
 	
 	/**
 	 * Metodo che inserisce parametri nel database 
 	 * 
 	 * @param args ArrayList contententi i parametri da inserire nel database 
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
 	 * @return true se insert termina senza errori, false altrimenti 
 	 */
 	@SuppressWarnings("finally")
@@ -67,6 +73,9 @@ public class operaDAO implements DAO {
 	 * Metodo che prende dati dal database
 	 * 
 	 * @param args ArrayList contententi i parametri che servono a costruire la query per il database
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
 	 * @return oggetto preso dal database 
 	 */
 	@SuppressWarnings("finally")
@@ -153,6 +162,16 @@ public class operaDAO implements DAO {
 				      }
 	}
 	
+	/**
+	 * Il metodo effettua la ricerca dei titoli sul database in base a un filtro ricerca 
+	 * 
+	 * @param filtro Stringa che identifica un pattern di ricerca
+	 * @param utente Utente che ha effettuato l'accesso al sistema 
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
+	 * @return ArrayList di titoli che matchano il pattern di ricerca 
+	 */
 	@SuppressWarnings("finally")
 	public ArrayList<String> retrieveTitoli(String filtro, utente utente) {
 		Connection connect = null;
@@ -273,6 +292,15 @@ public class operaDAO implements DAO {
 	}
 }
 	
+	/**
+	 * Il metodo pubblica l'opera 
+	 * 
+	 * @param args ArrayList contententi i parametri che servono a costruire la query per il database
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
+	 * @return
+	 */
 	@SuppressWarnings("finally")
 	public boolean pubblica(ArrayList<Object> args){
 		Connection connect = null;

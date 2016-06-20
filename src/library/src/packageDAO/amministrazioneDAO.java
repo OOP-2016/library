@@ -14,8 +14,21 @@ import javax.swing.table.DefaultTableModel;
 import packageController.tableListener;
 import packageGUI.dialog;
 
+/**
+ * Classe DAO amministrazioneDAO
+ */
 public class amministrazioneDAO {
 
+	/**
+	 * Il metodo fa la select sulla tabella scelta dall'amministratore 
+	 * 
+	 * @param listener tableListener che viene invocato ad ogni modifica sulla tabella 
+	 * @param columnNames ArrayList che contiene i nomi delle colonne nella tabella
+	 * @param tm tabella che contiene i dati 
+	 * @param tableName Stringa che identifica il nome della tabella scelta dall'amministratore 
+	 * @exception Exception In caso di fallimento di una delle operazioni sul database 
+	 * @return booleano, true se l'operazione va a buon fine, false altrimenti 
+	 */
 	public boolean seleziona(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
 		
 		Connection connect = null;
@@ -81,7 +94,17 @@ public class amministrazioneDAO {
 		
 	}
 	
-public boolean ricarica(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
+	/**
+	 * Il metodo ricarica i dati della JTable scelta dall'amministratore 
+	 * 
+	 * @param listener tableListener che viene invocato ad ogni modifica sulla tabella 
+	 * @param columnNames ArrayList che contiene i nomi delle colonne nella tabella
+	 * @param tm tabella che contiene i dati 
+	 * @param tableName Stringa che identifica il nome della tabella scelta dall'amministratore 
+	 * @exception Exception In caso di fallimento di una delle operazioni sul database 
+	 * @return booleano, true se l'operazione va a buon fine, false altrimenti 
+	 */
+	public boolean ricarica(tableListener listener, ArrayList<String> columnNames, DefaultTableModel tm, String tableName){
 		
 		Connection connect = null;
 		Statement statement = null;
@@ -146,6 +169,16 @@ public boolean ricarica(tableListener listener, ArrayList<String> columnNames, D
 		
 	}
 
+	/**
+	 * Il metodo cancella la riga sul database scelta dall'amministratore
+	 * 
+	 * @param table JTable che contiene i dati 
+	 * @param tableName Stringa che identifica la tabella scelta dall'amministratore 
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
+	 * @return booleano, true se l'operazione va a buon fine, false altrimenti 
+	 */
 	@SuppressWarnings("finally")
 	public boolean delete(JTable table, String tableName){
 		int row = table.getSelectedRow(); 
@@ -202,6 +235,18 @@ public boolean ricarica(tableListener listener, ArrayList<String> columnNames, D
 		  
 	}
 	
+	/**
+	 * Il metodo fa l'update sul database con le modifiche inserite sulla tabella dall'amministratore 
+	 * 
+	 * @param tableName Stringa che identifica la tabella scelta dall'amministratore 
+	 * @param columnName ArrayList che contiene i nomi delle colonne nella tabella
+	 * @param data Dato modificato dall'amministratore 
+	 * @param key ID sul database della riga modificata 
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
+	 * @return booleano, true se l'operazione va a buon fine, false altrimenti 
+	 */
 	@SuppressWarnings("finally")
 	public boolean update(String tableName, String columnName, String data, int key){
 		Connection connect = null;

@@ -22,10 +22,14 @@ import packageBusiness.immagine;
 import packageBusiness.utente;
 import packageGUI.dialog;
 
+/**
+ * Classe DAO immagineDAO
+ */
 public class immagineDAO {
 	/**
+	 * Il metodo applica l'algoritmo BubbleSort ad un array di interi 
 	 * 
-	 * @param array
+	 * @param array contiene gli interi da riordinare 
 	 */
 	 public static void bubbleSort(int [] array) {
 
@@ -55,6 +59,9 @@ public class immagineDAO {
  * Metodo che inserisce parametri nel database 
  * 
  * @param args ArrayList contententi i parametri da inserire nel database 
+ * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+ * @exception ClassNotFoundException In caso di fallimento del driver SQL
+ * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
  * @return true se insert termina senza errori, false altrimenti 
  */
 @SuppressWarnings("finally")
@@ -121,6 +128,9 @@ public boolean insert(ArrayList<Object> args){
  * Metodo che prende dati dal database
  * 
  * @param args ArrayList contententi i parametri che servono a costruire la query per il database
+ * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+ * @exception ClassNotFoundException In caso di fallimento del driver SQL
+ * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
  * @return oggetto preso dal database 
  */
 	@SuppressWarnings("finally")
@@ -204,7 +214,10 @@ public boolean insert(ArrayList<Object> args){
 	/**
 	 * Il metodo modifica una riga nel database
 	 * 
-	 * @param args args ArrayList contententi i parametri da inserire nel database 
+	 * @param args ArrayList contententi i parametri da inserire nel database 
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
 	 * @return true se insert termina senza errori, false altrimenti 
 	 */
 	@SuppressWarnings("finally")
@@ -262,7 +275,10 @@ public boolean insert(ArrayList<Object> args){
 	/**
 	 * Il metodo cancella una riga dal database 
 	 * 
-	 * @param args args ArrayList contententi i parametri che servono a costruire la query per il database
+	 * @param args ArrayList contententi i parametri che servono a costruire la query per il database
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
 	 * @return true se insert termina senza errori, false altrimenti 
 	 */
 	@SuppressWarnings("finally")
@@ -315,6 +331,15 @@ public boolean insert(ArrayList<Object> args){
 					    }
 	}
 
+	/**
+	 * Il metodo ritorna all'acquisitore la prossima pagina da acquisire 
+	 * 
+	 * @param args ArrayList contententi i parametri che servono a costruire la query per il database
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
+	 * @return Intero che mostra all'utente acquisitore la prossima pagina da acquisire
+	 */
 	@SuppressWarnings("finally")
 	public int paginaDaAcquisire(ArrayList<Object> args){
 		Connection connect = null;
@@ -390,6 +415,15 @@ public boolean insert(ArrayList<Object> args){
 				      }
 	}
 	
+	/**
+	 * Il metodo ritorna un booleano, booleano, true se tutte le immagini dell'opera sono state validate, false altrimenti 
+	 * 
+	 * @param args ArrayList contententi i parametri che servono a costruire la query per il database
+	 * @exception SQLException In caso di fallimento di una delle operazioni di query sul database 
+	 * @exception ClassNotFoundException In caso di fallimento del driver SQL
+	 * @exception Exception In caso di fallimento generale di una delle operazioni sul database 
+	 * @return booleano, true se tutte le immagini dell'opera sono state validate, false altrimenti 
+	 */
 	@SuppressWarnings("finally")
 	public boolean controllaValidate(ArrayList<Object> args){
 		Connection connect = null;
